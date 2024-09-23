@@ -2,10 +2,11 @@
 const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig = {
+  // output: "export",
   reactStrictMode: true,
   trailingSlash: true,
   publicRuntimeConfig: {
-    basePath: isProd ? "/my-mood-playlist" : "",
+    basePath: isProd ? "/mafia-club" : "",
   },
   images: {
     unoptimized: true,
