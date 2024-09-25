@@ -1,10 +1,12 @@
 import Link from "next/link";
 import css from "./NavBar.module.css";
 import { useRouter } from "next/router";
+import { useTranslation } from "../../hooks/useTranslation";
 
 const NavBar = () => {
   const router = useRouter();
   const isActive = (path: string) => router.pathname === path;
+  const { t } = useTranslation();
 
   return (
     <nav className={css.nav}>
@@ -14,7 +16,7 @@ const NavBar = () => {
             href="/"
             className={`${css.link} ${isActive("/") ? css.current : ""}`}
           >
-            Головна
+            {t.nav.main}
           </Link>
         </li>
         <li>
@@ -24,7 +26,7 @@ const NavBar = () => {
               isActive("/services") ? css.current : ""
             }`}
           >
-            Послуги
+            {t.nav.services}
           </Link>
         </li>
         <li>
@@ -32,7 +34,7 @@ const NavBar = () => {
             href="/gallery"
             className={`${css.link} ${isActive("/gallery") ? css.current : ""}`}
           >
-            Галерея
+            {t.nav.gallery}
           </Link>
         </li>
         <li>
@@ -40,7 +42,7 @@ const NavBar = () => {
             href="/rules"
             className={`${css.link} ${isActive("/rules") ? css.current : ""}`}
           >
-            Правила гри
+            {t.nav.rules}
           </Link>
         </li>
         <li>
@@ -48,7 +50,7 @@ const NavBar = () => {
             href="/shop"
             className={`${css.link} ${isActive("/shop") ? css.current : ""}`}
           >
-            Магазин
+            {t.nav.shop}
           </Link>
         </li>
         <li>
@@ -56,7 +58,7 @@ const NavBar = () => {
             href="/reviews"
             className={`${css.link} ${isActive("/reviews") ? css.current : ""}`}
           >
-            Відгуки
+            {t.nav.reviews}
           </Link>
         </li>
       </ul>

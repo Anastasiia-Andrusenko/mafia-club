@@ -1,6 +1,12 @@
 import Head from "next/head";
+import css from "../styles/Home.module.css";
+import { useTranslation } from "../hooks/useTranslation";
+import Container from "@/components/Container/Container";
+import Table from "@/components/Table/Table";
+import Overlay from "@/components/Overlay/Overlay";
 
 export default function Home() {
+  const { t } = useTranslation();
   return (
     <>
       <Head>
@@ -11,8 +17,67 @@ export default function Home() {
       </Head>
       <div>
         <main>
-          <h1>Гра в Мафію</h1>
-          <p>тут буде сторінка</p>
+          <div className={css.hero}>
+            <Container>
+              <p className={css.mafia}>
+                MAFIA
+                <span className={css.dream}>DREAM CLUB</span>
+              </p>
+              <h1 className={css.description}>
+                {t.homeP.description1}
+                <span className={css.enter}></span>
+                {t.homeP.description2}
+              </h1>
+            </Container>
+          </div>
+          <Container>
+            <div className={css.about}>
+              <div className={css.about__counter}>
+                <ul className={css.about__counter_list}>
+                  <li className={css.item}>
+                    <p className={css.counter_text}>
+                      <span className={css.sum}>14</span>
+                      {t.homeP.years}
+                    </p>
+                  </li>
+                  <li className={css.item}>
+                    <p className={css.counter_text}>
+                      <span className={css.sum}>382</span>
+                      {t.homeP.kids}
+                    </p>
+                  </li>
+                  <li className={css.item}>
+                    <p className={css.counter_text}>
+                      <span className={css.sum}>679</span>
+                      {t.homeP.adult}
+                    </p>
+                  </li>
+                  <li className={css.item}>
+                    <p className={css.counter_text}>
+                      <span className={css.sum}>737</span>
+                      {t.homeP.corporate}
+                    </p>
+                  </li>
+                </ul>
+              </div>
+              <h2 className={css.about_title}>{t.homeP.aboutTitle}</h2>
+              <p className={css.about_text}>{t.homeP.aboutText}</p>
+            </div>
+          </Container>
+          <div className={css.gallery}>
+            <ul className={css.gallery_list}>
+              <li className={css.gallery_item}></li>
+              <li className={css.gallery_item}></li>
+              <li className={css.gallery_item}></li>
+              <li className={css.gallery_item}></li>
+              <li className={css.gallery_item}></li>
+              <li className={css.gallery_item}></li>
+            </ul>
+          </div>
+          <Container>
+            <Table />
+          </Container>
+          <Overlay />
         </main>
       </div>
     </>

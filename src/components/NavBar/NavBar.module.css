@@ -1,5 +1,5 @@
 .nav {
-  background-color: #f8f9fa;
+  background-color: transparent;
   padding: 1rem;
 }
 
@@ -11,17 +11,24 @@
 }
 
 .link {
+  cursor: pointer;
+  text-transform: uppercase;
   text-decoration: none;
-  color: #000;
-  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 1.3rem;
   transition: color 0.3s ease;
+  padding: 4px 8px;
+  font-family: "Spectral SC", serif;
+  font-weight: 600;
 }
 
 .link:hover {
-  color: #007bff;
+  color: #ffffff;
+  text-shadow: 0px 0px 6px #000000;
 }
 
 .current {
-  color: #0ac000;
-  font-weight: bold;
+  color: var(--red);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  /* font-weight: bold; */
 }
