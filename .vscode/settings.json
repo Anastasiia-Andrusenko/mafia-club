@@ -1,5 +1,6 @@
 {
-  "commentTranslate.browse.mode": "inplace",
+  "commentTranslate.browse.mode": "contrast",
   "commentTranslate.source": "Google",
-  "commentTranslate.multiLineMerge": false
+  "commentTranslate.multiLineMerge": false,
+  "commentTranslate.targetLanguage": "ru"
 }

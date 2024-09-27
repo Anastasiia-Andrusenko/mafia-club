@@ -15,7 +15,7 @@ const Table: React.FC = () => {
         </tr>
         <tr className={css.table_row}>
           <td className={css.table_service}>{t.table.service2}</td>
-          <td className={css.table_}>{t.table.price2}</td>
+          <td className={css.table_price}>{t.table.price2}</td>
           <td className={css.table_}>BTN</td>
         </tr>
         <tr className={css.table_row}>

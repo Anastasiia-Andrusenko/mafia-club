@@ -1,0 +1,34 @@
+.container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  right: 0;
+  top: 20px;
+}
+
+.btn {
+  padding: 6px;
+  font-size: 24px;
+  font-weight: 100;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  transition: color 250ms ease;
+}
+
+.btn:hover {
+  color: var(--red);
+}
+
+/* Додаємо правило для .btn:disabled, щоб скасувати ефект hover */
+.btn:disabled {
+  color: rgba(255, 255, 255, 0.5); /* Залишаємо колір кнопки таким, як він є */
+  cursor: not-allowed; /* Зберігаємо стилізацію курсора для заблокованої кнопки */
+}
+
+/* Це правило можна залишити, якщо потрібно показувати курсор not-allowed */
+.btn:disabled:hover {
+  color: rgba(255, 255, 255, 0.5); /* Залишаємо колір таким, як є */
+}

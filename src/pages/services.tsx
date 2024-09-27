@@ -1,7 +1,9 @@
+import css from "../styles/Services.module.css";
+
 const Services = () => {
   return (
     <>
-      <h2>Services</h2>
+      <h2 className={css.title}>Services</h2>
     </>
   );
 };

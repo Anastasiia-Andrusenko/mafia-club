@@ -1,0 +1,20 @@
+.table {
+  width: 600px;
+  margin: auto;
+  margin-bottom: 200px;
+}
+
+.table_body {
+}
+
+.table_row {
+  font-size: 19px;
+  line-height: 2rem;
+  border-bottom: 1px solid white;
+}
+
+.table_service {
+}
+
+.table_price {
+}

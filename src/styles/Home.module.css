@@ -1,5 +1,4 @@
 .hero {
-  /* position: sticky; */
   top: 0;
   z-index: -1;
   background-image: url("../../public/img/hero.png");
@@ -28,12 +27,28 @@
   font-family: "Oswald", sans-serif;
   width: 900px;
   margin: auto;
-  margin-top: 250px;
+  margin-top: 300px;
+  margin-bottom: 40px;
 }
 
 .enter {
   display: block;
   height: 20px;
+}
+
+.mafiaWhat {
+  margin-top: 80px;
+  text-align: center;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+.mafiaText {
+  font-size: 20px;
+  line-height: 1.8rem;
+  text-align: justify;
+  max-width: 1000px;
+  margin: auto;
+  margin-bottom: 60px;
 }
 
 .about {
@@ -80,7 +95,7 @@
   text-align: justify;
   max-width: 1000px;
   margin: 0 auto;
-  line-height: 1.5rem;
+  line-height: 2rem;
   letter-spacing: 0.06rem;
   font-size: 20px;
   font-weight: 300;

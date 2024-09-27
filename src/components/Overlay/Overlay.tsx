@@ -3,9 +3,11 @@ import Button from "../Button/Button";
 import Container from "../Container/Container";
 import css from "./Overlay.module.css";
 import { TfiClose } from "react-icons/tfi";
+import { useTranslation } from "../../hooks/useTranslation";
 
 const Overlay = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -58,32 +60,28 @@ const Overlay = () => {
                 </button>
                 <input
                   type="text"
-                  placeholder="Ім'я"
+                  placeholder={t.overlay.name}
                   required
                   className={css.input}
                 />
                 <input
                   type="tel"
-                  placeholder="Телефон"
+                  placeholder={t.overlay.phone}
                   required
                   className={css.input}
                 />
                 <textarea
-                  placeholder="Повідомлення"
+                  placeholder={t.overlay.text}
                   required
                   className={css.textarea}
                 ></textarea>
-                <Button
-                  text="Відправити"
-                  typeBtn="submit"
-                  // onClick={handleClose}
-                />
+                <Button text={t.overlay.send} typeBtn="submit" />
               </form>
             </div>
           </Container>
         </div>
       ) : (
-        <Button text="Залишити заявку" typeBtn="button" onClick={handleOpen} />
+        <Button text={t.overlay.text} typeBtn="button" onClick={handleOpen} />
       )}
     </>
   );

@@ -12,4 +12,11 @@ export interface Translation {
   shopP: {
     [key: string]: string;
   };
+  overlay: {
+    [key: string]: string;
+  };
+  footer: {
+     [key: string]: string;
+  }
+  
 }
