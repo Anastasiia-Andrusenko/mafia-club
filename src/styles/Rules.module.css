@@ -1,0 +1,23 @@
+.img {
+  background-image: url(../../public/img/anonymus.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  width: 100vw;
+  height: 800px;
+  margin-left: auto;
+  background-color: black;
+  position: absolute;
+  z-index: -1;
+}
+
+.rules_title {
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 200px;
+  color: var(--red);
+  font-size: 40px;
+}
+
+.rules_title {
+}

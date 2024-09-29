@@ -16,7 +16,15 @@ export interface Translation {
     [key: string]: string;
   };
   footer: {
-     [key: string]: string;
+    [key: string]: string;
+  };
+  services: {
+    [key: string]: string;
+  };
+  extras: {
+    [key: string]: string;
+  };
+  rules: {
+    [key: string]: string;
   }
-  
 }

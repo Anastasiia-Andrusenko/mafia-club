@@ -31,11 +31,6 @@ export default function Home() {
             </Container>
           </div>
           <Container>
-            <h2 className={css.mafiaWhat}>{t.homeP.what}</h2>
-            <p className={css.mafiaText}>{t.homeP.mafia}</p>
-            <Overlay />
-          </Container>
-          <Container>
             <div className={css.about}>
               <div className={css.about__counter}>
                 <ul className={css.about__counter_list}>
