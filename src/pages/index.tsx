@@ -4,6 +4,7 @@ import { useTranslation } from "../hooks/useTranslation";
 import Container from "@/components/Container/Container";
 import Table from "@/components/Table/Table";
 import Overlay from "@/components/Overlay/Overlay";
+import ClientsList from "@/components/Clients/Clients";
 
 export default function Home() {
   const { t } = useTranslation();
@@ -78,6 +79,7 @@ export default function Home() {
             <Table />
           </Container>
           <Overlay />
+          <ClientsList />
         </main>
       </div>
     </>
