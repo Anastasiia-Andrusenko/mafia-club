@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import imagePaths from "../components/PhotoGallery/imagePaths.json";
+import Overlay from "@/components/Overlay/Overlay";
 // Define the type for each image
 interface ImageFile {
   id: string;
@@ -43,6 +44,7 @@ const Gallery: React.FC<GalleryProps> = ({ imagesFiles }) => {
     <>
       <h2>Gallery</h2>
       <ImageGallery images={imagesFiles} />
+      <Overlay />
     </>
   );
 };

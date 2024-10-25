@@ -3,6 +3,7 @@ import css from "../styles/Rules.module.css";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useState } from "react";
 import { FaHandPointDown } from "react-icons/fa";
+import Overlay from "@/components/Overlay/Overlay";
 // import Overlay from "@/components/Overlay/Overlay";
 
 const Rules = () => {
@@ -114,7 +115,9 @@ const Rules = () => {
           </span>
         </div>
       </Container>
-      {/* <Overlay /> */}
+      <div className={css.btnTable}>
+        <Overlay />
+      </div>
     </>
   );
 };
