@@ -5,9 +5,42 @@ import Container from "@/components/Container/Container";
 import Table from "@/components/Table/Table";
 import Overlay from "@/components/Overlay/Overlay";
 import ClientsList from "@/components/Clients/Clients";
+import Image from "next/image";
+import imagePaths from "../components/PhotoGallery/imagesMainPage.json";
 
-export default function Home() {
+interface ImageFile {
+  id: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+const link = "https://mafiadream.com.ua/wp-content/images/";
+
+export async function getStaticProps() {
+  const imagesFiles: ImageFile[] = imagePaths.images.map((path, index) => ({
+    id: `${index + 1}`, // Динамічне id
+    src: `${link}${path}`, // Повний шлях до зображення
+    alt: `Image ${index + 1}`, // Динамічний alt
+    width: 600,
+    height: 400,
+  }));
+
+  return {
+    props: {
+      imagesFiles,
+    },
+  };
+}
+interface ImageGalleryProps {
+  imagesFiles: ImageFile[];
+}
+
+const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
   const { t } = useTranslation();
+  const doubledImages = [...imagesFiles, ...imagesFiles];
+
   return (
     <>
       <Head>
@@ -67,21 +100,30 @@ export default function Home() {
           </Container>
           <div className={css.gallery}>
             <ul className={css.gallery_list}>
-              <li className={css.gallery_item}></li>
-              <li className={css.gallery_item}></li>
-              <li className={css.gallery_item}></li>
-              <li className={css.gallery_item}></li>
-              <li className={css.gallery_item}></li>
-              <li className={css.gallery_item}></li>
+              {doubledImages.map((img, index) => (
+                <li className={css.gallery_item} key={`${img.id}-${index}`}>
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    width={img.width}
+                    height={img.height}
+                    layout="responsive"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className={css.imageThumbnail}
+                  />
+                </li>
+              ))}
             </ul>
           </div>
+          <Overlay />
           <Container>
             <Table />
           </Container>
-          <Overlay />
           <ClientsList />
         </main>
       </div>
     </>
   );
-}
+};
+
+export default Home;

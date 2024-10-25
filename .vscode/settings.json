@@ -2,5 +2,8 @@
   "commentTranslate.browse.mode": "contrast",
   "commentTranslate.source": "Google",
   "commentTranslate.multiLineMerge": false,
-  "commentTranslate.targetLanguage": "ru"
+  "commentTranslate.targetLanguage": "ru",
+  "cSpell.words": [
+    "mafiadre"
+  ]
 }
