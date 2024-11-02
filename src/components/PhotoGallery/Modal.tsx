@@ -76,7 +76,6 @@ const Modal: React.FC<ModalProps> = ({
         <Image
           src={images[currentIndex].src}
           alt={images[currentIndex].alt}
-          layout="responsive"
           width={1000}
           height={1000}
           className={css.bigImg}

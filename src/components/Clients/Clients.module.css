@@ -1,8 +1,8 @@
 .title {
   text-transform: uppercase;
-  font-size: 28px;
+  font-size: 22px;
   text-align: center;
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 .list {
@@ -10,11 +10,13 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 40px;
-  margin-top: 40px;
+  gap: 14px;
+  margin-top: 20px;
+  padding: 20px;
 }
 
 .item {
+  transform: scale(0.9);
 }
 
 .contactis,
@@ -37,7 +39,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  filter: saturate(0);
   transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -54,7 +55,6 @@
   border-radius: 10px;
   width: 130px;
   padding: 4px;
-  opacity: 0.5;
 }
 
 .alfa {
@@ -100,7 +100,6 @@
   height: 50px;
   width: 90px;
   border-radius: 10px;
-  opacity: 0.5;
 }
 .materialis {
   background-color: white;
@@ -109,7 +108,6 @@
   height: 56px;
   border-radius: 10px;
   overflow: hidden;
-  opacity: 0.5;
 }
 .delta {
   background-image: url("/img/clients/deltam.svg");
@@ -133,7 +131,6 @@
   height: 50px;
   border-radius: 10px;
   width: 120px;
-  opacity: 0.5;
 }
 .ekta {
   background-image: url("/img/clients/ekta.webp");
@@ -146,26 +143,83 @@
   width: 60px;
   border-radius: 10px;
   overflow: hidden;
-  opacity: 0.5;
 }
 
-.contactis:hover,
-.dbshenker:hover,
-.alfa:hover,
-.breeze:hover,
-.dominos:hover,
-.kyivstar:hover,
-.otp:hover,
-.vodafone:hover,
-.persha:hover,
-.promin:hover,
-.materialis:hover,
-.delta:hover,
-.cptl:hover,
-.artofmice:hover,
-.estafeta:hover,
-.ekta:hover,
-.mont:hover {
-  filter: none;
-  opacity: 1;
+
+/* ============================= Desctop  */
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 28px;
+    margin-top: 60px;
+  }
+  
+  .list {
+    gap: 40px;
+    margin-top: 40px;
+    padding: 0;
+  }
+  
+  .item {
+    transform: scale(1);
+  }
+  
+  .contactis,
+  .dbshenker,
+  .alfa,
+  .breeze,
+  .dominos,
+  .kyivstar,
+  .otp,
+  .vodafone,
+  .persha,
+  .promin,
+  .materialis,
+  .delta,
+  .cptl,
+  .artofmice,
+  .estafeta,
+  .ekta,
+  .mont {
+    filter: saturate(0);
+  }
+  
+  .dbshenker {
+    opacity: 0.5;
+  }
+ 
+  .promin {
+    opacity: 0.5;
+  }
+  .materialis {
+    opacity: 0.5;
+  }
+
+  .estafeta {
+    opacity: 0.5;
+  }
+
+  .mont {
+    opacity: 0.5;
+  }
+  
+  .contactis:hover,
+  .dbshenker:hover,
+  .alfa:hover,
+  .breeze:hover,
+  .dominos:hover,
+  .kyivstar:hover,
+  .otp:hover,
+  .vodafone:hover,
+  .persha:hover,
+  .promin:hover,
+  .materialis:hover,
+  .delta:hover,
+  .cptl:hover,
+  .artofmice:hover,
+  .estafeta:hover,
+  .ekta:hover,
+  .mont:hover {
+    filter: none;
+    opacity: 1;
+  }
 }

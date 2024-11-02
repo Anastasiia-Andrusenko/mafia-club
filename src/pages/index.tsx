@@ -107,7 +107,6 @@ const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
                     alt={img.alt}
                     width={img.width}
                     height={img.height}
-                    layout="responsive"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className={css.imageThumbnail}
                   />

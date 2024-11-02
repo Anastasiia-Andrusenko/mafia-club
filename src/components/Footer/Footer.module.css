@@ -1,18 +1,21 @@
 .footer {
   width: 100vw;
-  /* height: 200px; */
   background-color: black;
-  margin-top: 100px;
+  margin-top: 20px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .wrapper {
   display: flex;
+  flex-direction: column-reverse;
+  gap: 20px;
   align-items: center;
   justify-content: space-between;
   padding: 20px 0;
+  margin-top: 20px;
 }
 
 .logo {
@@ -28,9 +31,11 @@
   font-weight: 100;
   font-size: 14px;
   margin-top: 40px;
+  margin-bottom: 5px;
 }
 .contacts {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 40px;
@@ -39,7 +44,7 @@
 .contact_item {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .contact_text {
@@ -98,4 +103,29 @@
 .social_item:hover {
   color: var(--red);
   transform: scale(1.05);
+}
+
+/* ============================= Desctop  */
+@media screen and (min-width: 768px) {
+  .footer {
+    width: 100vw;
+    /* height: 200px; */
+    background-color: black;
+    margin-top: 100px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wrapper {
+    flex-direction: row;
+  }
+  .contacts {
+    flex-direction: row;
+  }
+
+  .contact_item {
+    align-items: flex-end;
+  }
 }

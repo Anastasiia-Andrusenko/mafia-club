@@ -3,7 +3,11 @@ import css from "./NavBar.module.css";
 import { useRouter } from "next/router";
 import { useTranslation } from "../../hooks/useTranslation";
 
-const NavBar = () => {
+type NavBarProps = {
+  closeMenu: () => void;
+};
+
+const NavBar: React.FC<NavBarProps> = ({ closeMenu }) => {
   const router = useRouter();
   const isActive = (path: string) => router.pathname === path;
   const { t } = useTranslation();
@@ -15,6 +19,7 @@ const NavBar = () => {
           <Link
             href="/"
             className={`${css.link} ${isActive("/") ? css.current : ""}`}
+            onClick={closeMenu}
           >
             {t.nav.main}
           </Link>
@@ -25,6 +30,7 @@ const NavBar = () => {
             className={`${css.link} ${
               isActive("/services") ? css.current : ""
             }`}
+            onClick={closeMenu}
           >
             {t.nav.services}
           </Link>
@@ -33,6 +39,7 @@ const NavBar = () => {
           <Link
             href="/gallery"
             className={`${css.link} ${isActive("/gallery") ? css.current : ""}`}
+            onClick={closeMenu}
           >
             {t.nav.gallery}
           </Link>
@@ -41,6 +48,7 @@ const NavBar = () => {
           <Link
             href="/rules"
             className={`${css.link} ${isActive("/rules") ? css.current : ""}`}
+            onClick={closeMenu}
           >
             {t.nav.rules}
           </Link>
@@ -49,6 +57,7 @@ const NavBar = () => {
           <Link
             href="/shop"
             className={`${css.link} ${isActive("/shop") ? css.current : ""}`}
+            onClick={closeMenu}
           >
             {t.nav.shop}
           </Link>
@@ -57,6 +66,7 @@ const NavBar = () => {
           <Link
             href="/reviews"
             className={`${css.link} ${isActive("/reviews") ? css.current : ""}`}
+            onClick={closeMenu}
           >
             {t.nav.reviews}
           </Link>
