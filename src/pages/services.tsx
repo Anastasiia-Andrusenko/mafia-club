@@ -5,6 +5,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Link from "next/link";
 import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";
+import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 
 const Services = () => {
   const { t } = useTranslation();
@@ -146,6 +147,7 @@ const Services = () => {
         </div>
         <Overlay />
       </Container>
+      <ScrollTopBtn/>
     </>
   );
 };

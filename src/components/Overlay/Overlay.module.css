@@ -9,6 +9,7 @@
   backdrop-filter: blur(10px);
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
 }
+
 .btnClose {
   position: absolute;
   z-index: 110;
@@ -24,23 +25,17 @@
   transition: all 250ms ease;
 }
 
-.btnClose:hover {
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7);
-  color: var(--red);
-}
-
-.formWrapper {
-}
 
 .form {
   position: absolute;
-  padding: 100px 60px 60px;
-  top: 30vh;
+  padding: 100px 20px 60px;
+  top: 20vh;
   left: 50%;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  backdrop-filter: blur(15px);
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(25px);
   transform: translateY(-50%);
   transform: translateX(-50%);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -48,7 +43,7 @@
 
 .input {
   padding: 10px 20px;
-  width: 400px;
+  width: 80vw;
   background-color: transparent;
   backdrop-filter: blur(15px);
   border: 1px solid white;
@@ -56,7 +51,7 @@
 
 .textarea {
   padding: 10px 20px;
-  width: 400px;
+  width: 80vw;
   background-color: transparent;
   backdrop-filter: blur(15px);
   border: 1px solid white;
@@ -77,4 +72,89 @@
   bottom: 0;
   width: 100px;
   margin-right: 40px;
+}
+
+/* --------------------------- Desktop */
+
+@media screen and (min-width: 768px) {
+  .overlay {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+  }
+  .btnClose {
+    position: absolute;
+    z-index: 110;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0);
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1rem;
+    cursor: pointer;
+    padding: 8px;
+    transition: all 250ms ease;
+  }
+  
+  .btnClose:hover {
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7);
+    color: var(--red);
+  }
+  
+  .formWrapper {
+  }
+  
+  .form {
+    position: absolute;
+    padding: 100px 60px 60px;
+    top: 30vh;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    backdrop-filter: blur(15px);
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .input {
+    padding: 10px 20px;
+    width: 400px;
+    background-color: transparent;
+    backdrop-filter: blur(15px);
+    border: 1px solid white;
+  }
+  
+  .textarea {
+    padding: 10px 20px;
+    width: 400px;
+    background-color: transparent;
+    backdrop-filter: blur(15px);
+    border: 1px solid white;
+    margin-bottom: 40px;
+  }
+  
+  .textarea::placeholder,
+  .input::placeholder {
+    color: var(--red);
+    font-weight: 100;
+    letter-spacing: 0.3rem;
+    font-size: 18px;
+  }
+  
+  .submit {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100px;
+    margin-right: 40px;
+  }
 }

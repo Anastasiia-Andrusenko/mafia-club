@@ -7,6 +7,7 @@ import Overlay from "@/components/Overlay/Overlay";
 import ClientsList from "@/components/Clients/Clients";
 import Image from "next/image";
 import imagePaths from "../components/PhotoGallery/imagesMainPage.json";
+import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 
 interface ImageFile {
   id: string;
@@ -119,6 +120,7 @@ const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
             <Table />
           </Container>
           <ClientsList />
+          <ScrollTopBtn/>
         </main>
       </div>
     </>

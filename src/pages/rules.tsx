@@ -4,6 +4,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { useState } from "react";
 import { FaHandPointDown } from "react-icons/fa";
 import Overlay from "@/components/Overlay/Overlay";
+import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 // import Overlay from "@/components/Overlay/Overlay";
 
 const Rules = () => {
@@ -24,8 +25,9 @@ const Rules = () => {
           <h3 className={css.rules_title}>{t.rules.classicTitle}</h3>
           <div className={css.video}>
             <iframe
-              width="840"
-              height="473"
+              className={css.frame}
+              // width="840"
+              // height="473"
               src="https://www.youtube.com/embed/GqgDMsWyFHY?si=VnFkm1m6B6N24UTS"
               title="YouTube video player"
               frameBorder="0"
@@ -96,8 +98,9 @@ const Rules = () => {
           <h3 className={css.rules_title}>{t.rules.balaganTitle}</h3>
           <div className={css.video}>
             <iframe
-              width="840"
-              height="473"
+              className={css.frame}
+              // width="840"
+              // height="473"
               src="https://www.youtube.com/embed/DkMNdCm51wU?si=n4d6e0t7wAin09KG"
               title="YouTube video player"
               frameBorder="0"
@@ -118,6 +121,7 @@ const Rules = () => {
       <div className={css.btnTable}>
         <Overlay />
       </div>
+      <ScrollTopBtn/>
     </>
   );
 };

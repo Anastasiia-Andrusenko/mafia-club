@@ -1,0 +1,30 @@
+.wrapper {
+  cursor: pointer;
+  position: fixed;
+  height: 50px;
+  z-index: 100;
+  bottom: 40px;
+  right: 40px;
+  font-size: 50px;
+  color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  line-height: 50px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1000ms ease, visibility 1000ms ease;
+}
+
+.wrapper.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1000ms ease, visibility 1000ms ease;
+}
+
+/* ============================= Desktop  */
+@media screen and (min-width: 768px) {
+  .wrapper {
+    bottom: 100px;
+    right: 10vw;
+  }
+}
