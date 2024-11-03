@@ -76,8 +76,8 @@ const Modal: React.FC<ModalProps> = ({
         <Image
           src={images[currentIndex].src}
           alt={images[currentIndex].alt}
-          width={1000}
-          height={1000}
+          width={900}
+          height={900}
           className={css.bigImg}
         />
         <button className={css.nextButton} onClick={handleNext}>

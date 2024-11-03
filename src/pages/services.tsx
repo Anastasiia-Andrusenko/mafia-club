@@ -2,12 +2,26 @@ import Container from "@/components/Container/Container";
 import css from "../styles/Services.module.css";
 // import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";
-import Link from "next/link";
+// import Link from "next/link";
 import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
+import { FaArrowUpShortWide } from "react-icons/fa6";
+import { FaArrowDownShortWide } from "react-icons/fa6";
+import { useEffect, useState } from "react";
 
 const Services = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);;
+  const [isDesktop, setIsDesktop] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth > 768);
+  }, [isDesktop]);
+
+  const handleClickMore = (index: number | null) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
   const { t } = useTranslation();
   return (
     <>
@@ -16,7 +30,6 @@ const Services = () => {
           <h2 className={css.title}>{t.services.title}</h2>
           <h2 className={css.titleWhat}>{t.homeP.what}</h2>
           <p className={css.mafiaText}>{t.homeP.mafia}</p>
-          {/* <Overlay /> */}
         </Container>
       </div>
       <Container>
@@ -24,9 +37,9 @@ const Services = () => {
           <h4 className={css.listTitle}>{t.services.listTitle}</h4>
           <ul className={css.cards}>
             <li className={css.item}>
-              <Link className={css.thumb} href="/services/vip">
+              <div className={css.thumb}>
                 <div className={`${css.img} ${css.vip}`}></div>
-                <div className={css.thumb_overlay}>
+                <div className={activeIndex === 0 ? css.thumb_overlay_show : css.thumb_overlay}>
                   <div className={css.thumb_text}>
                     <p className={css.thumb_text_p}>1. {t.vipMafia.p1}</p>
                     <p className={css.thumb_text_p}>2. {t.vipMafia.p2}</p>
@@ -34,15 +47,22 @@ const Services = () => {
                     <p className={css.thumb_text_p}>4. {t.vipMafia.p4}</p>
                   </div>
                 </div>
-              </Link>
+                {!isDesktop && <span className={css.more} onClick={() => handleClickMore(0)}>
+                  {activeIndex === 0 ? (
+                    <FaArrowDownShortWide />
+                  ) : (
+                    <FaArrowUpShortWide />
+                  )}
+                </span>}
+              </div>
               <div className={css.card}>
                 <h3 className={css.card_title}>{t.services.vip}</h3>
               </div>
             </li>
             <li className={css.item}>
-              <Link className={css.thumb} href="/services/office">
+              <div className={css.thumb}>
                 <div className={`${css.img} ${css.office}`}></div>
-                <div className={css.thumb_overlay}>
+                <div className={activeIndex === 1 ? css.thumb_overlay_show : css.thumb_overlay}>
                   <div className={css.thumb_text}>
                     <p className={css.thumb_text_p}>1. {t.officeMafia.p1}</p>
                     <p className={css.thumb_text_p}>2. {t.officeMafia.p4}</p>
@@ -50,60 +70,88 @@ const Services = () => {
                     <p className={css.thumb_text_p}>4. {t.officeMafia.p3}</p>
                   </div>
                 </div>
-              </Link>
+                {!isDesktop && <span className={css.more} onClick={() => handleClickMore(1)}>
+                  {activeIndex === 1 ? (
+                    <FaArrowDownShortWide />
+                  ) : (
+                    <FaArrowUpShortWide />
+                  )}
+                </span>}
+              </div>
               <div className={css.card}>
                 <h3 className={css.card_title}>{t.services.corporate}</h3>
               </div>
             </li>
             <li className={css.item}>
-              <Link className={css.thumb} href="/services/outdoor">
+              <div className={css.thumb}>
                 <div className={`${css.img} ${css.outdoor}`}></div>
-                <div className={css.thumb_overlay}>
+                <div className={activeIndex === 2 ? css.thumb_overlay_show : css.thumb_overlay}>
                   <div className={css.thumb_text}>
                     <p className={css.thumb_text_p}>1. {t.outMafia.p1}</p>
                     <p className={css.thumb_text_p}>2. {t.outMafia.p2}</p>
                     <p className={css.thumb_text_p}>3. {t.outMafia.p3}</p>
                   </div>
                 </div>
-              </Link>
+                {!isDesktop && <span className={css.more} onClick={() => handleClickMore(2)}>
+                  {activeIndex === 2 ? (
+                    <FaArrowDownShortWide />
+                  ) : (
+                    <FaArrowUpShortWide />
+                  )}
+                </span>}
+              </div>
               <div className={css.card}>
                 <h3 className={css.card_title}>{t.services.outdoor}</h3>
               </div>
             </li>
             <li className={css.item}>
-              <Link className={css.thumb} href="/services/kids">
+              <div className={css.thumb}>
                 <div className={`${css.img} ${css.kids}`}></div>
-                <div className={css.thumb_overlay}>
+                <div className={activeIndex === 3 ? css.thumb_overlay_show : css.thumb_overlay}>
                   <div className={css.thumb_text}>
                     <p className={css.thumb_text_p}>1. {t.kidsMafia.p1}</p>
                     <p className={css.thumb_text_p}>2. {t.kidsMafia.p2}</p>
                     <p className={css.thumb_text_p}>3. {t.kidsMafia.p3}</p>
                   </div>
                 </div>
-              </Link>
+                {!isDesktop && <span className={css.more} onClick={() => handleClickMore(3)}>
+                  {activeIndex === 3 ? (
+                    <FaArrowDownShortWide />
+                  ) : (
+                    <FaArrowUpShortWide />
+                  )}
+                </span>}
+              </div>
               <div className={css.card}>
                 <h3 className={css.card_title}>{t.services.kids}</h3>
               </div>
             </li>
             <li className={css.item}>
-              <Link className={css.thumb} href="/services/birthday">
+              <div className={css.thumb}>
                 <div className={`${css.img} ${css.birthday}`}></div>
-                <div className={css.thumb_overlay}>
+                <div className={activeIndex === 4 ? css.thumb_overlay_show : css.thumb_overlay}>
                   <div className={css.thumb_text}>
                     <p className={css.thumb_text_p}>1. {t.birthdayMafia.p1}</p>
                     <p className={css.thumb_text_p}>2. {t.birthdayMafia.p2}</p>
                     <p className={css.thumb_text_p}>3. {t.birthdayMafia.p3}</p>
                   </div>
                 </div>
-              </Link>
+                {!isDesktop && <span className={css.more} onClick={() => handleClickMore(4)}>
+                  {activeIndex === 4 ? (
+                    <FaArrowDownShortWide />
+                  ) : (
+                    <FaArrowUpShortWide />
+                  )}
+                </span>}
+              </div>
               <div className={css.card}>
                 <h3 className={css.card_title}>{t.services.birth}</h3>
               </div>
             </li>
             <li className={css.item}>
-              <Link className={css.thumb} href="/services/english">
+              <div className={css.thumb}>
                 <div className={`${css.img} ${css.english}`}></div>
-                <div className={css.thumb_overlay}>
+                <div className={activeIndex === 5 ? css.thumb_overlay_show : css.thumb_overlay}>
                   <div className={css.thumb_text}>
                     <p className={css.thumb_text_p}>1. {t.enMafia.p1}</p>
                     <p className={css.thumb_text_p}>2. {t.enMafia.p2}</p>
@@ -111,16 +159,23 @@ const Services = () => {
                     <p className={css.thumb_text_p}>4. {t.enMafia.p4}</p>
                   </div>
                 </div>
-              </Link>
+                {!isDesktop && <span className={css.more} onClick={() => handleClickMore(5)}>
+                  {activeIndex === 5 ? (
+                    <FaArrowDownShortWide />
+                  ) : (
+                    <FaArrowUpShortWide />
+                  )}
+                </span>}
+              </div>
               <div className={css.card}>
                 <h3 className={css.card_title}>{t.services.engM}</h3>
               </div>
             </li>
           </ul>
         </div>
-        <Overlay />
+        
         <ExtraServices />
-
+        <Overlay />
         <div className={css.info}>
           <ul className={css.info_list}>
             <li className={css.info_item}>
@@ -147,7 +202,7 @@ const Services = () => {
         </div>
         <Overlay />
       </Container>
-      <ScrollTopBtn/>
+      <ScrollTopBtn />
     </>
   );
 };

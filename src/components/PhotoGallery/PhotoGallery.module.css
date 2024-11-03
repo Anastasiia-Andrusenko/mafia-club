@@ -1,12 +1,14 @@
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 30px;
+  padding: 0 20px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 40px;
 }
 
 .galleryItem {
   cursor: pointer;
-  height: 260px; /* Фіксована висота */
+  width: calc(90vw / 2); /* Фіксована висота */
   transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -16,7 +18,30 @@
   object-fit: cover;
 }
 
-.galleryItem:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px 2px rgba(255, 0, 0, 0.3);
+/* ============================= Desktop  */
+@media screen and (min-width: 768px) {
+  .gallery {
+    display: grid;
+    padding: 0 20px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+  }
+  
+  .galleryItem {
+    cursor: pointer;
+    width: auto;
+    height: 260px; /* Фіксована висота */
+    transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  
+  .imageThumbnail {
+    width: 100%; /* Заповнити ширину контейнера */
+    height: 100% !important; /* Заповнити висоту контейнера */
+    object-fit: cover;
+  }
+  
+  .galleryItem:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px 2px rgba(255, 0, 0, 0.3);
+  }
 }

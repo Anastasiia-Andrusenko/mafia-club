@@ -165,5 +165,9 @@
     "playersText": "",
     "extra": "Что еще?",
     "extraText": ""
+  },
+  "gallery": {
+    "title1": "Яркие моменты",
+    "title2": " игры в мафию с"
   }
 }

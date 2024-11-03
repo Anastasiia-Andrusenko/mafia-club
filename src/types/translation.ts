@@ -47,5 +47,8 @@ export interface Translation {
   };
   info: {
     [key: string]: string;
+  };
+  gallery: {
+    [key: string]: string;
   }
 }
