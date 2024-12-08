@@ -1,0 +1,22 @@
+.list {
+  width: 90vw;
+  margin: auto;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.item {
+  padding: 1rem;
+  border: 1px solid white;
+}
+
+.name {
+}
+
+.date {
+}
+
+.text {
+  text-align: justify;
+}

@@ -26,17 +26,17 @@ const Header = () => {
     };
 
     
-
-
     return () => {
       document.documentElement.style.overflow = "";
     };
   }, [isMenuOpen, isDesktop]);
 
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  
   // Функція для закриття меню
   const closeMenu = () => {
     setIsMenuOpen(false);
