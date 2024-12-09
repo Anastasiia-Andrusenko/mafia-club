@@ -6,6 +6,8 @@ import React, { useState } from "react";
 import { useTranslation } from "../hooks/useTranslation";
 // import ProductModal from './ProductModal';
 // import Cart from './Cart';
+import css from '../styles/Shop.module.css';
+import Container from "@/components/Container/Container";
 
 interface Product {
   id: number;
@@ -50,7 +52,7 @@ const link = "https://mafiadream.com.ua/wp-content/images/shop/";
 const Shop: React.FC = () => {
   const { t } = useTranslation();
   const [cart, setCart] = useState<Product[]>([]);
-  // const [modalProduct, setModalProduct] = useState<Product | null>(null);
+  const [modalProduct, setModalProduct] = useState<Product | null>(null);
 
   const handleAddToCart = (product: Product) => {
     setCart([...cart, product]);
@@ -60,9 +62,9 @@ const Shop: React.FC = () => {
   //   setCart(cart.filter((item) => item.id !== productId));
   // };
 
-  // const handleOpenModal = (product: Product) => {
-  //   setModalProduct(product);
-  // };
+  const handleOpenModal = (product: Product) => {
+    setModalProduct(product);
+  };
 
   // const handleCloseModal = () => {
   //   setModalProduct(null);
@@ -142,13 +144,13 @@ const Shop: React.FC = () => {
       imageUrl2: `${link}carts-00002.webp`,
       imageUrl3: `${link}carts-00003.webp`,
       imageUrl4: `${link}carts-00004.webp`,
-      cartType1: `${t.shopList.item7.cartType.mafia}`,
-      cartType2: `${t.shopList.item7.cartType.don}`,
-      cartType3: `${t.shopList.item7.cartType.sherif}`,
-      cartType4: `${t.shopList.item7.cartType.pieceP}`,
-      cartType5: `${t.shopList.item7.cartType.maniac}`,
-      cartType6: `${t.shopList.item7.cartType.doc}`,
-      cartType7: `${t.shopList.item7.cartType.putana}`,
+      cartType1: `${t.shopList.item7.cartType?.mafia}`,
+      cartType2: `${t.shopList.item7.cartType?.don}`,
+      cartType3: `${t.shopList.item7.cartType?.sherif}`,
+      cartType4: `${t.shopList.item7.cartType?.pieceP}`,
+      cartType5: `${t.shopList.item7.cartType?.maniac}`,
+      cartType6: `${t.shopList.item7.cartType?.doc}`,
+      cartType7: `${t.shopList.item7.cartType?.putana}`,
     },
     {
       id: 7,
@@ -266,22 +268,24 @@ const Shop: React.FC = () => {
 
   return (
     <div>
-      <h1>Магазин</h1>
-      <div className="product-list">
+      <Container>
+      <p className={css.description}>{t.shopP.welcoming}</p>
+      <ul className={css.productList}>
         {products.map((product) => (
-          <div key={product.id} className="product-item">
+          <li key={product.id} className={css.productItem}>
+            <h3 className={css.productName}>{product.name}</h3>
             <Image
               src={product.imageUrl1 ? product.imageUrl1 : "/img/logo.png"}
               alt={product.name}
-              width={100}
-              height={100}
+              width={200}
+              height={200}
+              className={css.img}
             />
-            <h3>{product.name}</h3>
-            <p>{product.mainDesk}</p>
-            {product.description1 ? <p>{product.description1}</p> : ''}
-            {product.description2 ? <p>{product.description2}</p> : ''}
-            {product.description3 ? <p>{product.description3}</p> : ''}
-            <p>{product.other}</p>
+            {/* <p className={css.product_desk}>{product.mainDesk}</p>
+            {product.description1 ? <p className={css.product_desk}>{product.description1}</p> : ''}
+            {product.description2 ? <p className={css.product_desk}>{product.description2}</p> : ''}
+            {product.description3 ? <p className={css.product_desk}>{product.description3}</p> : ''}
+            <p className={css.product_desk}>{product.other}</p>
            { product.cartType1 ? <ul>
             <li>{product.cartType1}</li>
             <li>{product.cartType2}</li>
@@ -290,16 +294,21 @@ const Shop: React.FC = () => {
             <li>{product.cartType5}</li>
             <li>{product.cartType6}</li>
             <li>{product.cartType7}</li>
-            </ul> : ''}
-            <p>{product.price} грн</p>
-            {/* <button onClick={() => handleOpenModal(product)}>Детальніше</button> */}
-            <button onClick={() => handleAddToCart(product)}>Купити</button>
-          </div>
+            </ul> : ''} */}
+            <p className={css.product_price}>{product.price} грн</p>
+            <ul className={css.btn_list}>
+              <li><button onClick={() => handleOpenModal(product)} className={css.btn}>{t.shopP.btnMore}</button></li>
+              <li><button onClick={() => handleAddToCart(product)} className={css.btn}>{t.shopP.btnBuy}</button></li>
+            </ul>
+            
+            
+          </li>
         ))}
         <ScrollTopBtn />
-      </div>
+      </ul>
       {/* {modalProduct && <ProductModal product={modalProduct} onClose={handleCloseModal} onAddToCart={handleAddToCart} />}
       <Cart cart={cart} onRemove={handleRemoveFromCart} /> */}
+      </Container>
     </div>
   );
 };
