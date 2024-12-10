@@ -4,71 +4,38 @@ import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useTranslation } from "../hooks/useTranslation";
-// import ProductModal from './ProductModal';
-// import Cart from './Cart';
+import ProductModal from '../components/Product/Product';
+
 import css from '../styles/Shop.module.css';
 import Container from "@/components/Container/Container";
+import { LuShoppingCart } from "react-icons/lu";
+import { CgDetailsMore } from "react-icons/cg";
 
-interface Product {
-  id: number;
-  name: string;
-
-  mainDesk: string;
-
-  description1?: string;
-  description2?: string;
-  description3?: string;
-
-  other: string;
-  price: number;
-
-  imageUrl1?: string;
-  imageUrl2?: string;
-  imageUrl3?: string;
-  imageUrl4?: string;
-  imageUrl5?: string;
-  
-  cartType1?: string;
-  cartType2?: string;
-  cartType3?: string;
-  cartType4?: string;
-  cartType5?: string;
-  cartType6?: string;
-  cartType7?: string;
-
-  cartType?: {
-    mafia?: string;
-    don?: string;
-    sherif?: string;
-    pieceP?: string;
-    maniac?: string;
-    doc?: string;
-    putana?: string;
-  }
-}
+import { Product } from "@/types/product";
+import Link from "next/link";
+import { useCart } from '@/context/CartContext';
 
 const link = "https://mafiadream.com.ua/wp-content/images/shop/";
 
 const Shop: React.FC = () => {
   const { t } = useTranslation();
-  const [cart, setCart] = useState<Product[]>([]);
+  const [basket, setCart] = useState<Product[]>([]);
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
-
+  const { addToCart } = useCart();
+  
   const handleAddToCart = (product: Product) => {
-    setCart([...cart, product]);
+    setCart([...basket, product]);
   };
 
-  // const handleRemoveFromCart = (productId: number) => {
-  //   setCart(cart.filter((item) => item.id !== productId));
-  // };
 
   const handleOpenModal = (product: Product) => {
     setModalProduct(product);
+    console.log('modal open');
   };
 
-  // const handleCloseModal = () => {
-  //   setModalProduct(null);
-  // };
+  const handleCloseModal = () => {
+    setModalProduct(null);
+  };
 
   const products: Product[] = [
     {
@@ -272,6 +239,7 @@ const Shop: React.FC = () => {
       <p className={css.description}>{t.shopP.welcoming}</p>
       <ul className={css.productList}>
         {products.map((product) => (
+
           <li key={product.id} className={css.productItem}>
             <h3 className={css.productName}>{product.name}</h3>
             <Image
@@ -281,24 +249,10 @@ const Shop: React.FC = () => {
               height={200}
               className={css.img}
             />
-            {/* <p className={css.product_desk}>{product.mainDesk}</p>
-            {product.description1 ? <p className={css.product_desk}>{product.description1}</p> : ''}
-            {product.description2 ? <p className={css.product_desk}>{product.description2}</p> : ''}
-            {product.description3 ? <p className={css.product_desk}>{product.description3}</p> : ''}
-            <p className={css.product_desk}>{product.other}</p>
-           { product.cartType1 ? <ul>
-            <li>{product.cartType1}</li>
-            <li>{product.cartType2}</li>
-            <li>{product.cartType3}</li>
-            <li>{product.cartType4}</li>
-            <li>{product.cartType5}</li>
-            <li>{product.cartType6}</li>
-            <li>{product.cartType7}</li>
-            </ul> : ''} */}
             <p className={css.product_price}>{product.price} грн</p>
             <ul className={css.btn_list}>
-              <li><button onClick={() => handleOpenModal(product)} className={css.btn}>{t.shopP.btnMore}</button></li>
-              <li><button onClick={() => handleAddToCart(product)} className={css.btn}>{t.shopP.btnBuy}</button></li>
+              <li><button onClick={() => handleOpenModal(product)} className={css.btn}><CgDetailsMore className={css.icon}/>{t.shopP.btnMore}</button></li>
+              <li><button onClick={() => addToCart(product)} className={css.btn}><LuShoppingCart  className={css.icon}/> {t.shopP.btnBuy}</button></li>
             </ul>
             
             
@@ -306,8 +260,15 @@ const Shop: React.FC = () => {
         ))}
         <ScrollTopBtn />
       </ul>
-      {/* {modalProduct && <ProductModal product={modalProduct} onClose={handleCloseModal} onAddToCart={handleAddToCart} />}
-      <Cart cart={cart} onRemove={handleRemoveFromCart} /> */}
+      {modalProduct && <ProductModal product={modalProduct} onClose={handleCloseModal} onAddToCart={handleAddToCart} />}
+      <Link
+            href="/basket"
+            className={css.basket}
+            // basket={basket}  // Property 'basket' does not exist on type 'IntrinsicAttributes & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof InternalLinkProps> & InternalLinkProps & { ...; } & RefAttributes<...>
+            // onRemove={handleRemoveFromCart} //  Property 'onRemove' does not exist on type 'IntrinsicAttributes & ...
+          >
+            кошик
+          </Link>
       </Container>
     </div>
   );
