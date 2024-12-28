@@ -53,14 +53,14 @@ export interface Translation {
   };
   shopList: {
     [key: string]: {
-      id: number;
+      id?: number;
       name: string;
       mainDesk: string;
       description1?: string;
       description2?: string;
       description3?: string;
       other: string;
-      price: number;
+      price?: number;
       imageUrl1?: string;
       imageUrl2?: string;
       imageUrl3?: string;
@@ -68,14 +68,15 @@ export interface Translation {
       imageUrl5?: string;
 
       cartType?: {
-        mafia: string;
-        don: string;
-        sherif: string;
-        pieceP: string;
-        maniac: string;
-        doc: string;
-        putana: string;
+        mafia?: string;
+        don?: string;
+        sherif?: string;
+        pieceP?: string;
+        maniac?: string;
+        doc?: string;
+        putana?: string;
       };
+      quantity?: number;
     };
   };
   basket: {
