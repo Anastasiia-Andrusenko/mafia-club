@@ -78,4 +78,10 @@ export interface Translation {
       };
     };
   };
+  basket: {
+    [key: string]: string;
+  };
+  reviews: {
+    [key: string]: string;
+  };
 }

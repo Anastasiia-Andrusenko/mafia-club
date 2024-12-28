@@ -34,4 +34,5 @@ export interface Product {
     doc?: string;
     putana?: string;
   };
+  quantity: number;
 }

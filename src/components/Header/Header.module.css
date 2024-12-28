@@ -39,7 +39,30 @@
   transform: rotate(90deg); /* Наприклад, поворот на 90 градусів */
 }
 
-@media screen and (min-width: 768px){
+.basketBtn {
+  display: block;
+  position: absolute;
+  right: 110px;
+  top: 20px;
+  z-index: 20;
+  background-color: transparent;
+  font-size: 40px;
+  line-height: 50px;
+}
+
+.basketBtnNav {
+  display: block;
+  position: absolute;
+  right: 50vw;
+  bottom: 20vh;
+  z-index: 20;
+  background-color: transparent;
+  font-size: 40px;
+  line-height: 50px;
+  transform: translateX(50%);
+}
+
+@media screen and (min-width: 768px) {
   .menuButton {
     display: none;
   }
@@ -50,12 +73,12 @@
     height: fit-content;
     z-index: 10;
   }
-  
+
   .logo {
     position: absolute;
     top: 15px;
   }
-  
+
   .menuButton {
     display: block;
     position: absolute;

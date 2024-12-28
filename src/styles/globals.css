@@ -9,6 +9,8 @@
     #86000759 53%,
     rgb(0, 0, 0) 100%
   );
+
+  --box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.7);
 }
 
 html,
@@ -125,6 +127,9 @@ button,
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
+  cursor: pointer;
+  box-shadow: none;
+  border: none;
 }
 
 legend {

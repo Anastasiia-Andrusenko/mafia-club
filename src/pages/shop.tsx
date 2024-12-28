@@ -14,7 +14,8 @@ import { CgDetailsMore } from "react-icons/cg";
 import { Product } from "@/types/product";
 import Link from "next/link";
 import { useCart } from '@/context/CartContext';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const link = "https://mafiadream.com.ua/wp-content/images/shop/";
 
 const Shop: React.FC = () => {
@@ -22,7 +23,7 @@ const Shop: React.FC = () => {
   const [basket, setCart] = useState<Product[]>([]);
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
   const { addToCart } = useCart();
-  
+  const notify = (productName:string) => toast.success(`${productName} ${t.basket.add}`);
   const handleAddToCart = (product: Product) => {
     setCart([...basket, product]);
   };
@@ -50,6 +51,7 @@ const Shop: React.FC = () => {
       imageUrl1: `${link}present-pro-set-00001.webp`,
       imageUrl2: `${link}present-pro-set-00002.webp`,
       imageUrl3: `${link}present-pro-set-00003.webp`,
+      quantity: 1
     },
     {
       id: 2,
@@ -63,6 +65,7 @@ const Shop: React.FC = () => {
       imageUrl1: `${link}present-set-00002.webp`,
       imageUrl2: `${link}present-set-00001.webp`,
       imageUrl3: `${link}present-set-00003.webp`,
+      quantity: 1
     },
     {
       id: 3,
@@ -74,6 +77,7 @@ const Shop: React.FC = () => {
       other: `${t.shopList.item3.other}`,
       price: 100,
       imageUrl1: `${link}pro-set-0001.webp`,
+      quantity: 1
     },
     {
       id: 4,
@@ -87,6 +91,7 @@ const Shop: React.FC = () => {
       imageUrl1: `${link}set-00001.webp`,
       imageUrl2: `${link}set-00002.webp`,
       imageUrl3: `${link}set-00003.webp`,
+      quantity: 1
     },
     {
       id: 5,
@@ -98,6 +103,7 @@ const Shop: React.FC = () => {
       imageUrl1: `${link}br-mask-00001.webp`,
       imageUrl2: `${link}br-mask-00002.webp`,
       imageUrl3: `${link}br-mask-00003.webp`,
+      quantity: 1
     },
     {
       id: 6,
@@ -118,6 +124,7 @@ const Shop: React.FC = () => {
       cartType5: `${t.shopList.item7.cartType?.maniac}`,
       cartType6: `${t.shopList.item7.cartType?.doc}`,
       cartType7: `${t.shopList.item7.cartType?.putana}`,
+      quantity: 1
     },
     {
       id: 7,
@@ -129,6 +136,7 @@ const Shop: React.FC = () => {
       price: 100,
       imageUrl1: `${link}mask-00001.webp`,
       imageUrl2: `${link}mask-00002.webp`,
+      quantity: 1
     },
     {
       id: 8,
@@ -138,6 +146,7 @@ const Shop: React.FC = () => {
       other: `${t.shopList.item8.other}`,
       price: 100,
       imageUrl1: `${link}shop_item_00027.webp`,
+       quantity: 1
     },
     {
       id: 9,
@@ -148,6 +157,7 @@ const Shop: React.FC = () => {
       price: 100,
       imageUrl1: `${link}pro-n-00001.webp`,
       imageUrl2: `${link}pro-n-00002.webp`,
+       quantity: 1
     },
     {
       id: 10,
@@ -159,6 +169,7 @@ const Shop: React.FC = () => {
       imageUrl1: `${link}m-hat-00001.webp`,
       imageUrl2: `${link}m-hat-00002.webp`,
       imageUrl3: `${link}m-hat-00003.webp`,
+       quantity: 1
     },
     {
       id: 11,
@@ -170,6 +181,7 @@ const Shop: React.FC = () => {
       price: 100,
       imageUrl1: `${link}w-hat-00002.webp`,
       imageUrl2: `${link}w-hat-00001.webp`,
+       quantity: 1
     },
     {
       id: 12,
@@ -179,6 +191,7 @@ const Shop: React.FC = () => {
       price: 100,
       imageUrl1: `${link}sh-gl-00002.webp`,
       imageUrl2: `${link}sh-gl-00001.webp`,
+       quantity: 1
     },
     {
       id: 13,
@@ -187,6 +200,7 @@ const Shop: React.FC = () => {
       other: `${t.shopList.item13.other}`,
       price: 100,
       imageUrl1: `${link}long-gl.webp`,
+       quantity: 1
     },
     {
       id: 14,
@@ -198,6 +212,7 @@ const Shop: React.FC = () => {
       imageUrl2: `${link}boa-00003.webp`,
       imageUrl3: `${link}boa-00002.webp`,
       imageUrl4: `${link}boa-00001.webp`,
+       quantity: 1
     },
     {
       id: 15,
@@ -207,6 +222,7 @@ const Shop: React.FC = () => {
       price: 100,
       imageUrl1: `${link}moutp-00001.webp`,
       imageUrl2: `${link}moutp-00002.webp`,
+       quantity: 1
     },
     {
       id: 16,
@@ -214,7 +230,8 @@ const Shop: React.FC = () => {
       mainDesk: `${t.shopList.item16.mainDesk}`,
       other: `${t.shopList.item16.other}`,
       price: 100,
-      imageUrl1: `${link}shop_item_00003.webp`
+      imageUrl1: `${link}shop_item_00003.webp`,
+       quantity: 1
     },
     {
       id: 17,
@@ -222,6 +239,7 @@ const Shop: React.FC = () => {
       mainDesk: `${t.shopList.item17.mainDesk}`,
       other: `${t.shopList.item17.other}`,
       price: 100,
+       quantity: 1
     },
     {
       id: 18,
@@ -229,7 +247,8 @@ const Shop: React.FC = () => {
       mainDesk: `${t.shopList.item18.mainDesk}`,
       other: `${t.shopList.item18.other}`,
       price: 100,
-      imageUrl1: `${link}shop_item_00031.webp`
+      imageUrl1: `${link}shop_item_00031.webp`,
+      quantity: 1
     },
   ];
 
@@ -239,9 +258,9 @@ const Shop: React.FC = () => {
       <p className={css.description}>{t.shopP.welcoming}</p>
       <ul className={css.productList}>
         {products.map((product) => (
-
           <li key={product.id} className={css.productItem}>
             <h3 className={css.productName}>{product.name}</h3>
+            <div className={css.imgBg}>
             <Image
               src={product.imageUrl1 ? product.imageUrl1 : "/img/logo.png"}
               alt={product.name}
@@ -249,13 +268,12 @@ const Shop: React.FC = () => {
               height={200}
               className={css.img}
             />
+            </div>
             <p className={css.product_price}>{product.price} грн</p>
             <ul className={css.btn_list}>
               <li><button onClick={() => handleOpenModal(product)} className={css.btn}><CgDetailsMore className={css.icon}/>{t.shopP.btnMore}</button></li>
-              <li><button onClick={() => addToCart(product)} className={css.btn}><LuShoppingCart  className={css.icon}/> {t.shopP.btnBuy}</button></li>
+              <li><button onClick={() => {addToCart(product); notify(product.name)}} className={css.btn}><LuShoppingCart  className={css.icon}/> {t.shopP.btnBuy}</button></li>
             </ul>
-            
-            
           </li>
         ))}
         <ScrollTopBtn />
@@ -264,12 +282,11 @@ const Shop: React.FC = () => {
       <Link
             href="/basket"
             className={css.basket}
-            // basket={basket}  // Property 'basket' does not exist on type 'IntrinsicAttributes & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof InternalLinkProps> & InternalLinkProps & { ...; } & RefAttributes<...>
-            // onRemove={handleRemoveFromCart} //  Property 'onRemove' does not exist on type 'IntrinsicAttributes & ...
           >
-            кошик
+            <LuShoppingCart/>
           </Link>
       </Container>
+       <ToastContainer  theme="dark" newestOnTop />
     </div>
   );
 };

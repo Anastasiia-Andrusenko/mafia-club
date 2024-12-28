@@ -1,0 +1,217 @@
+.overlay {
+  padding: 1rem;
+  overflow: scroll;
+}
+
+.title {
+  text-align: center;
+  margin: 3rem;
+  font-family: "Spectral SC", serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.toShop {
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.1rem solid rgba(255, 255, 255, 0.6);
+  padding: 0.7rem;
+  width: 20rem;
+  margin: 4rem auto;
+  box-shadow: var(--box-shadow);
+}
+
+.icon {
+  font-size: 2rem;
+}
+
+.productList {
+}
+
+.item {
+  border-bottom: 0.1rem solid white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.img {
+  width: 20vw;
+  object-fit: contain;
+}
+
+.name {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.03rem;
+  width: 30vw;
+}
+.quantityWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantityInput {
+  width: 2rem;
+  padding: 0.2rem;
+  border: 0.01rem solid white;
+  text-align: center;
+  margin-right: 0.5rem;
+}
+
+.deleteBtn {
+  background-color: transparent;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+}
+
+.total {
+  width: 20rem;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.total span {
+  font-family: "Oswald", sans-serif;
+}
+
+.btn {
+  display: block;
+  padding: 0.7rem;
+  width: 20rem;
+  letter-spacing: 0.05rem;
+  cursor: pointer;
+  background-color: var(--red);
+  border: none;
+  text-transform: uppercase;
+  margin: auto;
+  margin-top: 1rem;
+  box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.7);
+}
+
+@media screen and (min-width: 768px) {
+  .overlay {
+    height: 66vh;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .toShop {
+    margin-top: 10vh;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .productList {
+    margin-top: 2rem;
+    margin-bottom: 10rem;
+  }
+
+  .item {
+    border-bottom: 0.1rem solid white;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90vw;
+    max-width: 1200px;
+    margin: auto;
+    font-size: 1.3rem;
+    transition: transform 250ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .item:hover {
+    transform: scale(1.1);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10rem);
+  }
+
+  .img {
+    width: 5rem;
+    height: 6rem;
+    object-fit: contain;
+  }
+
+  .name {
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.03rem;
+    width: 30vw;
+  }
+
+  .quantityInput {
+    width: 6rem;
+    padding: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  .price {
+    font-size: 1.5rem;
+  }
+  .deleteBtn {
+    background-color: transparent;
+    font-size: 2rem;
+    margin-left: 1rem;
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 0, 0, 0);
+    border-radius: 1rem;
+    transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .deleteBtn:hover {
+    color: var(--red);
+    border: 1px solid rgb(255, 255, 255);
+    box-shadow: var(--box-shadow);
+  }
+
+  .total {
+    width: 90vw;
+    padding: 2rem 30rem 6rem 30rem;
+    font-size: 1.8rem;
+    position: fixed;
+    bottom: 25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    backdrop-filter: blur(0.6rem);
+  }
+
+  .total span {
+    letter-spacing: 0.05rem;
+    font-family: "Oswald", sans-serif;
+  }
+
+  .btn {
+    position: fixed;
+    bottom: 25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    font-size: 1.4rem;
+    letter-spacing: 0.05rem;
+    cursor: pointer;
+    background-color: var(--red);
+    border: none;
+    text-transform: uppercase;
+    padding: 1rem 1.4rem;
+    transition: all 300ms ease-in-out;
+    width: 16rem;
+  }
+
+  .btn:hover,
+  .btn:focus {
+    background-color: transparent;
+    box-shadow: 0 0 20px 4px rgba(255, 255, 255, 0.7);
+  }
+}

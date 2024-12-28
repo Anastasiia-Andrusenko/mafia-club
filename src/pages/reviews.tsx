@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import ReviewsList from "@/components/ReviewsList/ReviewsList";
 import ReviewForm from "@/components/ReviewForm/ReviewForm";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
+import { useTranslation } from "@/hooks/useTranslation";
+import css from "../styles/Reviews.module.css";
 
 // Тип для одного відгуку
 interface Review {
@@ -13,9 +15,9 @@ interface Review {
 }
 
 const Reviews: React.FC = () => {
-  const [reviews, setReviews] = useState<Review[]>([]);  // Типізуємо масив відгуків
+  const [reviews, setReviews] = useState<Review[]>([]); // Типізуємо масив відгуків
   const [updateTrigger, setUpdateTrigger] = useState(0);
-
+  const { t } = useTranslation();
   const handleReviewAdded = () => {
     setUpdateTrigger((prev) => prev + 1);
   };
@@ -23,11 +25,11 @@ const Reviews: React.FC = () => {
   // Завантажуємо відгуки з API
   const fetchReviews = async () => {
     try {
-      const response = await fetch('/api/reviews');
+      const response = await fetch("/api/reviews");
       if (!response.ok) {
-        throw new Error('Failed to fetch reviews');
+        throw new Error("Failed to fetch reviews");
       }
-      const data: Review[] = await response.json();  // Типізуємо дані
+      const data: Review[] = await response.json(); // Типізуємо дані
       setReviews(data);
     } catch (error) {
       console.error("Error fetching reviews:", error);
@@ -35,17 +37,20 @@ const Reviews: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchReviews();  // Викликаємо fetch при першому завантаженні
-  }, [updateTrigger]);  // Оновлюємо список відгуків кожен раз, коли додається новий
+    fetchReviews(); // Викликаємо fetch при першому завантаженні
+  }, [updateTrigger]); // Оновлюємо список відгуків кожен раз, коли додається новий
 
   return (
     <>
-      <h2>Reviews</h2>
+      <h2 className={css.title}>{t.reviews.giveFeedBack}</h2>
       <ReviewForm onReviewAdded={handleReviewAdded} />
       {reviews.length > 0 ? (
-        <ReviewsList reviews={reviews} /> 
+        <>
+          <h2 className={css.title}>{t.reviews.title}</h2>
+          <ReviewsList reviews={reviews} />
+        </>
       ) : (
-        <p>No reviews available.</p>
+        <p>{t.reviews.noReviews}</p>
       )}
       <ScrollTopBtn />
     </>
@@ -53,4 +58,3 @@ const Reviews: React.FC = () => {
 };
 
 export default Reviews;
-

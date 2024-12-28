@@ -7,6 +7,8 @@ import { useTranslation } from "../../hooks/useTranslation";
 import { TfiClose } from "react-icons/tfi";
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 interface ProductModalProps {
@@ -18,12 +20,13 @@ interface ProductModalProps {
 const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
   const { t } = useTranslation();
   const { addToCart } = useCart();
+  const notify = () => toast.success(`${product.name} ${t.basket.add}`);
 
   return (
     <div className={css.modal}>
       <div className={css.modalContent}>
         <button onClick={onClose} className={css.btnClose}> <TfiClose /></button>
-        <h2>{product.name}</h2>
+        <h2 className={css.name}>{product.name}</h2>
         <Image src={product.imageUrl1 ? product.imageUrl1 : "/img/logo.png"} alt={product.name} width={300} height={300}
               className={css.img}/>
         <p className={css.product_desk}>{product.mainDesk}</p>
@@ -40,8 +43,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             <li>{product.cartType6}</li>
             <li>{product.cartType7}</li>
             </ul> : ''}
-        <p>{product.price} грн</p>
-        <button onClick={() => addToCart(product)}><LuShoppingCart />{t.shopP.btnBuy}</button>
+            <div className={css.btn_list}>
+            <p className={css.product_price}>{product.price} грн</p>
+            <button className={css.btn} onClick={() => {addToCart(product); notify()}} ><LuShoppingCart />{t.shopP.btnBuy}</button>
+            </div>
       </div>
     </div>
   );

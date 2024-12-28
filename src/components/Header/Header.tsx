@@ -7,6 +7,7 @@ import LangSwitcher from "../LangSwitcher/LangSwitcher";
 import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeLine } from "react-icons/ri";
+import { LuShoppingCart } from "react-icons/lu";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,6 +51,8 @@ const Header = () => {
         </Link>
         {/* Кнопка для відкриття/закриття меню на мобільних пристроях */}
         {!isDesktop && (
+         <>
+         {!isMenuOpen && <Link  href="/basket" className={css.basketBtn}><LuShoppingCart/></Link>}
           <button className={`${css.menuButton} ${isMenuOpen ? css.menuButtonOpen : ""}`} onClick={toggleMenu}>
             {isMenuOpen ? (
               <span className={css.closeIcon}>
@@ -61,6 +64,8 @@ const Header = () => {
               </span>
             )}
           </button>
+         </>
+          
         )}
         {(isVisible || isDesktop) && <div
           className={`${css.nav} ${isMenuOpen || isDesktop ? css.navOpen : ""}`}
@@ -68,6 +73,7 @@ const Header = () => {
           {(isVisible || isDesktop) && (
             <>
               <NavBar closeMenu={closeMenu}/>
+              {isMenuOpen && <Link  href="/basket" className={css.basketBtnNav} onClick={closeMenu}><LuShoppingCart/></Link>}
               <LangSwitcher />
             </>
           )}
