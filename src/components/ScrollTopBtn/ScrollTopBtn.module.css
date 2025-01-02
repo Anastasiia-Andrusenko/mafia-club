@@ -2,7 +2,7 @@
   cursor: pointer;
   position: fixed;
   height: 50px;
-  z-index: 100;
+  z-index: 10;
   bottom: 40px;
   right: 40px;
   font-size: 50px;
@@ -24,7 +24,7 @@
 /* ============================= Desktop  */
 @media screen and (min-width: 768px) {
   .wrapper {
-    bottom: 100px;
+    bottom: 10rem;
     right: 10vw;
   }
 }

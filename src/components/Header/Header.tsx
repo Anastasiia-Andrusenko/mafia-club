@@ -24,20 +24,17 @@ const Header = () => {
       // Таймер для плавного закриття
       const timer = setTimeout(() => setIsVisible(false), 1000); // 300 мс — тривалість анімації
       return () => clearTimeout(timer); // Очищення таймера при повторному виклику
-    };
+    }
 
-    
     return () => {
       document.documentElement.style.overflow = "";
     };
   }, [isMenuOpen, isDesktop]);
 
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  
   // Функція для закриття меню
   const closeMenu = () => {
     setIsMenuOpen(false);
@@ -49,36 +46,58 @@ const Header = () => {
         <Link href="/" className={css.logo}>
           <Image src={"/img/logo.png"} alt="logo" width={60} height={60} />
         </Link>
-        {/* Кнопка для відкриття/закриття меню на мобільних пристроях */}
+
         {!isDesktop && (
-         <>
-         {!isMenuOpen && <Link  href="/basket" className={css.basketBtn}><LuShoppingCart/></Link>}
-          <button className={`${css.menuButton} ${isMenuOpen ? css.menuButtonOpen : ""}`} onClick={toggleMenu}>
-            {isMenuOpen ? (
-              <span className={css.closeIcon}>
-                <RiCloseLargeLine />
-              </span>
-            ) : (
-              <span className={css.burgerIcon}>
-                <GiHamburgerMenu />
-              </span>
+          <>
+            {!isMenuOpen && (
+              <Link href="/basket" className={css.basketBtn}>
+                <LuShoppingCart />
+              </Link>
             )}
-          </button>
-         </>
-          
+            <button
+              className={`${css.menuButton} ${
+                isMenuOpen ? css.menuButtonOpen : ""
+              }`}
+              onClick={toggleMenu}
+            >
+              {isMenuOpen ? (
+                <span className={css.closeIcon}>
+                  <RiCloseLargeLine />
+                </span>
+              ) : (
+                <span className={css.burgerIcon}>
+                  <GiHamburgerMenu />
+                </span>
+              )}
+            </button>
+          </>
         )}
-        {(isVisible || isDesktop) && <div
-          className={`${css.nav} ${isMenuOpen || isDesktop ? css.navOpen : ""}`}
-        >
-          {(isVisible || isDesktop) && (
-            <>
-              <NavBar closeMenu={closeMenu}/>
-              {isMenuOpen && <Link  href="/basket" className={css.basketBtnNav} onClick={closeMenu}><LuShoppingCart/></Link>}
-              <LangSwitcher />
-            </>
-          )}
-        </div>}
-        
+        {(isVisible || isDesktop) && (
+          <div
+            className={`${css.nav} ${
+              isMenuOpen || isDesktop ? css.navOpen : ""
+            }`}
+          >
+            {(isVisible || isDesktop) && (
+              <>
+                <NavBar closeMenu={closeMenu} />
+                {isMenuOpen && (
+                  <Link
+                    href="/basket"
+                    className={css.basketBtnNav}
+                    onClick={closeMenu}
+                  >
+                    <LuShoppingCart />
+                  </Link>
+                )}
+                <Link href="/basket" className={css.basket}>
+                  <LuShoppingCart />
+                </Link>
+                <LangSwitcher />
+              </>
+            )}
+          </div>
+        )}
       </Container>
     </header>
   );

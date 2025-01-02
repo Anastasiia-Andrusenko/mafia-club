@@ -19,7 +19,11 @@
 }
 
 .textArea {
+  height: 10rem;
 }
 
 .submit {
+}
+
+@media screen and (min-width: 768px) {
 }
