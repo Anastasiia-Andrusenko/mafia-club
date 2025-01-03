@@ -301,6 +301,7 @@ const Shop: React.FC = () => {
             product={modalProduct}
             onClose={handleCloseModal}
             onAddToCart={handleAddToCart}
+            isBasket={false}
           />
         )}
         <Link href="/basket" className={css.basket}>
