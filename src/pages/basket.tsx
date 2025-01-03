@@ -1,6 +1,6 @@
 // Basket.tsx
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import css from "../styles/Basket.module.css";
 import { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
@@ -10,6 +10,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Link from "next/link";
 import { MdOutlineSubdirectoryArrowRight } from "react-icons/md";
+import ProductModal from "@/components/Product/Product";
+import OrderForm from "@/components/OrderForm/OrderForm";
 
 interface BasketProps {
   basket: Product[];
@@ -18,6 +20,8 @@ interface BasketProps {
 
 const Basket: React.FC<BasketProps> = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
+  const [modalProduct, setModalProduct] = useState<Product | null>(null);
+  const [confirmForm, setConfirmForm] = useState(false);
   const { t } = useTranslation();
   const total = cart.reduce(
     (sum: number, product: Product) => sum + product.price * product.quantity,
@@ -25,8 +29,17 @@ const Basket: React.FC<BasketProps> = () => {
   );
   const notify = (productName: string) =>
     toast.warn(`${productName} ${t.basket.remove}`);
-
+  const handleAddToCart = () => {};
   const isEmpty = cart.length === 0;
+
+  const handleOpenModal = (product: Product) => {
+    setModalProduct(product);
+    console.log("modal open");
+  };
+
+  const handleCloseModal = () => {
+    setModalProduct(null);
+  };
 
   const handleQuantityChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -45,13 +58,17 @@ const Basket: React.FC<BasketProps> = () => {
     updateQuantity(productId, newQuantity);
   };
 
+  const handleToggleConfirmForm = () => {
+    setConfirmForm(!confirmForm);
+  };
+
   return (
     <div className={css.overlay}>
       <h2 className={css.title}>{t.basket.title}</h2>
       {isEmpty ? (
         <>
           {" "}
-          <p className={css.title}>{t.basket.empty}</p>{" "}
+          <p className={css.titleEmpty}>{t.basket.empty}</p>{" "}
           <Link href="/shop" className={css.toShop}>
             <MdOutlineSubdirectoryArrowRight className={css.icon} />
             {t.basket.redirect}
@@ -69,8 +86,11 @@ const Basket: React.FC<BasketProps> = () => {
               width={50}
               height={50}
               className={css.img}
+              onClick={() => handleOpenModal(product)}
             />
-            <p className={css.name}>{product.name}</p>
+            <p className={css.name} onClick={() => handleOpenModal(product)}>
+              {product.name}
+            </p>
             <div className={css.quantityWrapper}>
               <input
                 type="number"
@@ -95,6 +115,14 @@ const Basket: React.FC<BasketProps> = () => {
           </li>
         ))}
       </ul>
+      {modalProduct && (
+        <ProductModal
+          product={modalProduct}
+          onClose={handleCloseModal}
+          onAddToCart={handleAddToCart}
+          isBasket={true}
+        />
+      )}
       {isEmpty ? (
         ""
       ) : (
@@ -106,11 +134,16 @@ const Basket: React.FC<BasketProps> = () => {
         ""
       ) : (
         <div className={css.btnWrapper}>
-          <button type="button" className={css.btn}>
+          <button
+            type="button"
+            className={css.btn}
+            onClick={handleToggleConfirmForm}
+          >
             {t.basket.apply}
           </button>
         </div>
       )}
+      {confirmForm && <OrderForm onBack={handleToggleConfirmForm} />}
       <ToastContainer theme="dark" newestOnTop />
     </div>
   );

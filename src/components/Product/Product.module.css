@@ -17,6 +17,8 @@
   transform: translate(-50%, -50%);
   width: 90%;
   height: fit-content;
+  font-size: 1.3rem;
+  line-height: 2rem;
   padding: 2rem 1rem;
   margin: auto;
   border: 1px solid white;
