@@ -27,17 +27,34 @@
 
 .form {
   position: absolute;
-  padding: 100px 20px 60px;
-  top: 20vh;
+  padding: 8rem 1.8rem 4rem;
+  top: 50vh;
   left: 50%;
   display: flex;
   flex-direction: column;
   gap: 20px;
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(25px);
-  transform: translateY(-50%);
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.formTitle {
+  text-align: center;
+  text-transform: uppercase;
+  position: absolute;
+  width: 80%;
+  font-size: 0.9rem;
+  top: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.namePhone {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .input {
@@ -74,6 +91,56 @@
   margin-right: 40px;
 }
 
+.formServicesWrapper {
+  padding: 1rem 0;
+  border: 1px solid white;
+}
+
+.checkboxWrapper {
+  /* border: 1px solid white; */
+  font-weight: 100;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+  justify-items: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.checkboxWrapper label {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.75) inset;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.75) inset;
+  -moz-box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.75) inset;
+}
+
+.checkboxWrapper label:last-child {
+  transform: translateX(50%);
+}
+
+.checkIcon {
+  font-size: 0.8rem;
+  line-height: 0.8rem;
+}
+
+.check {
+}
+
+.formServices {
+  letter-spacing: 0.3rem;
+  color: var(--red);
+  font-weight: 100;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
 /* --------------------------- Desktop */
 
 @media screen and (min-width: 768px) {
@@ -112,35 +179,27 @@
   }
 
   .form {
-    position: absolute;
-    padding: 100px 60px 60px;
-    top: 20vh;
-    left: 50%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    backdrop-filter: blur(15px);
-    transform: translateY(-50%);
-    transform: translateX(-50%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10rem 2rem 4rem;
+    gap: 2rem;
+    font-size: 1.2rem;
+  }
+  .namePhone {
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   .input {
     padding: 10px 20px;
-    width: 400px;
-    background-color: transparent;
-    backdrop-filter: blur(15px);
-    border: 1px solid white;
+    width: 18rem;
   }
 
   .textarea {
     padding: 10px 20px;
-    width: 400px;
-    height: 200px;
+    width: 40rem;
+    height: 10rem;
     background-color: transparent;
     backdrop-filter: blur(15px);
-    border: 1px solid white;
-    margin-bottom: 40px;
+    margin-bottom: 3rem;
   }
 
   .textarea::placeholder,
@@ -157,5 +216,41 @@
     bottom: 0;
     width: 100px;
     margin-right: 40px;
+  }
+
+  .checkboxWrapper {
+    font-weight: 300;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+
+  .checkboxWrapper label {
+    font-size: 1rem;
+    width: 100%;
+    align-items: center;
+  }
+
+  .checkboxWrapper label:last-child {
+    transform: translateX(50%);
+  }
+
+  .checkIcon {
+    font-size: 1.4rem;
+    line-height: 0.8rem;
+  }
+
+  .check {
+    margin: 0;
+    padding: 0;
+    transform: scale(1.2);
+  }
+
+  .formServices {
+    letter-spacing: 0.3rem;
+    color: var(--red);
+    font-weight: 100;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 1.4rem;
   }
 }

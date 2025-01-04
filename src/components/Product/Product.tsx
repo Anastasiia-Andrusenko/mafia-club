@@ -1,6 +1,6 @@
 // components/ProductModal.tsx
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import css from "./Product.module.css";
 import { LuShoppingCart } from "react-icons/lu";
 import { useTranslation } from "../../hooks/useTranslation";
@@ -26,11 +26,36 @@ const ProductModal: React.FC<ProductModalProps> = ({
   const { addToCart } = useCart();
   const notify = () => toast.success(`${product.name} ${t.basket.add}`);
 
+  // Закриваємо модалку по клавіші Esc
+  useEffect(() => {
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscKey);
+
+    // Заборона скролу документа при відкритті модалки
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleEscKey);
+      document.documentElement.style.overflow = "auto"; // Відновлюємо скрол після закриття модалки
+    };
+  }, [onClose]);
+
+  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    // Закриття модалки при кліку на фон
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className={css.modal}>
+    <div className={css.modal} onClick={handleBackgroundClick}>
       <div className={css.modalContent}>
         <button onClick={onClose} className={css.btnClose}>
-          {" "}
           <TfiClose />
         </button>
         <h2 className={css.name}>{product.name}</h2>
@@ -79,6 +104,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
               onClick={() => {
                 addToCart(product);
                 notify();
+                onClose();
               }}
             >
               <LuShoppingCart />

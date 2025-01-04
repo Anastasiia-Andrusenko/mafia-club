@@ -3,13 +3,12 @@ import { useTranslation } from "../../hooks/useTranslation";
 import Container from "../Container/Container";
 import css from "./Footer.module.css";
 import Image from "next/image";
-// import Overlay from "../Overlay/Overlay";
 import { FaPhoneSquareAlt } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { FaYoutube } from "react-icons/fa";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { FaTelegram } from "react-icons/fa";
-import { RiInstagramFill } from "react-icons/ri";
+// import { RiInstagramFill } from "react-icons/ri";
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -50,22 +49,29 @@ const Footer: React.FC = () => {
             <p className={css.social_text}>{t.footer.getInTouch}</p>
             <ul className={css.social_list}>
               <li className={css.social_item}>
-                <Link href="/" className={css.social_link}>
-                  <RiInstagramFill />
-                </Link>
-              </li>
-              <li className={css.social_item}>
-                <Link href="/" className={css.social_link}>
+                <Link
+                  href="https://www.youtube.com/user/MafiaDreamClub"
+                  className={css.social_link}
+                  target="blank"
+                >
                   <FaYoutube />
                 </Link>
               </li>
               <li className={css.social_item}>
-                <Link href="/" className={css.social_link}>
+                <Link
+                  href="https://t.me/Khovaka"
+                  className={css.social_link}
+                  target="blank"
+                >
                   <FaTelegram />
                 </Link>
               </li>
               <li className={css.social_item}>
-                <Link href="/" className={css.social_link}>
+                <Link
+                  href="https://www.facebook.com/MafiaDreamClub"
+                  className={css.social_link}
+                  target="blank"
+                >
                   <FaSquareFacebook />
                 </Link>
               </li>

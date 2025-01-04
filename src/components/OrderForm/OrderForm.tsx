@@ -56,6 +56,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
       .then(
         (response) => {
           console.log("SUCCESS!", response.status, response.text);
+          onBack();
         },
         (err) => {
           console.error("FAILED...", err);
@@ -80,53 +81,82 @@ const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
   const notify = (name: string) =>
     toast.success(`${name}, ${t.basket.message}`);
 
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onBack();
+    }
+  };
+
+  // const handleEscPress = (e: KeyboardEvent) => {
+  //   if (e.key === "Escape") {
+  //     onBack();
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (confirmForm) {
+  //     document.documentElement.style.overflow = "hidden";
+  //     document.addEventListener("keydown", handleEscPress);
+  //   } else {
+  //     document.documentElement.style.overflow = "";
+  //     document.removeEventListener("keydown", handleEscPress);
+  //   }
+
+  //   return () => {
+  //     document.documentElement.style.overflow = "";
+  //     document.removeEventListener("keydown", handleEscPress);
+  //   };
+  // },[??] );
+
   return (
-    <div className={css.wrapper}>
-      <form onSubmit={handleSubmit} className={css.form}>
-        <p className={css.title}> {t.basket.order}:</p>
-        <ul className={css.list}>
-          {cart.map((product: Product) => (
-            <li key={product.id} className={css.item}>
-              <p className={css.quantity}>{product.quantity}</p>
-              &#xD7;
-              <p className={css.name}>{product.name}</p>
-            </li>
-          ))}
-        </ul>
-        <p className={css.total}>
-          {t.basket.total}: <span>{total} грн</span>
-        </p>
-        <label className={css.label}>
-          {t.basket.clientName}:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className={css.input}
-          />
-        </label>
-        <label className={css.label}>
-          {t.basket.phone}:
-          <input
-            type="text"
-            value={phone}
-            onChange={handlePhoneChange}
-            required
-            className={css.input}
-            pattern="\+380 \d{2} \d{2} \d{2} \d{3}"
-            title="+380 XX XX XX XXX"
-          />
-        </label>
-        <button type="submit" className={css.submit}>
-          <MdOutlineDoneOutline /> {t.basket.submit}
-        </button>
-        <button type="button" className={css.back} onClick={() => onBack()}>
-          <LuShoppingCart /> {t.basket.back}
-        </button>
-      </form>
-      <ToastContainer theme="dark" newestOnTop />
-    </div>
+    <>
+      <div className={css.wrapper} onClick={handleOverlayClick}>
+        <form onSubmit={handleSubmit} className={css.form}>
+          <p className={css.title}> {t.basket.order}:</p>
+          <ul className={css.list}>
+            {cart.map((product: Product) => (
+              <li key={product.id} className={css.item}>
+                <p className={css.quantity}>{product.quantity}</p>
+                &#xD7;
+                <p className={css.name}>{product.name}</p>
+              </li>
+            ))}
+          </ul>
+          <p className={css.total}>
+            {t.basket.total}: <span>{total} грн</span>
+          </p>
+          <label className={css.label}>
+            {t.basket.clientName}:
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className={css.input}
+            />
+          </label>
+          <label className={css.label}>
+            {t.basket.phone}:
+            <input
+              type="text"
+              value={phone}
+              onChange={handlePhoneChange}
+              required
+              className={css.input}
+              pattern="\+380 \d{2} \d{2} \d{2} \d{3}"
+              title="+380 XX XX XX XXX"
+            />
+          </label>
+          <button type="submit" className={css.submit}>
+            <MdOutlineDoneOutline /> {t.basket.submit}
+          </button>
+          <button type="button" className={css.back} onClick={() => onBack()}>
+            <LuShoppingCart /> {t.basket.back}
+          </button>
+        </form>
+        <ToastContainer theme="dark" newestOnTop />
+      </div>
+    </>
   );
 };
 
