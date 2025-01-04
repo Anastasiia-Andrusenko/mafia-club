@@ -56,7 +56,16 @@ const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
             <Container>
               <p className={css.mafia}>
                 MAFIA
-                <span className={css.dream}>DREAM CLUB</span>
+                <span className={css.dream}>
+                  DREAM{" "}
+                  <Image
+                    src={"/img/logo.png"}
+                    alt="logo"
+                    width={60}
+                    height={60}
+                  />
+                  CLUB
+                </span>
               </p>
               <h1 className={css.description}>
                 {t.homeP.description1}
@@ -120,7 +129,7 @@ const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
             <Table />
           </Container>
           <ClientsList />
-          <ScrollTopBtn/>
+          <ScrollTopBtn />
         </main>
       </div>
     </>

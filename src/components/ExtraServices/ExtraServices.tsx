@@ -15,7 +15,7 @@ const ExtraServices = () => {
   return (
     <>
       <Container>
-        <div className={css.extras}>
+        <div className={css.extras} id="extra">
           <p className={css.extras_title}>
             <FaPlus />
             {t.extras.title}
