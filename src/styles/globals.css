@@ -1,34 +1,35 @@
 :root {
-  --background: #330000;
-  --foreground: #ffffff;
-  --red: #ff0000;
+  --font-family-primary: "Oswald", sans-serif;
+  --font-family-secondary: "Spectral SC", serif;
+
+  --background: #240000;
+  --foreground: #e3e3e3;
+  --red: #d92929;
   --bg-gradient: linear-gradient(
     180deg,
     rgb(0, 0, 0) 0%,
-    rgba(134, 0, 7, 0.35) 48%,
-    #86000759 53%,
+    rgb(82, 0, 4) 48%,
+    #530004 53%,
     rgb(0, 0, 0) 100%
   );
 
   --box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.7);
 }
 
-html,
-body {
-  width: 100vw;
-  /* height: 200vh; */
-  overflow-x: hidden;
-}
-
 body {
   color: var(--foreground);
   background: var(--bg-gradient);
-  /* background-attachment: fixed; */
-  /* background-size: cover; */
-  font-family: "Oswald", sans-serif;
-  /* font-family: "Spectral SC", serif; */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+svg,
+input {
+  color: var(--foreground);
 }
 
 h1,
@@ -37,8 +38,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Spectral SC", serif;
-  /* font-family: "Oswald", sans-serif; */
+  font-family: var(--font-family-secondary);
 }
 
 a {
@@ -46,10 +46,12 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+body {
+  /* color: var(--foreground);
+  background: var(--bg-gradient); */
+  font-family: var(--font-family-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 *,
@@ -170,3 +172,31 @@ ul {
 img {
   display: block;
 }
+
+/* ============================= D A R K ============================= */
+
+/* ============================= L I G H T ============================= */
+
+/* :root {
+    --background: #330000;
+    --foreground: #ffffff;
+    --red: #d52222;
+    --bg-gradient: linear-gradient(
+      180deg,
+      rgb(0, 0, 0) 0%,
+      rgba(134, 0, 7, 0.35) 48%,
+      #86000759 53%,
+      rgb(0, 0, 0) 100%
+    );
+
+    --box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.7);
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--bg-gradient);
+  } */

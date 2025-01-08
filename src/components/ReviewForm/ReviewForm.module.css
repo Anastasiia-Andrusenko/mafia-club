@@ -16,6 +16,7 @@
   background-color: transparent;
   backdrop-filter: blur(15px);
   border: 1px solid white;
+  color: var(--foreground);
 }
 
 .textArea {

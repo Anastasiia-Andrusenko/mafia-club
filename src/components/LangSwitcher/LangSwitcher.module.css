@@ -14,26 +14,18 @@
   font-size: 24px;
   font-weight: 100;
   cursor: pointer;
+  color: var(--foreground);
   background-color: transparent;
   border: none;
   transition: color 250ms ease;
 }
 
-.btn:hover {
-  color: var(--red);
-}
-
-
 .btn:disabled {
-  color: rgba(255, 255, 255, 0.5); /* Залишаємо колір кнопки таким, як він є */
+  color: rgba(255, 255, 255, 0.4); /* Залишаємо колір кнопки таким, як він є */
   cursor: not-allowed; /* Зберігаємо стилізацію курсора для заблокованої кнопки */
 }
 
-.btn:disabled:hover {
-  color: rgba(255, 255, 255, 0.5); 
-}
-
-/* ============================= Desctop  */
+/* ============================= Desktop  */
 @media screen and (min-width: 768px) {
   .container {
     position: absolute;
@@ -44,5 +36,13 @@
     right: 20px;
     top: 20px;
     transform: none;
+  }
+
+  .btn:hover {
+    color: var(--red);
+  }
+
+  .btn:disabled:hover {
+    color: rgba(255, 255, 255, 0.4);
   }
 }

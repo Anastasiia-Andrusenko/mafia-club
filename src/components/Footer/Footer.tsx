@@ -8,19 +8,20 @@ import { IoMdMail } from "react-icons/io";
 import { FaYoutube } from "react-icons/fa";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { FaTelegram } from "react-icons/fa";
+import Overlay from "../Overlay/Overlay";
 // import { RiInstagramFill } from "react-icons/ri";
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className={css.footer}>
+    <footer className={css.footer} id="footer">
       <Container>
         <div className={css.wrapper}>
           <Link href="/" className={css.logo}>
             <Image src={"/img/logo.png"} alt="logo" width={60} height={60} />
           </Link>
-
+          <Overlay />
           <ul className={css.contacts}>
             <li className={css.contact_item}>
               <span className={css.contact_text}>{t.footer.mail}</span>

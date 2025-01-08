@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
+import { useTranslation } from "@/hooks/useTranslation";
+import { MdContactPhone } from "react-icons/md";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
+  const { t } = useTranslation();
   useEffect(() => {
     setIsDesktop(window.innerWidth > 768);
 
@@ -49,6 +51,15 @@ const Header = () => {
 
         {!isDesktop && (
           <>
+            <Link
+              href="#footer"
+              className={isMenuOpen ? css.menuContacts : css.contacts}
+              onClick={closeMenu}
+            >
+              <MdContactPhone />
+              {t.nav.contact}
+            </Link>
+
             {!isMenuOpen && (
               <Link href="/basket" className={css.basketBtn}>
                 <LuShoppingCart />
@@ -88,6 +99,7 @@ const Header = () => {
                     onClick={closeMenu}
                   >
                     <LuShoppingCart />
+                    {t.basket.basket}
                   </Link>
                 )}
                 <Link href="/basket" className={css.basket}>

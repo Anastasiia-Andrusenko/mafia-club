@@ -46,9 +46,12 @@
 }
 
 .table_que {
-  color: red;
   cursor: pointer;
   font-size: 1.7rem;
+}
+
+.table_que svg {
+  color: var(--red);
 }
 
 @media screen and (min-width: 768px) {
@@ -71,7 +74,7 @@
   }
   .table_row:hover {
     .table_que {
-      color: red;
+      color: var(--red);
       transform: scale(1.2);
     }
   }

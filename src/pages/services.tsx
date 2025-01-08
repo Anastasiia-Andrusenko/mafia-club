@@ -36,7 +36,11 @@ const Services = () => {
         <div className={css.services} id="services">
           <h4 className={css.listTitle}>{t.services.listTitle}</h4>
           <ul className={css.cards}>
-            <li className={css.item} id="vip">
+            <li
+              className={css.item}
+              id="vip"
+              onClick={() => !isDesktop && handleClickMore(0)}
+            >
               <div className={css.thumb}>
                 <div className={`${css.img} ${css.vip}`}></div>
                 <div
@@ -67,7 +71,11 @@ const Services = () => {
                 <h3 className={css.card_title}>{t.services.vip}</h3>
               </div>
             </li>
-            <li className={css.item} id="corporate">
+            <li
+              className={css.item}
+              id="corporate"
+              onClick={() => !isDesktop && handleClickMore(1)}
+            >
               <div className={css.thumb}>
                 <div className={`${css.img} ${css.office}`}></div>
                 <div
@@ -98,7 +106,11 @@ const Services = () => {
                 <h3 className={css.card_title}>{t.services.corporate}</h3>
               </div>
             </li>
-            <li className={css.item} id="out">
+            <li
+              className={css.item}
+              id="out"
+              onClick={() => !isDesktop && handleClickMore(2)}
+            >
               <div className={css.thumb}>
                 <div className={`${css.img} ${css.outdoor}`}></div>
                 <div
@@ -128,7 +140,11 @@ const Services = () => {
                 <h3 className={css.card_title}>{t.services.outdoor}</h3>
               </div>
             </li>
-            <li className={css.item} id="kids">
+            <li
+              className={css.item}
+              id="kids"
+              onClick={() => !isDesktop && handleClickMore(3)}
+            >
               <div className={css.thumb}>
                 <div className={`${css.img} ${css.kids}`}></div>
                 <div
@@ -158,7 +174,11 @@ const Services = () => {
                 <h3 className={css.card_title}>{t.services.kids}</h3>
               </div>
             </li>
-            <li className={css.item} id="birthday">
+            <li
+              className={css.item}
+              id="birthday"
+              onClick={() => !isDesktop && handleClickMore(4)}
+            >
               <div className={css.thumb}>
                 <div className={`${css.img} ${css.birthday}`}></div>
                 <div
@@ -188,7 +208,11 @@ const Services = () => {
                 <h3 className={css.card_title}>{t.services.birth}</h3>
               </div>
             </li>
-            <li className={css.item} id="english">
+            <li
+              className={css.item}
+              id="english"
+              onClick={() => !isDesktop && handleClickMore(5)}
+            >
               <div className={css.thumb}>
                 <div className={`${css.img} ${css.english}`}></div>
                 <div

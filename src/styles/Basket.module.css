@@ -6,7 +6,7 @@
 .title {
   text-align: center;
   margin: 3rem;
-  font-family: "Spectral SC", serif;
+  font-family: var(--font-family-secondary);
   font-weight: 800;
   text-transform: uppercase;
 }
@@ -70,6 +70,7 @@
   border: 0.01rem solid white;
   text-align: center;
   margin-right: 0.5rem;
+  color: var(--background);
 }
 
 .deleteBtn {

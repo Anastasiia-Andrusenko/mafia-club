@@ -15,6 +15,10 @@
   transition: opacity 1000ms ease, visibility 1000ms ease;
 }
 
+.wrapper svg {
+  color: rgba(255, 0, 0, 0.5);
+}
+
 .wrapper.show {
   opacity: 1;
   visibility: visible;

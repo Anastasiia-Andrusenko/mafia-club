@@ -1,7 +1,12 @@
 .hero {
   top: 0;
   z-index: -1;
-  background-image: url("../../public/img/hero.png");
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("../../public/img/hero.webp");
   background-position: center;
   background-size: cover;
   width: 100vw;
@@ -10,12 +15,13 @@
 }
 
 .mafia {
+  color: var(--foreground);
   padding-top: 84px;
   display: block;
   font-size: 4rem;
-  font-weight: 800;
-  font-family: "Spectral SC", serif;
-  -webkit-text-stroke-width: 2px;
+  font-weight: 600;
+  font-family: var(--font-family-secondary);
+  -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: rgb(0, 0, 0);
 }
 
@@ -24,7 +30,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  color: red;
+  color: var(--red);
   font-size: 2rem;
   font-weight: 500;
   -webkit-text-stroke-width: 1px;
@@ -83,7 +89,7 @@
 }
 
 .sum {
-  font-family: "Spectral SC", serif;
+  font-family: var(--font-family-secondary);
   font-size: 24px;
   font-weight: 900;
   display: block;
@@ -108,7 +114,7 @@
 }
 
 .gallery {
-  margin: 10px auto 40px auto;
+  margin: 1rem auto 3rem auto;
   height: 100px;
   overflow: hidden;
 }
@@ -157,7 +163,7 @@
   }
 
   .description {
-    font-family: "Oswald", sans-serif;
+    font-family: var(--font-family-primary);
     width: 900px;
     margin: auto;
     margin-top: 300px;
@@ -213,7 +219,7 @@
   }
 
   .sum {
-    font-family: "Spectral SC", serif;
+    font-family: var(--font-family-secondary);
     font-size: 100px;
     font-weight: 900;
     display: block;
