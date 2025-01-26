@@ -1,9 +1,9 @@
-const OutdorPage = () => {
+const OutdoorPage = () => {
   return (
     <>
-      <p>Outdor Page</p>
+      <p>OutdoorPage Page</p>
     </>
   );
 };
 
-export default OutdorPage;
+export default OutdoorPage;

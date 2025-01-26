@@ -142,8 +142,17 @@
   object-fit: cover;
 }
 
+.video {
+  margin-top: 2rem;
+  text-align: center;
+}
+
 /* ============================= Desktop  */
 @media screen and (min-width: 768px) {
+  .video iframe {
+    width: 560px;
+    height: 315px;
+  }
   .hero {
     height: 1000px;
   }

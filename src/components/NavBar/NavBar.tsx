@@ -2,14 +2,20 @@ import Link from "next/link";
 import css from "./NavBar.module.css";
 import { useRouter } from "next/router";
 import { useTranslation } from "../../hooks/useTranslation";
+import Overlay from "../Overlay/Overlay";
+import { MdContactPhone } from "react-icons/md";
+import { LuShoppingCart } from "react-icons/lu";
 
 type NavBarProps = {
   closeMenu: () => void;
+  isDesktop: boolean;
 };
 
-const NavBar: React.FC<NavBarProps> = ({ closeMenu }) => {
+const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
   const router = useRouter();
-  const isActive = (path: string) => router.pathname === path;
+  const isActive = (path: string) =>
+    path === "/" ? router.pathname === "/" : router.pathname.startsWith(path);
+
   const { t } = useTranslation();
 
   return (
@@ -72,6 +78,20 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu }) => {
           </Link>
         </li>
       </ul>
+
+      {isDesktop && (
+        <Link href="#footer" className={css.contactHeader}>
+          <MdContactPhone />
+        </Link>
+      )}
+      {isDesktop && (
+        <Link href="/basket" className={css.basket}>
+          <LuShoppingCart />
+        </Link>
+      )}
+      <div className={css.mainFormBtn}>
+        <Overlay />
+      </div>
     </nav>
   );
 };

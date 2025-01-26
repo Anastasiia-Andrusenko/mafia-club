@@ -44,6 +44,14 @@ const Footer: React.FC = () => {
                 <FaPhoneSquareAlt className={css.contact_icon} />
                 +380 97 625 85 45
               </Link>
+              <Link
+                target="blank"
+                href="tel:+380665986425 "
+                className={css.contact_link}
+              >
+                <FaPhoneSquareAlt className={css.contact_icon} />
+                +380 66 598 64 25
+              </Link>
             </li>
           </ul>
           <div className={css.social}>

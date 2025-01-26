@@ -32,12 +32,12 @@ const ScrollTopBtn = () => {
   useEffect(() => {
     if (!isVisible) {
       const timer = setTimeout(() => {
-        setIsRendered(false); // Видаляємо елемент з DOM після анімації
-      }, 1000); // Час має збігатися з CSS-анімацією
+        setIsRendered(false);
+      }, 1000);
 
       return () => clearTimeout(timer);
     } else {
-      setIsRendered(true); // Знову відображаємо елемент, коли isVisible = true
+      setIsRendered(true);
     }
   }, [isVisible]);
 

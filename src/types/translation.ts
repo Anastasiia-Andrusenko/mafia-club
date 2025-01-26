@@ -85,4 +85,22 @@ export interface Translation {
   reviews: {
     [key: string]: string;
   };
+  vipP: {
+    [key: string]: string;
+  };
+  corporateP: {
+    [key: string]: string;
+  };
+  outdoorP: {
+    [key: string]: string;
+  };
+  birthdayP: {
+    [key: string]: string;
+  };
+  kidsP: {
+    [key: string]: string;
+  };
+  englishP: {
+    [key: string]: string;
+  };
 }

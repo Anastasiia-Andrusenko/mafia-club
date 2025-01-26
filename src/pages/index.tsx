@@ -8,6 +8,7 @@ import ClientsList from "@/components/Clients/Clients";
 import Image from "next/image";
 import imagePaths from "../components/PhotoGallery/imagesMainPage.json";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
+import { useEffect, useState } from "react";
 
 interface ImageFile {
   id: string;
@@ -21,9 +22,9 @@ const link = "https://mafiadream.com.ua/wp-content/images/";
 
 export async function getStaticProps() {
   const imagesFiles: ImageFile[] = imagePaths.images.map((path, index) => ({
-    id: `${index + 1}`, // Динамічне id
-    src: `${link}${path}`, // Повний шлях до зображення
-    alt: `Image ${index + 1}`, // Динамічний alt
+    id: `${index + 1}`,
+    src: `${link}${path}`,
+    alt: `Image ${index + 1}`,
     width: 600,
     height: 400,
   }));
@@ -41,6 +42,19 @@ interface ImageGalleryProps {
 const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
   const { t } = useTranslation();
   const doubledImages = [...imagesFiles, ...imagesFiles];
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
@@ -128,6 +142,16 @@ const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
           <Container>
             <Table />
           </Container>
+          {isMobile && <Overlay />}
+          <div className={css.video}>
+            <iframe
+              src="https://www.youtube.com/embed/tUHAoshTRQ0?si=zuLF6Ij4gPv7G3bo"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+          </div>
           <ClientsList />
           <ScrollTopBtn />
         </main>

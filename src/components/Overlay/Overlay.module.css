@@ -27,7 +27,8 @@
 
 .form {
   position: absolute;
-  padding: 8rem 1.8rem 4rem;
+  padding: 8vh 4vh 2vh 4vh;
+  height: 96vh;
   top: 50vh;
   left: 50%;
   display: flex;
@@ -44,8 +45,8 @@
   text-transform: uppercase;
   position: absolute;
   width: 80%;
-  font-size: 0.9rem;
-  top: 4rem;
+  font-size: 0.8rem;
+  top: 2vh;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -66,14 +67,14 @@
 }
 
 .textarea {
-  padding: 10px 20px;
+  padding: 1vh 2vh;
   width: 80vw;
-  height: 40vw;
+  height: 16vh;
   color: var(--foreground);
   background-color: transparent;
   backdrop-filter: blur(15px);
   border: 1px solid white;
-  margin-bottom: 40px;
+  margin-bottom: 2vh;
 }
 
 .textarea::placeholder,

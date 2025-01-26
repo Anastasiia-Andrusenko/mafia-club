@@ -1,16 +1,17 @@
 .nav {
   background-color: black;
-  padding: 60px 40px;
+  padding: 6vw 4vw;
   width: 100vw;
   height: 100vh;
-  padding-top: 160px;
+  padding-top: 16vh;
+  overflow-y: hidden;
 }
 
 .navList {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 4vh;
   justify-content: center;
   align-items: center;
 }
@@ -32,7 +33,9 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   /* font-weight: bold; */
 }
-
+.mainFormBtn {
+  margin-top: 5vh;
+}
 /* ============================= Desktop  */
 @media screen and (min-width: 768px) {
   .nav {
@@ -41,6 +44,9 @@
     height: fit-content;
     width: fit-content;
     margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 
   .navList {
@@ -66,5 +72,25 @@
     color: var(--red);
     border-bottom: 1px solid rgba(255, 255, 255, 0.4);
     /* font-weight: bold; */
+  }
+
+  .basket,
+  .contactHeader {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.8rem;
+    padding: 0.5rem;
+
+    /* border-radius: 50%; */
+  }
+
+  .basket:hover,
+  .contactHeader:hover {
+    box-shadow: var(--box-shadow);
+  }
+
+  .mainFormBtn {
+    height: 100%;
+    margin: auto;
   }
 }

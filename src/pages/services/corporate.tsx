@@ -10,15 +10,18 @@ import { BiGame } from "react-icons/bi";
 import { BiAnalyse } from "react-icons/bi";
 import { FaPhotoVideo } from "react-icons/fa";
 
-const VipPage = () => {
+const CorporatePage = () => {
   const { t } = useTranslation();
   return (
     <>
-      <div className={`${css.bgImg} ${css.vip}`}></div>
-      <h2 className={css.pageName}>{t.vipP.title}</h2>
+      <div className={css.bgImg}>
+        <Container>
+          <h2 className={css.pageName}>{t.vipP.pageName}</h2>
+        </Container>
+      </div>
       <Container>
         <section className={css.main}>
-          {/* <h3 className={css.title}>{t.vipP.title}</h3> */}
+          <h3 className={css.title}>{t.vipP.title}</h3>
           <p className={css.description}>{t.vipP.description}</p>
         </section>
         <section className={css.instruction}>
@@ -84,4 +87,4 @@ const VipPage = () => {
   );
 };
 
-export default VipPage;
+export default CorporatePage;

@@ -91,7 +91,8 @@ const Header = () => {
           >
             {(isVisible || isDesktop) && (
               <>
-                <NavBar closeMenu={closeMenu} />
+                <NavBar closeMenu={closeMenu} isDesktop={isDesktop} />
+
                 {isMenuOpen && (
                   <Link
                     href="/basket"
@@ -102,9 +103,6 @@ const Header = () => {
                     {t.basket.basket}
                   </Link>
                 )}
-                <Link href="/basket" className={css.basket}>
-                  <LuShoppingCart />
-                </Link>
                 <LangSwitcher />
               </>
             )}
