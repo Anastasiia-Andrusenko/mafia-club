@@ -12,7 +12,7 @@
 }
 .nav {
   opacity: 0;
-  overflow: hidden;
+  /* overflow: hidden; */
   transition: opacity 1000ms ease;
 }
 

@@ -3,16 +3,98 @@
   background-position: center;
   background-size: cover;
   width: 100vw;
-  height: 8rem;
+  height: 15rem;
   opacity: 0.6;
 }
 
 .pageTitle {
-  position: absolute;
-  top: 8rem;
+  transform: translateY(-150%);
   text-align: center;
   font-size: 1.3rem;
+  line-height: 2rem;
   color: white;
+  margin: auto;
+  width: 90vw;
+  text-shadow: 0px 0px 3rem rgba(0, 0, 0, 0.6);
+}
+
+.title2 {
+  font-size: 1.1rem;
+}
+
+.instruction_title {
+  text-align: center;
+  font-size: 1.3rem;
+  transform: translateY(-100%);
+  text-transform: uppercase;
+}
+
+.algorithm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 90vw;
+  margin: auto;
+  margin-bottom: 4rem;
+}
+
+.algorithm_item {
+  text-align: center;
+}
+
+.algorithm_text {
+  font-size: 1rem;
+  text-align: center;
+  text-shadow: 0px 0px 3rem rgba(0, 0, 0, 0.6);
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  fill: rgb(255, 255, 255);
+  margin-bottom: 0.6rem;
+}
+.arrow {
+  width: 1rem;
+  height: 1rem;
+  fill: rgba(255, 255, 255, 0.6);
+  rotate: 90deg;
+}
+
+.details {
+  margin: 3rem auto;
+  width: 90vw;
+}
+
+.details_title {
+  text-align: center;
+  margin: 2rem auto;
+  text-transform: uppercase;
+}
+
+.text1,
+.text2,
+.text3,
+.text4,
+.text5,
+.text6 {
+  margin: 0.5rem;
+}
+
+.details_players {
+  margin: 1rem 0.5rem;
+}
+
+.details_taxi {
+  margin: 0.5rem;
+  color: var(--red);
+}
+
+.details_coast {
+  font-weight: 800;
+  margin: 0.5rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -27,35 +109,45 @@
   }
 
   .pageTitle {
+    position: absolute;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
     width: 60vw;
     left: 50vw;
     transform: translateX(-50%);
-    top: 30rem;
-  }
-
-  .pageName {
+    top: 34rem;
     text-align: center;
     font-size: 3rem;
     text-shadow: 0px 0px 3rem rgba(0, 0, 0);
   }
 
+  .title2 {
+    font-size: 2.7rem;
+  }
+
   .emotionalImg {
   }
 
+  .instruction {
+    margin: 4rem auto;
+    box-shadow: var(--box-shadow);
+    padding: 3rem 0;
+  }
   .instruction_title {
     text-align: center;
     font-size: 2rem;
+    transform: translateY(0%);
   }
 
   .algorithm {
     display: flex;
-    align-items: top;
+    flex-direction: row;
+    align-items: flex-start;
     justify-content: space-between;
     width: 90%;
     margin: auto;
-    margin: 5vh auto;
+    margin-top: 3vh;
   }
 
   .algorithm_item {
@@ -72,6 +164,7 @@
 
   .algorithm_text {
     text-align: center;
+    font-size: 0.9rem;
     text-shadow: 0px 0px 3rem rgba(0, 0, 0, 0.6);
   }
 
@@ -82,8 +175,39 @@
     transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
   }
   .arrow {
-    margin-top: 3rem;
-    width: 2rem;
+    margin-top: 4rem;
+    width: 1.6rem;
     height: 2rem;
+    rotate: 0deg;
+  }
+
+  .details {
+    width: 100%;
+    margin: 4rem auto;
+  }
+
+  .details_title {
+    font-size: 2rem;
+  }
+
+  .text1,
+  .text2,
+  .text3,
+  .text4,
+  .text5,
+  .text6 {
+    font-size: 1.3rem;
+  }
+
+  .details_players {
+    font-size: 1.3rem;
+  }
+
+  .details_taxi {
+    font-size: 1.3rem;
+  }
+
+  .details_coast {
+    font-size: 1.3rem;
   }
 }

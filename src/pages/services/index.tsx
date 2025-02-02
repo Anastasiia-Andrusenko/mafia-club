@@ -274,7 +274,7 @@ const Services = () => {
           </ul>
         </div>
         <ExtraServices />
-        {isVisibleBtn && !isDesktop ? (
+        {isVisibleBtn && isDesktop ? (
           <div className={css.mainButton}>
             <Overlay />
           </div>

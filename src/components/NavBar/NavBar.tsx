@@ -30,7 +30,11 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
             {t.nav.main}
           </Link>
         </li>
-        <li>
+        <li
+          className={css.services}
+          // onMouseEnter={() => isDesktop && setIsServicesOpen(true)}
+          // onMouseLeave={() => isDesktop && setIsServicesOpen(false)}
+        >
           <Link
             href="/services"
             className={`${css.link} ${
@@ -40,6 +44,64 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
           >
             {t.nav.services}
           </Link>
+          {isDesktop && (
+            <ul className={css.submenu}>
+              <li
+                className={`${css.subLink} ${
+                  isActive("/services/vip") ? css.subCurrent : ""
+                }`}
+              >
+                <Link href="/services/vip" onClick={closeMenu}>
+                  {t.services.vip}
+                </Link>
+              </li>
+              <li
+                className={`${css.subLink} ${
+                  isActive("/services/corporate") ? css.subCurrent : ""
+                }`}
+              >
+                <Link href="/services/corporate" onClick={closeMenu}>
+                  {t.services.corporate}
+                </Link>
+              </li>
+              <li
+                className={`${css.subLink} ${
+                  isActive("/services/outdoor") ? css.subCurrent : ""
+                }`}
+              >
+                <Link href="/services/outdoor" onClick={closeMenu}>
+                  {t.services.outdoor}
+                </Link>
+              </li>
+              <li
+                className={`${css.subLink} ${
+                  isActive("/services/kids") ? css.subCurrent : ""
+                }`}
+              >
+                <Link href="/services/kids" onClick={closeMenu}>
+                  {t.services.kids}
+                </Link>
+              </li>
+              <li
+                className={`${css.subLink} ${
+                  isActive("/services/birthday") ? css.subCurrent : ""
+                }`}
+              >
+                <Link href="/services/birthday" onClick={closeMenu}>
+                  {t.services.birth}
+                </Link>
+              </li>
+              <li
+                className={`${css.subLink} ${
+                  isActive("/services/english") ? css.subCurrent : ""
+                }`}
+              >
+                <Link href="/services/english" onClick={closeMenu}>
+                  {t.services.engM}
+                </Link>
+              </li>
+            </ul>
+          )}
         </li>
         <li>
           <Link
@@ -78,7 +140,6 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
           </Link>
         </li>
       </ul>
-
       {isDesktop && (
         <Link href="#footer" className={css.contactHeader}>
           <MdContactPhone />
