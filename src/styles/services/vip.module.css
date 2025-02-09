@@ -134,6 +134,7 @@
     box-shadow: var(--box-shadow);
     padding: 3rem 0;
   }
+
   .instruction_title {
     text-align: center;
     font-size: 2rem;
@@ -143,6 +144,7 @@
   .algorithm {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
     width: 90%;
@@ -152,7 +154,7 @@
 
   .algorithm_item {
     text-align: center;
-    width: calc(100% / 6);
+    width: 9rem;
     transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
   }
   .algorithm_item:hover {
@@ -175,7 +177,7 @@
     transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
   }
   .arrow {
-    margin-top: 4rem;
+    margin-top: 3.6rem;
     width: 1.6rem;
     height: 2rem;
     rotate: 0deg;
