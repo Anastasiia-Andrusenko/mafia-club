@@ -46,19 +46,24 @@ const Header = () => {
     <header className={css.header}>
       <Container>
         <Link href="/" className={css.logo}>
-          <Image src={"/img/logo.png"} alt="logo" width={60} height={60} />
+          <Image src={"/img/logo.png"} alt="logo" width={40} height={44} />
+          <div className={css.logo_text}>
+            <p className={css.mafia}>MAFIA</p>
+            <span className={css.dream}>DREAM CLUB</span>
+          </div>
         </Link>
 
         {!isDesktop && (
           <>
-            <Link
-              href="#footer"
-              className={isMenuOpen ? css.menuContacts : css.contacts}
-              onClick={closeMenu}
-            >
-              <MdContactPhone />
-              {t.nav.contact}
-            </Link>
+            {!isMenuOpen && (
+              <Link
+                href="#footer"
+                className={isMenuOpen ? css.menuContacts : css.contacts}
+                onClick={closeMenu}
+              >
+                <MdContactPhone />
+              </Link>
+            )}
 
             {!isMenuOpen && (
               <Link href="/basket" className={css.basketBtn}>

@@ -68,23 +68,11 @@ const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
         <main>
           <div className={css.hero}>
             <Container>
-              <p className={css.mafia}>
-                MAFIA
-                <span className={css.dream}>
-                  DREAM{" "}
-                  <Image
-                    src={"/img/logo.png"}
-                    alt="logo"
-                    width={60}
-                    height={60}
-                  />
-                  CLUB
-                </span>
-              </p>
               <h1 className={css.description}>
                 {t.homeP.description1}
-                <span className={css.enter}></span>
-                {t.homeP.description2}
+                {/* {t.homeP.description3} */}
+                <span className={css.description2}>{t.homeP.description2}</span>
+                {/* {t.homeP.description4} */}
               </h1>
             </Container>
           </div>
@@ -146,6 +134,13 @@ const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
           <div className={css.video}>
             <iframe
               src="https://www.youtube.com/embed/tUHAoshTRQ0?si=zuLF6Ij4gPv7G3bo"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
+            <iframe
+              src="https://www.youtube.com/embed/CY4_zTEm_sk?si=aN5_bPGc3OMPlLku"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"

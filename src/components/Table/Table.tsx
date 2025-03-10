@@ -66,22 +66,16 @@ const Table: React.FC = () => {
           </p>
           <p className={css.more}>{t.table.more}</p>
         </Link>
-        {/* <li className={css.column}>
-          <p className={css.table_service}>
-            <Link href={getHref("extra")}>{t.table.service5}</Link>
-          </p>
+        <Link href="/services/extras" className={css.column}>
+          <p className={css.table_service}>Додаткові послуги</p>
+          <p className={css.thumb_text_p}>{t.table.players}</p>
+          <p className={css.thumb_text_p}>{t.table.rules}</p>
+          <p className={css.thumb_text_p}>{t.table.specificBirthday}</p>
           <p className={css.table_price}>
-            {t.table.from}
-            <span className={css.money}>{t.table.price5}</span>
-            грн
+            <span className={css.money}>{t.table.price4}</span>грн
           </p>
-          <p className={css.table_que}>
-            <Link href={getHref("extra")}>
-              {t.table.more}
-              <BsQuestionSquare />
-            </Link>
-          </p>
-        </li> */}
+          <p className={css.more}>{t.table.more}</p>
+        </Link>
       </div>
     </table>
   );

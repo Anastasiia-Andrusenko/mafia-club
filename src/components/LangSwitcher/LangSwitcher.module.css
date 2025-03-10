@@ -4,8 +4,7 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  right: 50%;
-  transform: translateX(50%);
+  left: 50%;
   top: 30px;
 }
 
@@ -30,12 +29,13 @@
   .container {
     position: absolute;
     display: flex;
+    width: fit-content;
     align-items: center;
     justify-content: center;
     gap: 16px;
-    right: 20px;
+    left: 94%;
     top: 2rem;
-    transform: none;
+    /* transform: translateX(-50%); */
   }
 
   .btn:hover {

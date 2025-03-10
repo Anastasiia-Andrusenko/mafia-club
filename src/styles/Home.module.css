@@ -14,37 +14,31 @@
   text-align: center;
 }
 
-.mafia {
-  color: var(--foreground);
-  padding-top: 84px;
+.description {
+  color: var(--red);
+  width: 90vw;
+  margin: auto;
+  padding-top: 8vh;
   display: block;
-  font-size: 4rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  font-family: var(--font-family-secondary);
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: rgb(0, 0, 0);
+  font-family: var(--font-family-primary);
+  text-transform: uppercase;
 }
 
-.dream {
+.description2 {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  color: var(--red);
-  font-size: 2rem;
-  font-weight: 500;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: rgb(0, 0, 0);
-}
-
-.dream img {
-  width: 3rem;
-  height: 3rem;
-}
-
-.description {
-  font-size: 1px;
-  color: transparent;
+  color: var(--foreground);
+  font-size: 0.9rem;
+  font-weight: 200;
+  letter-spacing: 0.05rem;
+  padding-top: 2vh;
+  width: 80%;
+  margin: auto;
+  text-transform: initial;
 }
 
 .mafiaWhat {
@@ -143,40 +137,43 @@
 }
 
 .video {
+  width: 80vw;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
   margin-top: 2rem;
-  text-align: center;
 }
 
 /* ============================= Desktop  */
 @media screen and (min-width: 768px) {
+  .video {
+    justify-content: space-around;
+  }
   .video iframe {
     width: 560px;
     height: 315px;
   }
+
   .hero {
     height: 1000px;
   }
 
-  .mafia {
-    margin-top: 240px;
-    font-size: 8rem;
-  }
-
-  .dream {
-    font-size: 5rem;
-  }
-
-  .dream img {
-    width: 4rem;
-    height: 4rem;
-  }
-
   .description {
-    font-family: var(--font-family-primary);
-    width: 900px;
+    width: 90vw;
     margin: auto;
-    margin-top: 300px;
-    margin-bottom: 40px;
+    padding-top: 24vh;
+    font-size: 4rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+  }
+
+  .description2 {
+    font-size: 3rem;
+    font-weight: 100;
+    padding-top: 4vh;
+    width: 54%;
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .enter {

@@ -100,6 +100,15 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
                   {t.services.engM}
                 </Link>
               </li>
+              <li
+                className={`${css.subLink} ${
+                  isActive("/services/extras") ? css.subCurrent : ""
+                }`}
+              >
+                <Link href="/services/extras" onClick={closeMenu}>
+                  Додаткові послуги
+                </Link>
+              </li>
             </ul>
           )}
         </li>
