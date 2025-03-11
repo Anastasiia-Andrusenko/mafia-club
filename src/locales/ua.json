@@ -468,5 +468,23 @@
     "details_players": "",
     "taxi": "",
     "details_coast": ""
+  },
+  "extrasP": {
+    "pageName": "Додаткові послуги",
+    "title": "Додаткові послуги",
+    "description": "Ми можемо зробити ваше свято ще більше яскравим та незабутнім! ",
+    "instruction_title": "",
+    "negotiation": "",
+    "arrival_of_the_presenter": "",
+    "entourage": "",
+    "game": "",
+    "analysis": "",
+    "final": "",
+    "details_title": "",
+    "details_time": "",
+    "extraCoast": "",
+    "details_players": "",
+    "taxi": "",
+    "details_coast": ""
   }
 }

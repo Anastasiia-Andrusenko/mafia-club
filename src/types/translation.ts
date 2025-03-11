@@ -103,4 +103,7 @@ export interface Translation {
   englishP: {
     [key: string]: string;
   };
+  extrasP: {
+    [key: string]: string;
+  };
 }

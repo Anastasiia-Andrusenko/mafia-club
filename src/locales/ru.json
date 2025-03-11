@@ -444,5 +444,23 @@
     "details_players": "",
     "taxi": "",
     "details_coast": ""
+  },
+  "extrasP": {
+    "pageName": "Дополнительные услуги",
+    "title": "Дополнительные услуги",
+    "description": "Мы можем сделать ваш праздник еще более ярким и незабываемым! ",
+    "instruction_title": "",
+    "negotiation": "",
+    "arrival_of_the_presenter": "",
+    "entourage": "",
+    "game": "",
+    "analysis": "",
+    "final": "",
+    "details_title": "",
+    "details_time": "",
+    "extraCoast": "",
+    "details_players": "",
+    "taxi": "",
+    "details_coast": ""
   }
 }

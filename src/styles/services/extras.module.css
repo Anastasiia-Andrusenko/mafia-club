@@ -1,5 +1,4 @@
 .bgImg {
-  background-image: url("/img/vipP/vipP.webp");
   background-position: center;
   background-size: cover;
   width: 100vw;
@@ -106,6 +105,12 @@
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.6;
+  }
+
+  .description {
+    font-size: 3rem;
+    text-align: center;
+    transform: translateY(-30vh);
   }
 
   .pageTitle {
