@@ -1,7 +1,6 @@
 import Container from "@/components/Container/Container";
 import css from "../../styles/services/extras.module.css";
 import styles from "../../styles/services/kids.module.css";
-import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";
 
