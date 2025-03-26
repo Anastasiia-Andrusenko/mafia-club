@@ -91,15 +91,7 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
                   {t.services.birth}
                 </Link>
               </li>
-              <li
-                className={`${css.subLink} ${
-                  isActive("/services/english") ? css.subCurrent : ""
-                }`}
-              >
-                <Link href="/services/english" onClick={closeMenu}>
-                  {t.services.engM}
-                </Link>
-              </li>
+
               <li
                 className={`${css.subLink} ${
                   isActive("/services/extras") ? css.subCurrent : ""
@@ -149,18 +141,22 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
           </Link>
         </li>
       </ul>
-      {isDesktop && (
-        <Link href="#footer" className={css.contactHeader}>
-          <MdContactPhone />
-        </Link>
-      )}
-      {isDesktop && (
-        <Link href="/basket" className={css.basket}>
-          <LuShoppingCart />
-        </Link>
-      )}
-      <div className={css.mainFormBtn}>
-        <Overlay />
+      <div className={css.navButtonsContainer}>
+        <div className={css.buttonsIconsWrapper}>
+          {isDesktop && (
+            <Link href="#footer" className={css.contactHeader}>
+              <MdContactPhone />
+            </Link>
+          )}
+          {isDesktop && (
+            <Link href="/basket" className={css.basket}>
+              <LuShoppingCart />
+            </Link>
+          )}
+        </div>
+        <div className={css.mainFormBtn}>
+          <Overlay />
+        </div>
       </div>
     </nav>
   );

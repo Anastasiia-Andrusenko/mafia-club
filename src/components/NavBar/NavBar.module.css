@@ -59,10 +59,10 @@
     min-height: fit-content;
     height: fit-content;
     width: fit-content;
-    margin-left: auto;
-    margin-right: 6%;
+    margin: auto;
     display: flex;
     align-items: center;
+    gap: 1rem;
   }
 
   .navList {
@@ -71,13 +71,12 @@
     gap: 0.5rem;
     justify-content: center;
     align-items: center;
-    margin-right: 3rem;
   }
 
   .link {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.65);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .link:hover {
@@ -91,11 +90,23 @@
     /* font-weight: bold; */
   }
 
+  .navButtonsContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    /* flex-direction: column; */
+  }
+
+  .buttonsIconsWrapper {
+    /* display: flex;
+    width: 100%;
+    justify-content: space-around; */
+  }
   .basket,
   .contactHeader {
     width: 3rem;
     height: 3rem;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     padding: 0.5rem;
 
     /* border-radius: 50%; */
@@ -109,7 +120,6 @@
   .mainFormBtn {
     height: 100%;
     margin: auto;
-    margin-left: 2rem;
   }
 }
 

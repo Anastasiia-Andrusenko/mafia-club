@@ -24,8 +24,8 @@ const Table: React.FC = () => {
       <div className={css.table_body}>
         <Link href="/services/vip" className={css.column}>
           <p className={css.table_service}>{t.table.service2}</p>
-          <p className={css.thumb_text_p}>{t.table.players}</p>
-          <p className={css.thumb_text_p}>{t.table.rules}</p>
+          {/* <p className={css.thumb_text_p}>{t.table.players}</p>
+          <p className={css.thumb_text_p}>{t.table.rules}</p> */}
           <p className={css.thumb_text_p}>{t.table.specificVip}</p>
           <p className={css.table_price}>
             <span className={css.money}>{t.table.price2}</span>грн
@@ -34,8 +34,8 @@ const Table: React.FC = () => {
         </Link>
         <Link href="/services/corporate" className={css.column}>
           <p className={css.table_service}>{t.table.service1}</p>
-          <p className={css.thumb_text_p}>{t.table.players}</p>
-          <p className={css.thumb_text_p}>{t.table.rules}</p>
+          {/* <p className={css.thumb_text_p}>{t.table.players}</p>
+          <p className={css.thumb_text_p}>{t.table.rules}</p> */}
           <p className={css.thumb_text_p}>{t.table.specificCorporate}</p>
           <p className={css.table_price}>
             <span className={css.money}>{t.table.price1}</span>грн
@@ -48,8 +48,8 @@ const Table: React.FC = () => {
             <br />
             <span className={css.age}>{t.table.age}</span>
           </p>
-          <p className={css.thumb_text_p}>{t.table.players}</p>
-          <p className={css.thumb_text_p}>{t.table.rules}</p>
+          {/* <p className={css.thumb_text_p}>{t.table.players}</p>
+          <p className={css.thumb_text_p}>{t.table.rules}</p> */}
           <p className={css.thumb_text_p}>{t.table.specificKids}</p>
           <p className={css.table_price}>
             <span className={css.money}>{t.table.price3}</span>грн
@@ -58,8 +58,8 @@ const Table: React.FC = () => {
         </Link>
         <Link href="/services/birthday" className={css.column}>
           <p className={css.table_service}>{t.table.service4}</p>
-          <p className={css.thumb_text_p}>{t.table.players}</p>
-          <p className={css.thumb_text_p}>{t.table.rules}</p>
+          {/* <p className={css.thumb_text_p}>{t.table.players}</p>
+          <p className={css.thumb_text_p}>{t.table.rules}</p> */}
           <p className={css.thumb_text_p}>{t.table.specificBirthday}</p>
           <p className={css.table_price}>
             <span className={css.money}>{t.table.price4}</span>грн
@@ -67,9 +67,9 @@ const Table: React.FC = () => {
           <p className={css.more}>{t.table.more}</p>
         </Link>
         <Link href="/services/extras" className={css.column}>
-          <p className={css.table_service}>Додаткові послуги</p>
-          <p className={css.thumb_text_p}>{t.table.players}</p>
-          <p className={css.thumb_text_p}>{t.table.rules}</p>
+          <p className={css.table_service}>{t.services.extrasPText}</p>
+          {/* <p className={css.thumb_text_p}>{t.table.players}</p>
+          <p className={css.thumb_text_p}>{t.table.rules}</p> */}
           <p className={css.thumb_text_p}>{t.table.specificBirthday}</p>
           <p className={css.table_price}>
             <span className={css.money}>{t.table.price4}</span>грн

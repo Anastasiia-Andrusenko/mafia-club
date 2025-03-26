@@ -27,14 +27,14 @@
 /* ============================= Desktop  */
 @media screen and (min-width: 768px) {
   .container {
-    position: absolute;
+    position: static;
     display: flex;
     width: fit-content;
     align-items: center;
     justify-content: center;
     gap: 16px;
-    left: 94%;
-    top: 2rem;
+    /* left: 94%;
+    top: 2rem; */
     /* transform: translateX(-50%); */
   }
 

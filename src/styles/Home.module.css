@@ -162,8 +162,7 @@
   }
 
   .description {
-    width: 90vw;
-    margin: auto;
+    width: 50vw;
     padding-top: 24vh;
     font-size: 4rem;
     font-weight: 600;
@@ -174,7 +173,6 @@
     font-size: 3rem;
     font-weight: 100;
     padding-top: 4vh;
-    width: 54%;
     color: rgba(255, 255, 255, 0.5);
   }
 

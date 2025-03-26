@@ -9,7 +9,6 @@ import { IoDiamondOutline } from "react-icons/io5";
 import { BiLandscape } from "react-icons/bi";
 import { PiOfficeChair } from "react-icons/pi";
 import { MdChildCare } from "react-icons/md";
-import { RiEnglishInput } from "react-icons/ri";
 import { LiaMaskSolid } from "react-icons/lia";
 import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
@@ -256,20 +255,7 @@ const Overlay = () => {
                         value="День народження"
                       />
                     </label>
-                    <label htmlFor="english">
-                      {t.services.engM}
-                      <span className={css.checkIcon}>
-                        <RiEnglishInput />
-                      </span>
-                      <input
-                        type="checkbox"
-                        className={css.check}
-                        onChange={handleCheckboxChange}
-                        id="english"
-                        name="english"
-                        value="Англійська Мафія"
-                      />
-                    </label>
+
                     <label htmlFor="other">
                       {t.services.other}
                       <span className={css.checkIcon}>

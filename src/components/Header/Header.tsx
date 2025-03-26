@@ -45,74 +45,75 @@ const Header = () => {
   return (
     <header className={css.header}>
       <Container>
-        <Link href="/" className={css.logo}>
-          <Image src={"/img/logo.png"} alt="logo" width={40} height={44} />
-          <div className={css.logo_text}>
-            <p className={css.mafia}>MAFIA</p>
-            <span className={css.dream}>DREAM CLUB</span>
-          </div>
-        </Link>
+        <div className={css.headerWrapper}>
+          <Link href="/" className={css.logo}>
+            <Image src={"/img/logo.png"} alt="logo" width={40} height={44} />
+            <div className={css.logo_text}>
+              <p className={css.mafia}>MAFIA</p>
+              <span className={css.dream}>DREAM CLUB</span>
+            </div>
+          </Link>
 
-        {!isDesktop && (
-          <>
-            {!isMenuOpen && (
-              <Link
-                href="#footer"
-                className={isMenuOpen ? css.menuContacts : css.contacts}
-                onClick={closeMenu}
-              >
-                <MdContactPhone />
-              </Link>
-            )}
-
-            {!isMenuOpen && (
-              <Link href="/basket" className={css.basketBtn}>
-                <LuShoppingCart />
-              </Link>
-            )}
-            <button
-              className={`${css.menuButton} ${
-                isMenuOpen ? css.menuButtonOpen : ""
-              }`}
-              onClick={toggleMenu}
-            >
-              {isMenuOpen ? (
-                <span className={css.closeIcon}>
-                  <RiCloseLargeLine />
-                </span>
-              ) : (
-                <span className={css.burgerIcon}>
-                  <GiHamburgerMenu />
-                </span>
+          {!isDesktop && (
+            <>
+              {!isMenuOpen && (
+                <Link
+                  href="#footer"
+                  className={isMenuOpen ? css.menuContacts : css.contacts}
+                  onClick={closeMenu}
+                >
+                  <MdContactPhone />
+                </Link>
               )}
-            </button>
-          </>
-        )}
-        {(isVisible || isDesktop) && (
-          <div
-            className={`${css.nav} ${
-              isMenuOpen || isDesktop ? css.navOpen : ""
-            }`}
-          >
-            {(isVisible || isDesktop) && (
-              <>
-                <NavBar closeMenu={closeMenu} isDesktop={isDesktop} />
 
-                {isMenuOpen && (
-                  <Link
-                    href="/basket"
-                    className={css.basketBtnNav}
-                    onClick={closeMenu}
-                  >
-                    <LuShoppingCart />
-                    {t.basket.basket}
-                  </Link>
+              {!isMenuOpen && (
+                <Link href="/basket" className={css.basketBtn}>
+                  <LuShoppingCart />
+                </Link>
+              )}
+              <button
+                className={`${css.menuButton} ${
+                  isMenuOpen ? css.menuButtonOpen : ""
+                }`}
+                onClick={toggleMenu}
+              >
+                {isMenuOpen ? (
+                  <span className={css.closeIcon}>
+                    <RiCloseLargeLine />
+                  </span>
+                ) : (
+                  <span className={css.burgerIcon}>
+                    <GiHamburgerMenu />
+                  </span>
                 )}
-                <LangSwitcher />
-              </>
-            )}
-          </div>
-        )}
+              </button>
+            </>
+          )}
+          {(isVisible || isDesktop) && (
+            <div
+              className={`${css.nav} ${
+                isMenuOpen || isDesktop ? css.navOpen : ""
+              }`}
+            >
+              {(isVisible || isDesktop) && (
+                <>
+                  <NavBar closeMenu={closeMenu} isDesktop={isDesktop} />
+                  {isMenuOpen && (
+                    <Link
+                      href="/basket"
+                      className={css.basketBtnNav}
+                      onClick={closeMenu}
+                    >
+                      <LuShoppingCart />
+                      {t.basket.basket}
+                    </Link>
+                  )}
+                </>
+              )}
+            </div>
+          )}
+          <LangSwitcher />
+        </div>
       </Container>
     </header>
   );

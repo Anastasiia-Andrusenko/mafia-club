@@ -235,12 +235,12 @@ const Services = () => {
             </li>
             <li
               className={css.item}
-              id="english"
+              id="extras"
               onClick={() => !isDesktop && handleClickMore(5)}
             >
-              <Link href="/services/english">
+              <Link href="/services/extras">
                 <div className={css.thumb}>
-                  <div className={`${css.img} ${css.english}`}></div>
+                  <div className={`${css.img} ${css.extras}`}></div>
                   <div
                     className={
                       activeIndex === 5
@@ -267,7 +267,7 @@ const Services = () => {
                   )}
                 </div>
                 <div className={css.card}>
-                  <h3 className={css.card_title}>{t.services.engM}</h3>
+                  <h3 className={css.card_title}>{t.services.extrasP}</h3>
                 </div>
               </Link>
             </li>
