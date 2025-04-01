@@ -1,5 +1,6 @@
 import Container from "@/components/Container/Container";
 import css from "../../styles/services/vip.module.css";
+import styles from "../../styles/services/corporate.module.css";
 import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -8,20 +9,19 @@ const CorporatePage = () => {
   const { t } = useTranslation();
   return (
     <>
-      <div className={`${css.bgImg} ${css.vip}`}></div>
+      <div className={`${styles.bgImg} ${css.vip}`}></div>
       <div className={css.pageTitle}>
-        <h2 className={css.title1}>{t.vipP.title1}</h2>
-        <h2 className={css.title2}>{t.vipP.title2}</h2>
-        <h2 className={css.title3}>{t.vipP.title3}</h2>
+        <h2 className={css.title1}>{t.corporateP.title}</h2>
       </div>
       <Container>
         <section className={css.main}>
-          {/* <h3 className={css.title}>{t.vipP.title}</h3> */}
-          <p className={css.description}>{t.vipP.description}</p>
+          {/* <p className={css.description}>{t.vipP.description}</p> */}
         </section>
         <div className={css.emotionalImg}></div>
         <section className={css.instruction}>
-          <h4 className={css.instruction_title}>{t.vipP.instruction_title}</h4>
+          <h4 className={css.instruction_title}>
+            {t.corporateP.instruction_title}
+          </h4>
           <div className={css.algorithm}>
             <div className={css.algorithm_item}>
               <div className={css.algorithm_icon}>
@@ -102,16 +102,16 @@ const CorporatePage = () => {
         </section>
         <Overlay />
         <section className={css.details}>
-          <h4 className={css.details_title}>{t.vipP.details_title}</h4>
-          <p className={css.text1}>1. {t.vipP.text1}</p>
-          <p className={css.text2}>2. {t.vipP.text2}</p>
-          <p className={css.text3}>3. {t.vipP.text3}</p>
-          <p className={css.text4}>4. {t.vipP.text4}</p>
-          <p className={css.text5}>5. {t.vipP.text5}</p>
-          <p className={css.text6}>6. {t.vipP.text6}</p>
-          <p className={css.details_players}>{t.vipP.details_players}</p>
-          <p className={css.details_taxi}>{t.vipP.taxi}</p>
-          <p className={css.details_coast}>{t.vipP.details_coast}</p>
+          <h4 className={css.details_title}>{t.corporateP.details_title}</h4>
+          <p className={css.text1}>1. {t.corporateP.text1}</p>
+          <p className={css.text2}>2. {t.corporateP.text2}</p>
+          <p className={css.text3}>3. {t.corporateP.text3}</p>
+          <p className={css.text4}>4. {t.corporateP.details_time}</p>
+          <p className={css.text5}>5. {t.corporateP.extraCoast}</p>
+          <p className={css.text6}>6. {t.corporateP.players_age}</p>
+          <p className={css.details_players}>{t.corporateP.details_players}</p>
+          <p className={css.details_taxi}>{t.corporateP.taxi}</p>
+          <p className={css.details_coast}>{t.corporateP.details_coast}</p>
         </section>
         <Overlay />
       </Container>

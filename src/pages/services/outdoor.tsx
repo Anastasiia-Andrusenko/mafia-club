@@ -1,5 +1,6 @@
 import Container from "@/components/Container/Container";
 import css from "../../styles/services/vip.module.css";
+import styles from "../../styles/services/outdor.module.css";
 import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -8,7 +9,7 @@ const OutdoorPage = () => {
   const { t } = useTranslation();
   return (
     <>
-      <div className={`${css.bgImg} ${css.vip}`}></div>
+      <div className={`${styles.bgImg} ${css.vip}`}></div>
       <div className={css.pageTitle}>
         <h2 className={css.title1}>{t.vipP.title1}</h2>
         <h2 className={css.title2}>{t.vipP.title2}</h2>

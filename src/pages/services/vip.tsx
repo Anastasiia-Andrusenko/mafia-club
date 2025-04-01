@@ -10,18 +10,18 @@ const VipPage = () => {
     <>
       <div className={`${css.bgImg} ${css.vip}`}></div>
       <div className={css.pageTitle}>
-        <h2 className={css.title1}>{t.vipP.title1}</h2>
-        <h2 className={css.title2}>{t.vipP.title2}</h2>
-        <h2 className={css.title3}>{t.vipP.title3}</h2>
+        <h2 className={css.title1}>{t.vipP.title}</h2>
       </div>
       <Container>
         <section className={css.main}>
           {/* <h3 className={css.title}>{t.vipP.title}</h3> */}
-          <p className={css.description}>{t.vipP.description}</p>
+          {/* <p className={css.description}>{t.vipP.description}</p> */}
         </section>
         <div className={css.emotionalImg}></div>
         <section className={css.instruction}>
-          <h4 className={css.instruction_title}>{t.vipP.instruction_title}</h4>
+          <h4 className={css.instruction_title}>
+            {t.corporateP.instruction_title}
+          </h4>
           <div className={css.algorithm}>
             <div className={css.algorithm_item}>
               <div className={css.algorithm_icon}>
