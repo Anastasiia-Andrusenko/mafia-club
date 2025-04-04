@@ -27,22 +27,6 @@ export interface Translation {
   rules: {
     [key: string]: string;
   };
-
-  officeMafia: {
-    [key: string]: string;
-  };
-  kidsMafia: {
-    [key: string]: string;
-  };
-  outMafia: {
-    [key: string]: string;
-  };
-  birthdayMafia: {
-    [key: string]: string;
-  };
-  enMafia: {
-    [key: string]: string;
-  };
   info: {
     [key: string]: string;
   };
@@ -96,9 +80,6 @@ export interface Translation {
     [key: string]: string;
   };
   kidsP: {
-    [key: string]: string;
-  };
-  englishP: {
     [key: string]: string;
   };
   extrasP: {
