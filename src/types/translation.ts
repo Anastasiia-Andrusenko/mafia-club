@@ -27,9 +27,7 @@ export interface Translation {
   rules: {
     [key: string]: string;
   };
-  vipMafia: {
-    [key: string]: string;
-  };
+
   officeMafia: {
     [key: string]: string;
   };
