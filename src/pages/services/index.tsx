@@ -141,7 +141,6 @@ const Services = () => {
                     <div className={css.thumb_text}>
                       <p className={css.thumb_text_p}>{t.table.players}</p>
                       <p className={css.thumb_text_p}>{t.table.rules}</p>
-                      <p className={css.thumb_text_p}> {t.outMafia.p2}</p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>
@@ -251,9 +250,7 @@ const Services = () => {
                     <div className={css.thumb_text}>
                       <p className={css.thumb_text_p}>{t.table.players}</p>
                       <p className={css.thumb_text_p}>{t.table.rules}</p>
-                      <p className={css.thumb_text_p}>
-                        {t.enMafia.p1} {t.enMafia.p2}
-                      </p>
+                      <p className={css.thumb_text_p}></p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>
