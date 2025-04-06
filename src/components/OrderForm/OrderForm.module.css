@@ -140,7 +140,7 @@
 
   .submit:hover {
     background: rgba(0, 0, 0, 0.5);
-    color: white;
+    color: var(--foreground);
     box-shadow: var(--box-shadow);
   }
 
@@ -152,7 +152,7 @@
 
   .back:hover {
     background: transparent;
-    color: white;
+    color: var(--foreground);
     box-shadow: var(--box-shadow);
   }
 }

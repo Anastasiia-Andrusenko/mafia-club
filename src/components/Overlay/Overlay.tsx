@@ -11,8 +11,15 @@ import { PiOfficeChair } from "react-icons/pi";
 import { MdChildCare } from "react-icons/md";
 import { LiaMaskSolid } from "react-icons/lia";
 import emailjs from "@emailjs/browser";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { validateOverlayForm } from "../utils/validateOverlayForm";
+import CheckboxItem from "./CheckboxItem";
+import { notify } from "../utils/notify";
+import OverlayModal from "./OverlayModal";
+import NameInput from "./NameInput";
+import PhoneInput from "./PhoneInput";
+import CommentTextarea from "./CommentTextarea";
 
 const Overlay = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,39 +27,22 @@ const Overlay = () => {
   const [phone, setPhone] = useState("");
   const [services, setServices] = useState<string[]>([]);
   const [comment, setComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { t } = useTranslation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
-    const cleanedName = name.trim();
-
-    if (cleanedName.replace(/\s+/g, "").length < 3) {
-      notify(false, "Ім'я повинно містити мінімум 3 символи.");
-      return;
-    }
-
-    if (services.length === 0) {
-      notify(false, "Оберіть хоча б один варіант заходу");
-      return;
-    }
-
-    if (!/^\+380 \d{2} \d{2} \d{2} \d{3}$/.test(phone)) {
-      notify(
-        false,
-        "Невірний формат номера телефону. Вкажіть номер у форматі +380 XX XX XX XXX."
-      );
-      return;
-    }
-
-    const phoneDigits = phone.replace(/\D/g, "");
-    if (/^(\d)\1*$/.test(phoneDigits.slice(3))) {
-      notify(false, "Вкажіть свій реальний номер.");
+    const error = validateOverlayForm({ name, phone, services });
+    if (error) {
+      notify(false, error);
       return;
     }
 
     notify(true, "Дані успішно перевірені. Відправляємо заявку...");
+    setIsSubmitting(true);
 
     const templateParams = {
       name: name.trim(),
@@ -72,26 +62,36 @@ const Overlay = () => {
         (response) => {
           console.log("SUCCESS!", response.status, response.text);
           notify(true, `${name}, супер, ми вам перезвоним!`);
+          resetForm();
+          setIsSubmitting(false);
+          setIsOpen(false);
         },
         (err) => {
           console.error("FAILED...", err);
           notify(false, "Сталася помилка при відправці. Спробуйте ще.");
+          setIsSubmitting(false);
         }
       );
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let input = e.target.value.replace(/\D/g, "");
-    if (input.length > 12) input = input.slice(0, 12);
-    if (input.startsWith("380")) {
-      input = `+380 ${input.slice(3, 5)} ${input.slice(5, 7)} ${input.slice(
-        7,
-        9
-      )} ${input.slice(9, 12)}`;
-    } else {
-      input = "+380";
+    let digits = e.target.value.replace(/\D/g, "");
+
+    if (!digits.startsWith("380")) {
+      digits = "380";
     }
-    setPhone(input.trim());
+
+    digits = digits.slice(0, 12);
+
+    const parts = [
+      "+380",
+      digits.slice(3, 5),
+      digits.slice(5, 7),
+      digits.slice(7, 9),
+      digits.slice(9, 12),
+    ].filter(Boolean);
+
+    setPhone(parts.join(" "));
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,12 +101,6 @@ const Overlay = () => {
         ? [...prevServices, value]
         : prevServices.filter((s) => s !== value)
     );
-  };
-
-  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      setIsOpen(false);
-    }
   };
 
   const handleEscPress = (e: KeyboardEvent) => {
@@ -138,154 +132,103 @@ const Overlay = () => {
     };
   }, [isOpen]);
 
-  const notify = (isSuccess: boolean, message: string) => {
-    if (isSuccess) {
-      toast.success(message);
-    } else {
-      toast.error(message);
-    }
+  const resetForm = () => {
+    setName("");
+    setPhone("");
+    setServices([]);
+    setComment("");
   };
 
   return (
     <>
-      {isOpen ? (
-        <div className={css.overlay} onClick={handleOverlayClick}>
-          <Container>
-            <div className={css.formWrapper}>
-              <form className={css.form} onSubmit={handleSubmit}>
-                <p className={css.formTitle}>{t.services.formTitle}</p>
-                <button
-                  type="button"
-                  className={css.btnClose}
-                  onClick={handleClose}
-                >
-                  <TfiClose />
-                </button>
-                <div className={css.namePhone}>
-                  <input
-                    type="text"
-                    placeholder={t.overlay.name}
-                    required
-                    value={name}
-                    className={css.input}
-                    onChange={(e) => setName(e.target.value)}
+      <Button text={t.overlay.text} typeBtn="button" onClick={handleOpen} />
+      <OverlayModal isOpen={isOpen} onClose={handleClose}>
+        <Container>
+          <div className={css.formWrapper}>
+            <form className={css.form} onSubmit={handleSubmit}>
+              <p className={css.formTitle}>{t.services.formTitle}</p>
+              <button
+                type="button"
+                className={css.btnClose}
+                onClick={handleClose}
+              >
+                <TfiClose />
+              </button>
+              <div className={css.namePhone}>
+                <NameInput
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder={t.overlay.name}
+                />
+                <PhoneInput
+                  value={phone}
+                  onChange={handlePhoneChange}
+                  placeholder={t.overlay.phone}
+                />
+              </div>
+
+              <div className={css.formServicesWrapper}>
+                <p className={css.formServices}>{t.services.formServices}</p>
+                <div className={css.checkboxWrapper}>
+                  <CheckboxItem
+                    id="vip"
+                    label={t.services.vip}
+                    value="Віп Мафія"
+                    icon={<IoDiamondOutline />}
+                    onChange={handleCheckboxChange}
                   />
-                  <input
-                    type="tel"
-                    placeholder={t.overlay.phone}
-                    required
-                    className={css.input}
-                    value={phone}
-                    onChange={handlePhoneChange}
-                    pattern="\+380 \d{2} \d{2} \d{2} \d{3}"
-                    title="+380 XX XX XX XXX"
+                  <CheckboxItem
+                    id="corporate"
+                    label={t.services.corporateShort}
+                    value="Корпоратив"
+                    icon={<PiOfficeChair />}
+                    onChange={handleCheckboxChange}
+                  />
+                  <CheckboxItem
+                    id="outdoor"
+                    label={t.services.outdoor}
+                    value="Виїзна Мафія"
+                    icon={<BiLandscape />}
+                    onChange={handleCheckboxChange}
+                  />
+                  <CheckboxItem
+                    id="kids"
+                    label={t.services.kids}
+                    value="Дитяче Свято"
+                    icon={<MdChildCare />}
+                    onChange={handleCheckboxChange}
+                  />
+                  <CheckboxItem
+                    id="birthday"
+                    label={t.services.birth}
+                    value="День народження"
+                    icon={<LiaBirthdayCakeSolid />}
+                    onChange={handleCheckboxChange}
+                  />
+                  <CheckboxItem
+                    id="other"
+                    label={t.services.other}
+                    value="Ще не вирішили"
+                    icon={<LiaMaskSolid />}
+                    onChange={handleCheckboxChange}
                   />
                 </div>
-
-                <div className={css.formServicesWrapper}>
-                  <p className={css.formServices}>{t.services.formServices}</p>
-                  <div className={css.checkboxWrapper}>
-                    <label htmlFor="vip">
-                      {t.services.vip}
-                      <span className={css.checkIcon}>
-                        <IoDiamondOutline />
-                      </span>
-                      <input
-                        className={css.check}
-                        type="checkbox"
-                        onChange={handleCheckboxChange}
-                        id="vip"
-                        name="vip"
-                        value="Віп Мафія"
-                      />
-                    </label>
-                    <label htmlFor="corporate">
-                      {t.services.corporateShort}
-                      <span className={css.checkIcon}>
-                        <PiOfficeChair />
-                      </span>
-                      <input
-                        className={css.check}
-                        type="checkbox"
-                        onChange={handleCheckboxChange}
-                        id="corporate"
-                        name="corporate"
-                        value="Корпоратив"
-                      />
-                    </label>
-                    <label htmlFor="outdoor">
-                      {t.services.outdoor}
-                      <span className={css.checkIcon}>
-                        <BiLandscape />
-                      </span>
-                      <input
-                        type="checkbox"
-                        className={css.check}
-                        onChange={handleCheckboxChange}
-                        id="outdoor"
-                        name="outdoor"
-                        value="Виїзна Мафія"
-                      />
-                    </label>
-                    <label htmlFor="kids">
-                      {t.services.kids}
-                      <span className={css.checkIcon}>
-                        <MdChildCare />
-                      </span>
-                      <input
-                        type="checkbox"
-                        className={css.check}
-                        onChange={handleCheckboxChange}
-                        id="kids"
-                        name="kids"
-                        value="Дитяче Свято"
-                      />
-                    </label>
-                    <label htmlFor="birthday">
-                      {t.services.birth}
-                      <span className={css.checkIcon}>
-                        <LiaBirthdayCakeSolid />
-                      </span>
-                      <input
-                        type="checkbox"
-                        className={css.check}
-                        onChange={handleCheckboxChange}
-                        id="birthday"
-                        name="birthday"
-                        value="День народження"
-                      />
-                    </label>
-
-                    <label htmlFor="other">
-                      {t.services.other}
-                      <span className={css.checkIcon}>
-                        <LiaMaskSolid />
-                      </span>
-                      <input
-                        type="checkbox"
-                        className={css.check}
-                        onChange={handleCheckboxChange}
-                        id="other"
-                        name="other"
-                        value="Ще не вирішили"
-                      />
-                    </label>
-                  </div>
-                </div>
-                <textarea
-                  placeholder={t.overlay.message}
-                  className={css.textarea}
-                  onChange={(e) => setComment(e.target.value)}
-                ></textarea>
-                <Button text={t.overlay.send} typeBtn="submit" />
-              </form>
-            </div>
-          </Container>
-          <ToastContainer theme="dark" />
-        </div>
-      ) : (
-        <Button text={t.overlay.text} typeBtn="button" onClick={handleOpen} />
-      )}
+              </div>
+              <CommentTextarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder={t.overlay.message}
+              />
+              <Button
+                text={isSubmitting ? t.overlay.sending : t.overlay.send}
+                typeBtn="submit"
+                disabled={isSubmitting}
+              />
+            </form>
+          </div>
+        </Container>
+      </OverlayModal>
+      <ToastContainer theme="dark" />
     </>
   );
 };

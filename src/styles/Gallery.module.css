@@ -1,28 +1,28 @@
 .title {
-    text-transform: uppercase;
-    text-align: center;
-    padding: 10px 20px;
-    margin: 40px 0;
-    line-height: 2rem;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 10px 20px;
+  margin: 40px 0;
+  line-height: 2rem;
 }
 
 .club {
-    color: red;
+  color: var(--red);
 }
 
 .break {
-    display: inline-block;
+  display: inline-block;
 }
 /* ============================= Desctop  */
 @media screen and (min-width: 768px) {
-    .title {
-        font-size: 40px;
-        line-height: 3.3rem;
-        margin-top: 100px;
-        letter-spacing: 0.06rem;
-    }
+  .title {
+    font-size: 40px;
+    line-height: 3.3rem;
+    margin-top: 100px;
+    letter-spacing: 0.06rem;
+  }
 
-    .break {
-        display: inline;
-    }
+  .break {
+    display: inline;
+  }
 }

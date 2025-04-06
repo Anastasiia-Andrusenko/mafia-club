@@ -180,7 +180,7 @@
   }
 
   .basket:hover {
-    color: white;
+    color: var(--foreground);
     box-shadow: var(--box-shadow);
   }
 }
