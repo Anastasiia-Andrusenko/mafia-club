@@ -4,8 +4,14 @@ import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";
 import Algorithm from "@/components/Algorithm/Algorithm";
+import Thread from "@/components/Thread/Thread";
+import path from "../../components/PhotoGallery/imagesVip.json";
 
-const VipPage = () => {
+interface VipProps {
+  imagePaths: string[];
+}
+
+const VipPage: React.FC<VipProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
   return (
     <>
@@ -18,6 +24,7 @@ const VipPage = () => {
         <div className={css.emotionalImg}></div>
         <Algorithm />
         <Overlay />
+        <Thread imagePaths={imagePaths} double />
         <section className={css.details}>
           <h4 className={css.details_title}>{t.vipP.details_title}</h4>
           <p className={css.text1}>1. {t.vipP.text1}</p>
@@ -38,3 +45,11 @@ const VipPage = () => {
 };
 
 export default VipPage;
+
+export async function getStaticProps() {
+  return {
+    props: {
+      imagePaths: path,
+    },
+  };
+}

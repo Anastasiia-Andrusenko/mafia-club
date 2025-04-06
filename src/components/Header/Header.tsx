@@ -99,20 +99,31 @@ const Header = () => {
                 <>
                   <NavBar closeMenu={closeMenu} isDesktop={isDesktop} />
                   {isMenuOpen && (
-                    <Link
-                      href="/basket"
-                      className={css.basketBtnNav}
-                      onClick={closeMenu}
-                    >
-                      <LuShoppingCart />
-                      {t.basket.basket}
-                    </Link>
+                    <>
+                      {" "}
+                      <Link
+                        href="/basket"
+                        className={css.basketBtnNav}
+                        onClick={closeMenu}
+                      >
+                        <LuShoppingCart />
+                        {t.basket.basket}
+                      </Link>
+                      <Link
+                        href="#footer"
+                        className={`${css.basketBtnNav} ${css.cont}`}
+                        onClick={closeMenu}
+                      >
+                        <MdContactPhone />
+                        {t.nav.contact}
+                      </Link>
+                    </>
                   )}
                 </>
               )}
             </div>
           )}
-          <LangSwitcher />
+          {isMenuOpen && <LangSwitcher />}
         </div>
       </Container>
     </header>

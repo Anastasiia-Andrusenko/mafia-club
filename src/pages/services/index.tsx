@@ -12,24 +12,10 @@ import { GiClick } from "react-icons/gi";
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isDesktop, setIsDesktop] = useState<boolean>(false);
-  const [isVisibleBtn, setIsVisibleBtn] = useState(true);
 
   useEffect(() => {
     setIsDesktop(window.innerWidth > 768);
   }, [isDesktop]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY >= 2900) {
-        setIsVisibleBtn(false);
-      } else {
-        setIsVisibleBtn(true);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleClickMore = (index: number | null) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -40,7 +26,7 @@ const Services = () => {
     <>
       <div className={css.hero}>
         <Container>
-          <h2 className={css.title}>{t.services.title}</h2>
+          {/* <h2 className={css.title}>{t.services.title}</h2> */}
           <h2 className={css.titleWhat}>{t.homeP.what}</h2>
           <p className={css.mafiaText}>{t.homeP.mafia}</p>
         </Container>
@@ -65,8 +51,6 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>{t.table.players}</p>
-                      <p className={css.thumb_text_p}>{t.table.rules}</p>
                       <p className={css.thumb_text_p}>{t.table.specificVip}</p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
@@ -101,8 +85,6 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>{t.table.players}</p>
-                      <p className={css.thumb_text_p}>{t.table.rules}</p>
                       <p className={css.thumb_text_p}>
                         {t.table.specificCorporate}
                       </p>
@@ -139,8 +121,9 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>{t.table.players}</p>
-                      <p className={css.thumb_text_p}>{t.table.rules}</p>
+                      <p className={css.thumb_text_p}>
+                        {t.outdoorP.description}
+                      </p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>
@@ -174,9 +157,7 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>{t.table.players}</p>
-                      <p className={css.thumb_text_p}>{t.table.rules}</p>
-                      <p className={css.thumb_text_p}>{t.table.specificKids}</p>
+                      <p className={css.thumb_text_p}>{t.kidsP.description}</p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>
@@ -210,10 +191,8 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>{t.table.players}</p>
-                      <p className={css.thumb_text_p}>{t.table.rules}</p>
                       <p className={css.thumb_text_p}>
-                        {t.table.specificBirthday}
+                        {t.birthdayP.description}
                       </p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
@@ -248,9 +227,9 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>{t.table.players}</p>
-                      <p className={css.thumb_text_p}>{t.table.rules}</p>
-                      <p className={css.thumb_text_p}></p>
+                      <p className={css.thumb_text_p}>
+                        {t.extrasP.description}
+                      </p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>
@@ -271,13 +250,9 @@ const Services = () => {
           </ul>
         </div>
         <ExtraServices />
-        {isVisibleBtn && isDesktop ? (
-          <div className={css.mainButton}>
-            <Overlay />
-          </div>
-        ) : (
-          ""
-        )}
+
+        <Overlay />
+
         <div className={css.info}>
           <ul className={css.info_list}>
             <li className={css.info_item}>

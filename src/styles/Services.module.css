@@ -40,8 +40,8 @@
 }
 
 .services {
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  /* border-top: 1px solid white;
+  border-bottom: 1px solid white; */
   padding: 20px 0;
   margin-top: 60vh;
 }
@@ -101,11 +101,11 @@
 }
 
 .office {
-  background-image: url("/img/corporate.webp");
+  background-image: url("/img/corporate_mob.webp");
 }
 
 .kids {
-  background-image: url("/img/kids.webp");
+  background-image: url("/img/kids_mob.webp");
 }
 
 .outdoor {
@@ -113,11 +113,11 @@
 }
 
 .birthday {
-  background-image: url("/img/birthday.webp");
+  background-image: url("/img/birthday_mob.webp");
 }
 
-.english {
-  background-image: url("/img/english.webp");
+.extras {
+  background-image: url("/img/extra_mob.webp");
 }
 
 .thumb_overlay {
@@ -147,7 +147,6 @@
 .thumb_text {
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(0.5rem);
   gap: 10px;
   justify-content: space-around;
   height: 100%;
@@ -206,12 +205,12 @@
 }
 
 .mainButton {
-  position: fixed;
+  /* position: fixed;
   bottom: 4vh;
   left: 50vw;
   transform: translateX(-50%);
   z-index: 1000;
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow); */
 }
 
 .thumb_overlay_more {
@@ -260,7 +259,7 @@
   }
 }
 
-/* ============================= Desctop  */
+/* ============================= Desktop  */
 @media screen and (min-width: 768px) {
   .hero {
     height: 1000px;
@@ -280,7 +279,7 @@
   .titleWhat {
     font-size: 30px;
     text-transform: uppercase;
-    margin-top: 200px;
+    margin-top: 26rem;
     text-align: center;
     margin-bottom: 40px;
   }
@@ -290,12 +289,11 @@
     letter-spacing: 0.03rem;
     max-width: 1000px;
     margin: auto;
+    margin-top: 12rem;
     text-align: justify;
   }
 
   .services {
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
     padding: 60px 0;
     margin-top: 40px;
   }
@@ -369,9 +367,9 @@
 
   .thumb_text_p {
     margin: 0;
-    font-weight: 200;
+    font-weight: 400;
     font-size: 19px;
-    line-height: 1.7rem;
+    line-height: 1.8rem;
     letter-spacing: 0.07rem;
   }
 

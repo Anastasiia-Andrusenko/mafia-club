@@ -5,43 +5,17 @@ import Container from "@/components/Container/Container";
 import Table from "@/components/Table/Table";
 import Overlay from "@/components/Overlay/Overlay";
 import ClientsList from "@/components/Clients/Clients";
-import Image from "next/image";
-import imagePaths from "../components/PhotoGallery/imagesMainPage.json";
+import path from "../components/PhotoGallery/imagesMainPage.json";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 import { useEffect, useState } from "react";
+import Thread from "@/components/Thread/Thread";
 
-interface ImageFile {
-  id: string;
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
+interface HomeProps {
+  imagePaths: string[];
 }
 
-const link = "https://mafiadream.com.ua/wp-content/images/";
-
-export async function getStaticProps() {
-  const imagesFiles: ImageFile[] = imagePaths.images.map((path, index) => ({
-    id: `${index + 1}`,
-    src: `${link}${path}`,
-    alt: `Image ${index + 1}`,
-    width: 600,
-    height: 400,
-  }));
-
-  return {
-    props: {
-      imagesFiles,
-    },
-  };
-}
-interface ImageGalleryProps {
-  imagesFiles: ImageFile[];
-}
-
-const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
+const Home: React.FC<HomeProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
-  const doubledImages = [...imagesFiles, ...imagesFiles];
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -70,9 +44,7 @@ const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
             <Container>
               <h1 className={css.description}>
                 {t.homeP.description1}
-                {/* {t.homeP.description3} */}
                 <span className={css.description2}>{t.homeP.description2}</span>
-                {/* {t.homeP.description4} */}
               </h1>
             </Container>
           </div>
@@ -110,22 +82,7 @@ const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
               <p className={css.about_text}>{t.homeP.aboutText}</p>
             </div>
           </Container>
-          <div className={css.gallery}>
-            <ul className={css.gallery_list}>
-              {doubledImages.map((img, index) => (
-                <li className={css.gallery_item} key={`${img.id}-${index}`}>
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    width={img.width}
-                    height={img.height}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className={css.imageThumbnail}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Thread imagePaths={imagePaths} double />
           <Overlay />
           <Container>
             <Table />
@@ -156,3 +113,11 @@ const Home: React.FC<ImageGalleryProps> = ({ imagesFiles }) => {
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  return {
+    props: {
+      imagePaths: path,
+    },
+  };
+}

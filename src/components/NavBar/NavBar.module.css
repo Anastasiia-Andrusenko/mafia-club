@@ -62,7 +62,7 @@
     margin: auto;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: calc(100vw / 20);
   }
 
   .navList {

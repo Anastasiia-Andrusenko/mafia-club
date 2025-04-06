@@ -69,13 +69,11 @@
 .basketBtnNav {
   position: absolute;
   top: 74vh;
-  /* bottom: 6vh; */
   left: 50%;
   display: flex;
   width: 12rem;
   align-items: center;
   justify-content: center;
-  /* flex-direction: column; */
   gap: 0.5rem;
   transform: translateX(-50%);
   text-transform: uppercase;
@@ -83,9 +81,11 @@
   font-weight: 600;
   color: var(--foreground);
   font-family: var(--font-family-secondary);
-  /* border: 1px solid rgba(255, 255, 255, 0.5); */
   padding: 0.5rem;
-  /* box-shadow: var(--box-shadow); */
+}
+
+.basketBtnNav + .cont {
+  top: 84vh;
 }
 
 .basketBtnNav svg,
@@ -150,6 +150,7 @@
   .headerWrapper {
     display: flex;
     align-items: center;
+    /* gap: calc(100vw / 15); */
     justify-content: space-between;
   }
 

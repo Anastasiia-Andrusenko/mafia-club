@@ -33,20 +33,25 @@
 }
 
 .prompt {
+  display: none;
   position: absolute;
   top: -20px;
   color: transparent;
   text-transform: lowercase;
-  font-size: 11px;
-  width: 160px;
+  font-weight: 300;
+  font-size: 0.8rem;
+  letter-spacing: 0.05rem;
+  width: 11rem;
   text-align: center;
-  padding: 6px;
+  vertical-align: sub;
+  padding: 0.3rem 0.3rem 0.4rem 0.3rem;
   transition: all 250ms ease;
 }
 
 .extras_item:hover .prompt {
-  color: inherit;
-  background-color: var(--red);
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgb(39, 9, 9);
 }
 
 /* ============================= Desctop  */
@@ -65,7 +70,7 @@
     gap: 10px;
     padding: 10px;
   }
-  
+
   .icon {
     font-size: 24px;
   }
