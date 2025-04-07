@@ -5,7 +5,7 @@
   z-index: 10;
   bottom: 40px;
   right: 40px;
-  font-size: 50px;
+  font-size: var(--font-size-huge);
   color: rgba(255, 0, 0, 0.5);
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 50%;

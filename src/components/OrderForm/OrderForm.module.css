@@ -10,7 +10,7 @@
 
 .title {
   width: 100%;
-  font-size: 2rem;
+  font-size: var(--font-size-3xl);
   background-color: black;
   padding: 2rem;
   border-top: 1px solid var(--foreground);
@@ -29,7 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  font-size: 1.2rem;
+  font-size: var(--font-size-md);
   gap: 0.5rem;
 }
 
@@ -55,29 +55,31 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1.1rem;
+  font-size: var(--font-size-md-lg);
   padding: 0.4rem;
   /* border-bottom: 1px solid red; */
 }
 
 .total {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl);
   padding: 1rem;
   margin-bottom: 1rem;
   background-color: black;
-  color: var(--foreground);
+  color: var(--red);
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.submit {
+.submit,
+.back {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin: 1rem auto;
   background-color: rgb(255, 255, 255);
-  padding: 0.6rem 1rem;
+  padding: 0.8rem 1rem;
   color: var(--background);
+  font-size: var(--font-size-md-lg);
 }
 
 .submit svg {
@@ -86,12 +88,8 @@
 
 .back {
   margin: 3rem auto;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   color: var(--foreground);
   background-color: var(--red);
-  padding: 0.5rem 1rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -112,7 +110,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    font-size: 1.4rem;
+    font-size: var(--font-size-xl);
     gap: 0.5rem;
     width: 31vw;
     margin: auto;
@@ -134,7 +132,7 @@
   .submit {
     margin-top: 2rem;
     padding: 1rem;
-    font-size: 1.3rem;
+    font-size: var(--font-size-xl);
     transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 
@@ -146,7 +144,7 @@
 
   .back {
     padding: 1rem;
-    font-size: 1.3rem;
+    font-size: var(--font-size-xl);
     margin: 5rem auto;
   }
 

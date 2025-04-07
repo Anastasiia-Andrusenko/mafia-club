@@ -7,8 +7,9 @@ import { useTranslation } from "@/hooks/useTranslation";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { LuShoppingCart } from "react-icons/lu";
 import emailjs from "@emailjs/browser";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useScrollLock } from "@/hooks/useScrollLock";
 
 interface OrderFormProps {
   onBack: () => void;
@@ -24,6 +25,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
     0
   );
 
+  useScrollLock(true);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     notify(name);
@@ -87,27 +89,6 @@ const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
     }
   };
 
-  // const handleEscPress = (e: KeyboardEvent) => {
-  //   if (e.key === "Escape") {
-  //     onBack();
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (confirmForm) {
-  //     document.documentElement.style.overflow = "hidden";
-  //     document.addEventListener("keydown", handleEscPress);
-  //   } else {
-  //     document.documentElement.style.overflow = "";
-  //     document.removeEventListener("keydown", handleEscPress);
-  //   }
-
-  //   return () => {
-  //     document.documentElement.style.overflow = "";
-  //     document.removeEventListener("keydown", handleEscPress);
-  //   };
-  // },[??] );
-
   return (
     <>
       <div className={css.wrapper} onClick={handleOverlayClick}>
@@ -154,7 +135,6 @@ const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
             <LuShoppingCart /> {t.basket.back}
           </button>
         </form>
-        <ToastContainer theme="dark" newestOnTop />
       </div>
     </>
   );

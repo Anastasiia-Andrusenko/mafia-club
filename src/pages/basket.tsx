@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import css from "../styles/Basket.module.css";
 import { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "@/hooks/useTranslation";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -12,6 +12,7 @@ import Link from "next/link";
 import { MdOutlineSubdirectoryArrowRight } from "react-icons/md";
 import ProductModal from "@/components/Product/Product";
 import OrderForm from "@/components/OrderForm/OrderForm";
+import OverlayModal from "@/components/common/OverlayModal";
 
 interface BasketProps {
   basket: Product[];
@@ -60,6 +61,10 @@ const Basket: React.FC<BasketProps> = () => {
 
   const handleToggleConfirmForm = () => {
     setConfirmForm(!confirmForm);
+  };
+
+  const handleChangeProduct = (product: Product) => {
+    setModalProduct(product);
   };
 
   return (
@@ -116,12 +121,16 @@ const Basket: React.FC<BasketProps> = () => {
         ))}
       </ul>
       {modalProduct && (
-        <ProductModal
-          product={modalProduct}
-          onClose={handleCloseModal}
-          onAddToCart={handleAddToCart}
-          isBasket={true}
-        />
+        <OverlayModal isOpen={true} onClose={handleCloseModal}>
+          <ProductModal
+            product={modalProduct}
+            productList={cart}
+            onClose={handleCloseModal}
+            onAddToCart={handleAddToCart}
+            isBasket={true}
+            onChangeProduct={handleChangeProduct}
+          />
+        </OverlayModal>
       )}
       {isEmpty ? (
         ""
@@ -144,7 +153,6 @@ const Basket: React.FC<BasketProps> = () => {
         </div>
       )}
       {confirmForm && <OrderForm onBack={handleToggleConfirmForm} />}
-      <ToastContainer theme="dark" newestOnTop />
     </div>
   );
 };

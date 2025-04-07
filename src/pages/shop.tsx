@@ -14,14 +14,19 @@ import { CgDetailsMore } from "react-icons/cg";
 import { Product } from "@/types/product";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OverlayModal from "@/components/common/OverlayModal";
 const link = "https://mafiadream.com.ua/wp-content/images/shop/";
 
 const Shop: React.FC = () => {
   const { t } = useTranslation();
   const [basket, setCart] = useState<Product[]>([]);
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
+
+  const handleChangeProduct = (product: Product) => {
+    setModalProduct(product);
+  };
   const { addToCart } = useCart();
   const notify = (productName: string) =>
     toast.success(`${productName} ${t.basket.add}`);
@@ -258,7 +263,11 @@ const Shop: React.FC = () => {
         <p className={css.description}>{t.shopP.welcoming}</p>
         <ul className={css.productList}>
           {products.map((product) => (
-            <li key={product.id} className={css.productItem}>
+            <li
+              key={product.id}
+              className={css.productItem}
+              onClick={() => handleOpenModal(product)}
+            >
               <h3 className={css.productName}>{product.name}</h3>
               <div className={css.imgBg}>
                 <Image
@@ -273,7 +282,10 @@ const Shop: React.FC = () => {
               <ul className={css.btn_list}>
                 <li>
                   <button
-                    onClick={() => handleOpenModal(product)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleOpenModal(product);
+                    }}
                     className={css.btn}
                   >
                     <CgDetailsMore className={css.icon} />
@@ -282,7 +294,8 @@ const Shop: React.FC = () => {
                 </li>
                 <li>
                   <button
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       addToCart(product);
                       notify(product.name);
                     }}
@@ -297,19 +310,23 @@ const Shop: React.FC = () => {
           <ScrollTopBtn />
         </ul>
         {modalProduct && (
-          <ProductModal
-            product={modalProduct}
-            onClose={handleCloseModal}
-            onAddToCart={handleAddToCart}
-            isBasket={false}
-          />
+          <OverlayModal isOpen={true} onClose={handleCloseModal}>
+            <ProductModal
+              product={modalProduct}
+              productList={products}
+              onClose={handleCloseModal}
+              onAddToCart={handleAddToCart}
+              onChangeProduct={handleChangeProduct}
+              isBasket={false}
+            />
+          </OverlayModal>
         )}
+
         <Link href="/basket" className={css.basket}>
           <LuShoppingCart />
           <span className={css.basketText}> {t.basket.toBasket}</span>
         </Link>
       </Container>
-      <ToastContainer theme="dark" newestOnTop />
     </div>
   );
 };

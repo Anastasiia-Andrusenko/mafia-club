@@ -53,7 +53,7 @@
 
 .icon {
   line-height: 1rem;
-  font-size: 20px;
+  font-size: var(--font-size-lg);
 }
 
 .bigImg {
@@ -93,11 +93,6 @@
     box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.7);
     color: var(--foreground);
     background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  .icon {
-    line-height: 1rem;
-    font-size: 20px;
   }
 
   .bigImg {

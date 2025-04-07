@@ -13,10 +13,10 @@
 .break {
   display: inline-block;
 }
-/* ============================= Desctop  */
+/* ============================= Desktop  */
 @media screen and (min-width: 768px) {
   .title {
-    font-size: 40px;
+    font-size: var(--font-size-4xl);
     line-height: 3.3rem;
     margin-top: 100px;
     letter-spacing: 0.06rem;

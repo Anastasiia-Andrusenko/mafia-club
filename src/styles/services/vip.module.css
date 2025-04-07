@@ -10,7 +10,7 @@
 .pageTitle {
   transform: translateY(-150%);
   text-align: center;
-  font-size: 1.3rem;
+  font-size: var(--font-size-lg);
   line-height: 2rem;
   color: var(--foreground);
   margin: auto;
@@ -19,7 +19,7 @@
 }
 
 .title2 {
-  font-size: 1.1rem;
+  font-size: var(--font-size-md-lg);
 }
 
 .details {
@@ -77,12 +77,12 @@
     transform: translateX(-50%);
     top: 38rem;
     text-align: center;
-    font-size: 3rem;
+    font-size: var(--font-size-huge);
     text-shadow: 0px 0px 3rem rgba(0, 0, 0);
   }
 
   .title2 {
-    font-size: 2.7rem;
+    font-size: var(--font-size-4xl);
   }
 
   .emotionalImg {
@@ -94,7 +94,7 @@
   }
 
   .details_title {
-    font-size: 2rem;
+    font-size: var(--font-size-3xl);
   }
 
   .text1,
@@ -103,18 +103,18 @@
   .text4,
   .text5,
   .text6 {
-    font-size: 1.3rem;
+    font-size: var(--font-size-lg);
   }
 
   .details_players {
-    font-size: 1.3rem;
+    font-size: var(--font-size-lg);
   }
 
   .details_taxi {
-    font-size: 1.3rem;
+    font-size: var(--font-size-lg);
   }
 
   .details_coast {
-    font-size: 1.3rem;
+    font-size: var(--font-size-lg);
   }
 }

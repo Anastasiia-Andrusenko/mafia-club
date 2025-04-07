@@ -1,7 +1,7 @@
 .description {
   text-align: center;
   padding: 1rem;
-  font-size: 1.4rem;
+  font-size: var(--font-size-xl);
   font-weight: 200;
   margin: 2rem;
   margin-bottom: 4rem;
@@ -20,7 +20,7 @@
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 0.3rem;
   transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
-  background-color: rgba(255, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0);
 }
 
 .imgBg {
@@ -38,7 +38,7 @@
   justify-content: center;
   align-items: center;
   text-overflow: ellipsis;
-  font-size: 1rem;
+  font-size: var(--font-size-md);
   text-align: center;
   text-transform: uppercase;
   margin-bottom: 1rem;
@@ -48,7 +48,7 @@
 }
 
 .product_price {
-  font-size: 1.6rem;
+  font-size: var(--font-size-xl);
   text-align: center;
   padding: 0.5rem;
   margin-bottom: 2rem;
@@ -66,18 +66,18 @@
   padding: 0.5rem;
   border: 0.05rem solid rgba(255, 255, 255, 0.6);
   /* border-radius: 0.3rem;  */
-  font-size: 0.8rem;
+  font-size: var(--font-size-xs);
   letter-spacing: 0.05rem;
   display: flex;
   color: var(--foreground);
   align-items: center;
   justify-content: space-around;
-  background-color: transparent;
+  background-color: var(--red);
   transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .icon {
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl);
 }
 
 .basket {
@@ -87,9 +87,8 @@
   justify-content: center;
   gap: 1.4rem;
   width: 14rem;
-  margin: auto;
-  margin-top: 4rem;
-  font-size: 1.8rem;
+  margin: 4rem auto;
+  font-size: var(--font-size-xxl);
   padding: 0.5rem;
   transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
   box-shadow: var(--box-shadow);
@@ -100,13 +99,13 @@
 }
 
 .basketText {
-  font-size: 1.2rem;
+  font-size: var(--font-size-lg);
   text-transform: uppercase;
 }
 
 @media screen and (min-width: 768px) {
   .description {
-    font-size: 1.8rem;
+    font-size: var(--font-size-xxl);
     line-height: 2.4rem;
     letter-spacing: 0.06rem;
     text-align: center;
@@ -168,14 +167,13 @@
     width: 14rem;
     margin: auto;
     margin-top: 4rem;
-    font-size: 1.8rem;
+    font-size: var(--font-size-xxl);
     padding: 0.5rem;
     transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: none;
   }
 
   .basketText {
-    font-size: 1.2rem;
     text-transform: uppercase;
   }
 

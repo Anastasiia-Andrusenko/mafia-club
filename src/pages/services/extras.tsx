@@ -84,8 +84,8 @@ const ExtrasPage = () => {
     {
       id: "shop",
       title: t.extrasP.shop,
-      description: `${t.extrasP.shop_t}\n${t.extrasP.shop_attention}`,
-      coast: "",
+      description: `${t.extrasP.shop_t}`,
+      coast: `${t.extrasP.shop_attention}`,
       image: "/img/extra/shop.webp",
     },
   ];

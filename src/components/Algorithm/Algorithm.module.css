@@ -1,19 +1,20 @@
 .instruction_title {
   text-align: center;
-  font-size: 1.3rem;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md);
   transform: translateY(60%);
   text-transform: uppercase;
+  letter-spacing: 0.1rem;
 }
 
 .algorithm {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 1rem;
   width: 90vw;
   margin: auto;
-  margin-bottom: 4rem;
+  margin-bottom: 10rem;
   transform: translateY(8%);
 }
 
@@ -24,7 +25,7 @@
 }
 
 .algorithm_text {
-  font-size: 1rem;
+  font-size: var(--font-size-md);
   width: 100%;
   text-align: center;
   text-shadow: 0px 0px 3rem rgba(0, 0, 0, 0.6);
@@ -33,7 +34,7 @@
 .icon {
   width: 2rem;
   height: 2rem;
-  fill: rgb(255, 255, 255);
+  fill: var(--foreground);
   margin-bottom: 0.6rem;
 }
 
@@ -53,7 +54,7 @@
   }
 
   .instruction_title {
-    font-size: 2rem;
+    font-size: var(--font-size-3xl);
     transform: translateY(0%);
   }
 
@@ -84,7 +85,7 @@
   }
 
   .algorithm_text {
-    font-size: 1.1rem;
+    font-size: var(--font-size-md-lg);
     text-shadow: 0px 0px 3rem rgba(0, 0, 0, 0.6);
   }
 

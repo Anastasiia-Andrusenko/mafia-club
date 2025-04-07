@@ -1,5 +1,6 @@
 import Container from "@/components/Container/Container";
-import css from "../../styles/services/birthday.module.css";
+import styles from "../../styles/services/birthday.module.css";
+import css from "../../styles/services/corporate.module.css";
 import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -15,7 +16,7 @@ const BirthdayPage: React.FC<BirthdayProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
   return (
     <>
-      <div className={`${css.bgImg} `}></div>
+      <div className={`${styles.bgImg} `}></div>
       <div className={css.pageTitle}>
         <h2 className={css.title1}>{t.birthdayP.title}</h2>
       </div>

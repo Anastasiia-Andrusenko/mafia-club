@@ -9,24 +9,29 @@ import { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSwipeable } from "react-swipeable";
+import { motion } from "framer-motion";
 
 interface ProductModalProps {
   product: Product;
+  productList: Product[];
   onClose: () => void;
   onAddToCart: (product: Product) => void;
   isBasket: boolean;
+  onChangeProduct: (product: Product) => void;
 }
 
 const ProductModal: React.FC<ProductModalProps> = ({
   product,
+  productList,
   onClose,
+  onChangeProduct,
   isBasket = false,
 }) => {
   const { t } = useTranslation();
   const { addToCart } = useCart();
   const notify = () => toast.success(`${product.name} ${t.basket.add}`);
 
-  // Закриваємо модалку по клавіші Esc
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -36,25 +41,46 @@ const ProductModal: React.FC<ProductModalProps> = ({
 
     document.addEventListener("keydown", handleEscKey);
 
-    // Заборона скролу документа при відкритті модалки
     document.documentElement.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleEscKey);
-      document.documentElement.style.overflow = "auto"; // Відновлюємо скрол після закриття модалки
+      document.documentElement.style.overflow = "auto";
     };
   }, [onClose]);
 
-  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    // Закриття модалки при кліку на фон
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
+  // const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   if (e.target === e.currentTarget) {
+  //     onClose();
+  //   }
+  // };
+
+  const index = productList.findIndex((p) => p.id === product.id);
+  const lastIndex = productList.length - 1;
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => {
+      const nextIndex = index === lastIndex ? 0 : index + 1;
+      onChangeProduct(productList[nextIndex]);
+    },
+    onSwipedRight: () => {
+      const prevIndex = index === 0 ? lastIndex : index - 1;
+      onChangeProduct(productList[prevIndex]);
+    },
+    trackMouse: true,
+  });
 
   return (
-    <div className={css.modal} onClick={handleBackgroundClick}>
-      <div className={css.modalContent}>
+    <>
+      <motion.div
+        key={product.id}
+        className={css.modalContent}
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -50 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        {...handlers}
+      >
         <button onClick={onClose} className={css.btnClose}>
           <TfiClose />
         </button>
@@ -112,8 +138,8 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </button>
           </div>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </>
   );
 };
 

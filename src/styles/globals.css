@@ -2,6 +2,23 @@
   --font-family-primary: "Oswald", sans-serif;
   --font-family-secondary: "Spectral SC", serif;
 
+  /* Font sizes */
+  --font-size-xxs: 0.75rem; /* 12px - var(--font-size-xxs); */
+  --font-size-xs: 0.8125rem; /* 13px - var(--font-size-xs); */
+  --font-size-sm: 0.875rem; /* 14px - var(--font-size-sm); */
+  --font-size-md: 1rem; /* 16px -  var(--font-size-md); */
+  --font-size-md-lg: 1.125rem; /* 18px - var(--font-size-md-lg); */
+  --font-size-lg: 1.25rem; /* 20px - var(--font-size-lg); */
+  --font-size-xl: 1.5rem; /* 24px  - var(--font-size-xl); */
+  --font-size-xxl: 1.75rem; /* 28px - var(--font-size-xxl); */
+  --font-size-3xl: 2rem; /* 32px - var(--font-size-3xl); */
+  --font-size-4xl: 2.5rem; /* 40px - var(--font-size-4xl); */
+  --font-size-huge: 3.125rem; /* 50px - var(--font-size-huge); */
+
+  --container-width: 90vw;
+  --section-padding: 5vh;
+  --border-radius: 0.5rem;
+
   --background: #240000;
   --foreground: #e3e3e3;
   --red: #d92929;
@@ -19,13 +36,29 @@
   --box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.7);
 }
 
-body {
-  color: var(--foreground);
-  background: var(--bg-gradient);
+html {
+  font-size: var(--font-size-md);
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
-html,
+@media (max-width: 768px) {
+  html {
+    font-size: var(--font-size-md);
+  }
+}
+
 body {
+  margin: 0;
+  color: var(--foreground);
+  background: var(--bg-gradient);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   overflow-x: hidden;
 }
@@ -49,12 +82,6 @@ a {
   text-decoration: none;
 }
 
-body {
-  font-family: var(--font-family-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 *,
 ::before,
 ::after {
@@ -65,16 +92,6 @@ body {
 
 * {
   transition: all 0.3s ease;
-}
-
-html {
-  line-height: 1.15; /* 1. Correct the line height in all browsers. */
-  -webkit-text-size-adjust: 100%; /* 2. Prevent adjustments of font size after orientation changes in iOS. */
-  tab-size: 4; /* 3. Use a more readable tab size (opinionated). */
-}
-
-body {
-  margin: 0; /* Remove the margin in all browsers. */
 }
 
 b,

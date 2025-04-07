@@ -7,6 +7,7 @@ import Footer from "@/components/Footer/Footer";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Loader from "@/components/Loader/Loader";
+import { ToastContainer } from "react-toastify";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false); // Стан лоадера
@@ -33,6 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Header />
         {loading && <Loader />}
         <Component {...pageProps} />
+        <ToastContainer theme="dark" newestOnTop />
         <Footer />
       </CartProvider>
     </LanguageProvider>

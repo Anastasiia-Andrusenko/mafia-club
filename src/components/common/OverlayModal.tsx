@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import css from "./Overlay.module.css";
+import css from "../Overlay/Overlay.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {

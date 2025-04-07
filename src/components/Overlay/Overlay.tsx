@@ -11,12 +11,11 @@ import { PiOfficeChair } from "react-icons/pi";
 import { MdChildCare } from "react-icons/md";
 import { LiaMaskSolid } from "react-icons/lia";
 import emailjs from "@emailjs/browser";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { validateOverlayForm } from "../utils/validateOverlayForm";
 import CheckboxItem from "./CheckboxItem";
 import { notify } from "../utils/notify";
-import OverlayModal from "./OverlayModal";
+import OverlayModal from "../common/OverlayModal";
 import NameInput from "./NameInput";
 import PhoneInput from "./PhoneInput";
 import CommentTextarea from "./CommentTextarea";
@@ -228,7 +227,6 @@ const Overlay = () => {
           </div>
         </Container>
       </OverlayModal>
-      <ToastContainer theme="dark" />
     </>
   );
 };

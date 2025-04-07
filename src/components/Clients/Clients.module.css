@@ -1,6 +1,6 @@
 .title {
   text-transform: uppercase;
-  font-size: 22px;
+  font-size: var(--font-size-xl);
   text-align: center;
   margin-top: 40px;
 }
@@ -145,24 +145,23 @@
   overflow: hidden;
 }
 
-
 /* ============================= Desctop  */
 @media screen and (min-width: 768px) {
   .title {
-    font-size: 28px;
+    font-size: var(--font-size-xxl);
     margin-top: 60px;
   }
-  
+
   .list {
     gap: 40px;
     margin-top: 40px;
     padding: 0;
   }
-  
+
   .item {
     transform: scale(1);
   }
-  
+
   .contactis,
   .dbshenker,
   .alfa,
@@ -182,11 +181,11 @@
   .mont {
     filter: saturate(0);
   }
-  
+
   .dbshenker {
     opacity: 0.5;
   }
- 
+
   .promin {
     opacity: 0.5;
   }
@@ -201,7 +200,7 @@
   .mont {
     opacity: 0.5;
   }
-  
+
   .contactis:hover,
   .dbshenker:hover,
   .alfa:hover,

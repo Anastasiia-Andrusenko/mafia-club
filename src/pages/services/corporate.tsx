@@ -24,7 +24,7 @@ const CorporatePage: React.FC<CorporateProps> = ({ imagePaths }) => {
         <section className={css.main}>
           <p className={css.description}>{t.corporateP.description}</p>
         </section>
-        <div className={css.emotionalImg}></div>
+
         <Algorithm />
         <Overlay />
         <Thread imagePaths={imagePaths} double />

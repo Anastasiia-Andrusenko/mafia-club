@@ -22,7 +22,7 @@
   text-transform: uppercase;
   text-decoration: none;
   color: var(--foreground);
-  font-size: 1.3rem;
+  font-size: var(--font-size-lg);
   transition: color 0.3s ease;
   padding: 4px 8px;
   font-family: var(--font-family-secondary);
@@ -76,7 +76,7 @@
   .link {
     cursor: pointer;
     color: rgba(255, 255, 255, 0.65);
-    font-size: 1.1rem;
+    font-size: var(--font-size-md-lg);
   }
 
   .link:hover {
@@ -106,7 +106,7 @@
   .contactHeader {
     width: 3rem;
     height: 3rem;
-    font-size: 1.7rem;
+    font-size: var(--font-size-xxl);
     padding: 0.5rem;
 
     /* border-radius: 50%; */
