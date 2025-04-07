@@ -10,12 +10,12 @@ type Props = {
 const PhoneInput: React.FC<Props> = ({ value, onChange, placeholder }) => (
   <input
     type="tel"
+    inputMode="tel"
     required
     className={css.input}
     value={value}
     onChange={onChange}
     placeholder={placeholder}
-    pattern="\\+380 \\d{2} \\d{2} \\d{2} \\d{3}"
     title="+380 XX XX XX XXX"
   />
 );

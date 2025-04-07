@@ -19,6 +19,7 @@ import OverlayModal from "../common/OverlayModal";
 import NameInput from "./NameInput";
 import PhoneInput from "./PhoneInput";
 import CommentTextarea from "./CommentTextarea";
+import { sendTelegramMessage } from "../utils/telegram";
 
 const Overlay = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,6 +51,24 @@ const Overlay = () => {
       comment: comment.trim(),
     };
 
+    const escapeMarkdown = (text: string) =>
+      text.replace(/[_*[\]()~`>#+\-=|{}.!]/g, "\\$&");
+
+    const safeName = escapeMarkdown(templateParams.name);
+    const safePhone = escapeMarkdown(templateParams.phone);
+    const safeServices = escapeMarkdown(templateParams.services);
+    const safeComment = escapeMarkdown(templateParams.comment);
+    const rawPhone = templateParams.phone.replace(/\s/g, "");
+    const safePhoneLink = `tel:${rawPhone.replace(/\+/g, "%2B")}`;
+
+    const messageForTelegram = `
+📩 *ХОЧУТЬ СВЯТО:*
+👤 *Імʼя:* ${safeName}
+📞 *Телефон:* [${safePhone}](${safePhoneLink})
+🧩 *Послуги:* ${safeServices}
+💬 *Коментар:* ${safeComment}
+`.trim();
+
     emailjs
       .send(
         "service_awhca1b",
@@ -58,9 +77,10 @@ const Overlay = () => {
         "nBlfFj-daI3JM87lR"
       )
       .then(
-        (response) => {
+        async (response) => {
           console.log("SUCCESS!", response.status, response.text);
           notify(true, `${name}, супер, ми вам перезвоним!`);
+          await sendTelegramMessage(messageForTelegram);
           resetForm();
           setIsSubmitting(false);
           setIsOpen(false);
@@ -118,15 +138,15 @@ const Overlay = () => {
 
   useEffect(() => {
     if (isOpen) {
-      document.documentElement.style.overflow = "hidden"; // Заборонити прокрутку сторінки
+      document.documentElement.style.overflow = "hidden";
       document.addEventListener("keydown", handleEscPress);
     } else {
-      document.documentElement.style.overflow = ""; // Відновити прокрутку
+      document.documentElement.style.overflow = "";
       document.removeEventListener("keydown", handleEscPress);
     }
 
     return () => {
-      document.documentElement.style.overflow = ""; // Завжди відновлюємо прокрутку при розмонтуванні
+      document.documentElement.style.overflow = "";
       document.removeEventListener("keydown", handleEscPress);
     };
   }, [isOpen]);

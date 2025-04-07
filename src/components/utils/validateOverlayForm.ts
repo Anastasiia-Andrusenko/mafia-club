@@ -13,16 +13,17 @@ export const validateOverlayForm = ({
 }: OverlayFormData): string | null => {
   const cleanedName = name.trim();
   const phoneDigits = phone.replace(/\D/g, "");
+  const cleanedPhone = phone.trim().replace(/\s+/g, " ");
 
   if (cleanedName.replace(/\s+/g, "").length < 3) {
     return "Ім'я повинно містити мінімум 3 символи.";
   }
 
   if (services.length === 0) {
-    return "Оберіть хоча б один варіант заходу";
+    return "Оберіть хоча б один варіант заходу.";
   }
 
-  if (!/^\+380 \d{2} \d{2} \d{2} \d{3}$/.test(phone)) {
+  if (!/^\+380(?:\s?\d{2}){3}\s?\d{3}$/.test(cleanedPhone)) {
     return "Невірний формат номера телефону. Вкажіть номер у форматі +380 XX XX XX XXX.";
   }
 

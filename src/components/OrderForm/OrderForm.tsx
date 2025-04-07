@@ -10,6 +10,7 @@ import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useScrollLock } from "@/hooks/useScrollLock";
+import { sendTelegramMessage } from "../utils/telegram";
 
 interface OrderFormProps {
   onBack: () => void;
@@ -26,6 +27,10 @@ const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
   );
 
   useScrollLock(true);
+
+  const escapeMarkdown = (text: string) =>
+    text.replace(/[_*[\]()~`>#+\-=|{}.!]/g, "\\$&");
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     notify(name);
@@ -46,7 +51,20 @@ const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
       total: total,
     };
 
-    // console.log("Дані для EmailJS:", templateParams);
+    const safeName = escapeMarkdown(templateParams.name);
+    const safePhone = escapeMarkdown(templateParams.phone);
+    const rawPhone = templateParams.phone.replace(/\s/g, "");
+    const safePhoneLink = `tel:${rawPhone.replace(/\+/g, "%2B")}`;
+    const safeMessage = escapeMarkdown(templateParams.message);
+
+    const messageForTelegram = `
+🛒 *ХОЧУТЬ ПРИДБАТИ:*
+👤 *Імʼя:* ${safeName}
+📞 *Телефон:* [${safePhone}](${safePhoneLink})
+🛍️ *Замовлення:*
+${safeMessage}
+💵 *Разом:* ${templateParams.total} грн
+`.trim();
 
     emailjs
       .send(
@@ -56,8 +74,11 @@ const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
         "nBlfFj-daI3JM87lR"
       )
       .then(
-        (response) => {
+        async (response) => {
           console.log("SUCCESS!", response.status, response.text);
+
+          await sendTelegramMessage(messageForTelegram);
+
           onBack();
         },
         (err) => {
