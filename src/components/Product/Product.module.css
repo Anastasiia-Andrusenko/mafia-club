@@ -24,6 +24,7 @@
   line-height: 1.6rem;
   padding: 2rem 1rem;
   margin: auto;
+  text-align: center;
   /* border: 1px solid white; */
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -51,8 +52,9 @@
 .img {
   padding: 1rem;
   background-color: rgba(255, 255, 255, 0.2);
-  width: 100%;
-  height: auto;
+  width: 90vw;
+  height: 90vw;
+  margin: auto;
   object-fit: contain;
 }
 
@@ -89,6 +91,44 @@
 
 .btn svg {
   font-size: var(--font-size-xl);
+}
+/* SWIPE */
+.imageSliderDots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.arrowHintLeft,
+.arrowHintRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.2);
+  user-select: none;
+  pointer-events: none;
+}
+
+.arrowHintLeft {
+  left: 8px;
+}
+
+.arrowHintRight {
+  right: 8px;
 }
 
 @media screen and (min-width: 768px) {

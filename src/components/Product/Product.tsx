@@ -1,6 +1,6 @@
 // components/ProductModal.tsx
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import css from "./Product.module.css";
 import { LuShoppingCart } from "react-icons/lu";
 import { useTranslation } from "../../hooks/useTranslation";
@@ -21,6 +21,16 @@ interface ProductModalProps {
   onChangeProduct: (product: Product) => void;
 }
 
+const getProductImages = (product: Product): string[] => {
+  return [
+    product.imageUrl1,
+    product.imageUrl2,
+    product.imageUrl3,
+    product.imageUrl4,
+    product.imageUrl5,
+  ].filter((img): img is string => typeof img === "string");
+};
+
 const ProductModal: React.FC<ProductModalProps> = ({
   product,
   productList,
@@ -31,6 +41,8 @@ const ProductModal: React.FC<ProductModalProps> = ({
   const { t } = useTranslation();
   const { addToCart } = useCart();
   const notify = () => toast.success(`${product.name} ${t.basket.add}`);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const images = getProductImages(product);
 
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
@@ -49,11 +61,21 @@ const ProductModal: React.FC<ProductModalProps> = ({
     };
   }, [onClose]);
 
-  // const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
-  //   if (e.target === e.currentTarget) {
-  //     onClose();
-  //   }
-  // };
+  useEffect(() => {
+    setActiveImageIndex(0);
+  }, [product]);
+
+  const imageSwipeHandlers = useSwipeable({
+    onSwipedLeft: (e) => {
+      e.event.stopPropagation();
+      setActiveImageIndex((prev) => (prev + 1) % images.length);
+    },
+    onSwipedRight: (e) => {
+      e.event.stopPropagation();
+      setActiveImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    },
+    trackMouse: true,
+  });
 
   const index = productList.findIndex((p) => p.id === product.id);
   const lastIndex = productList.length - 1;
@@ -81,17 +103,32 @@ const ProductModal: React.FC<ProductModalProps> = ({
         transition={{ duration: 0.3, ease: "easeInOut" }}
         {...handlers}
       >
+        <div className={css.arrowHintLeft}>‹</div>
+        <div className={css.arrowHintRight}>›</div>
         <button onClick={onClose} className={css.btnClose}>
           <TfiClose />
         </button>
         <h2 className={css.name}>{product.name}</h2>
-        <Image
-          src={product.imageUrl1 ? product.imageUrl1 : "/img/logo.png"}
-          alt={product.name}
-          width={300}
-          height={300}
-          className={css.img}
-        />
+        <div className={css.imgWrapper} {...imageSwipeHandlers}>
+          <Image
+            src={images[activeImageIndex] || "/img/logo.png"}
+            alt={product.name}
+            width={300}
+            height={300}
+            className={css.img}
+          />
+        </div>
+        <div className={css.imageSliderDots}>
+          {images.map((_, i) => (
+            <span
+              key={i}
+              className={`${css.dot} ${
+                i === activeImageIndex ? css.active : ""
+              }`}
+            />
+          ))}
+        </div>
+
         <p className={css.product_desk}>{product.mainDesk}</p>
         {product.description1 ? (
           <p className={css.product_desk}>{product.description1}</p>

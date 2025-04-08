@@ -2,7 +2,6 @@
 import fs from "fs";
 import path from "path";
 
-// Тип для відгуку
 interface Review {
   id: string;
   name: string;
@@ -10,7 +9,7 @@ interface Review {
   date: string;
 }
 
-// Обробник запитів
+//
 function handler(
   req: { method: string; body: Review },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,7 +17,7 @@ function handler(
 ) {
   const reviewsPath = path.join(process.cwd(), "public/reviews.json");
 
-  // GET запит
+  // GET
   if (req.method === "GET") {
     try {
       const data = fs.readFileSync(reviewsPath, "utf-8");
@@ -37,14 +36,14 @@ function handler(
     }
   }
 
-  // POST запит
+  // POST
   if (req.method === "POST") {
     try {
       const newReview: Review = req.body;
       const data = fs.readFileSync(reviewsPath, "utf-8");
       const reviews: Review[] = JSON.parse(data);
 
-      // Додаємо новий відгук
+      // new review
       newReview.id = (reviews.length + 1).toString();
       reviews.push(newReview);
 

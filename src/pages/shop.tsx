@@ -17,6 +17,7 @@ import { useCart } from "@/context/CartContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OverlayModal from "@/components/common/OverlayModal";
+import { useSwipeable } from "react-swipeable";
 const link = "https://mafiadream.com.ua/wp-content/images/shop/";
 
 const Shop: React.FC = () => {
@@ -52,10 +53,12 @@ const Shop: React.FC = () => {
       description2: `${t.shopList.item1.description2}`,
       description3: `${t.shopList.item1.description3}`,
       other: `${t.shopList.item1.other}`,
-      price: 100,
-      imageUrl1: `${link}present-pro-set-00001.webp`,
-      imageUrl2: `${link}present-pro-set-00002.webp`,
-      imageUrl3: `${link}present-pro-set-00003.webp`,
+      price: 1999,
+      imageUrl1: `${link}present-pro-set-0001.webp`,
+      imageUrl2: `${link}present-pro-set-0002.webp`,
+      imageUrl3: `${link}present-pro-set-0003.webp`,
+      imageUrl4: `${link}present-pro-set-0004.webp`,
+      imageUrl5: `${link}present-pro-set-0005.webp`,
       quantity: 1,
     },
     {
@@ -66,10 +69,11 @@ const Shop: React.FC = () => {
       description2: `${t.shopList.item2.description2}`,
       description3: `${t.shopList.item2.description3}`,
       other: `${t.shopList.item2.other}`,
-      price: 100,
-      imageUrl1: `${link}present-set-00002.webp`,
-      imageUrl2: `${link}present-set-00001.webp`,
-      imageUrl3: `${link}present-set-00003.webp`,
+      price: 1199,
+      imageUrl1: `${link}present-set-0001.webp`,
+      imageUrl2: `${link}present-set-0002.webp`,
+      imageUrl3: `${link}present-set-0003.webp`,
+      imageUrl4: `${link}present-set-0004.webp`,
       quantity: 1,
     },
     {
@@ -80,8 +84,11 @@ const Shop: React.FC = () => {
       description2: `${t.shopList.item3.description2}`,
       description3: `${t.shopList.item3.description3}`,
       other: `${t.shopList.item3.other}`,
-      price: 100,
+      price: 1699,
       imageUrl1: `${link}pro-set-0001.webp`,
+      imageUrl2: `${link}pro-n-00001.webp`,
+      imageUrl3: `${link}carts-0005.webp`,
+      imageUrl4: `${link}br-mask-0001.webp`,
       quantity: 1,
     },
     {
@@ -92,10 +99,11 @@ const Shop: React.FC = () => {
       description2: `${t.shopList.item4.description2}`,
       description3: `${t.shopList.item4.description3}`,
       other: `${t.shopList.item4.other}`,
-      price: 100,
+      price: 849,
       imageUrl1: `${link}set-00001.webp`,
       imageUrl2: `${link}set-00002.webp`,
       imageUrl3: `${link}set-00003.webp`,
+      imageUrl4: `${link}carts-0005.webp`,
       quantity: 1,
     },
     {
@@ -104,10 +112,10 @@ const Shop: React.FC = () => {
       mainDesk: `${t.shopList.item5.mainDesk}`,
       description1: `${t.shopList.item5.description1}`,
       other: `${t.shopList.item5.other}`,
-      price: 100,
-      imageUrl1: `${link}br-mask-00001.webp`,
-      imageUrl2: `${link}br-mask-00002.webp`,
-      imageUrl3: `${link}br-mask-00003.webp`,
+      price: 899,
+      imageUrl1: `${link}br-mask-0001.webp`,
+      imageUrl2: `${link}br-mask-0002.webp`,
+      imageUrl3: `${link}br-mask-0003.webp`,
       quantity: 1,
     },
     {
@@ -117,11 +125,12 @@ const Shop: React.FC = () => {
       description1: `${t.shopList.item7.description1}`,
       description2: `${t.shopList.item7.description2}`,
       other: `${t.shopList.item7.other}`,
-      price: 100,
-      imageUrl1: `${link}carts-00001.webp`,
-      imageUrl2: `${link}carts-00002.webp`,
-      imageUrl3: `${link}carts-00003.webp`,
-      imageUrl4: `${link}carts-00004.webp`,
+      price: 199,
+      imageUrl1: `${link}carts-0001.webp`,
+      imageUrl2: `${link}carts-0002.webp`,
+      imageUrl3: `${link}carts-0003.webp`,
+      imageUrl4: `${link}carts-0004.webp`,
+      imageUrl5: `${link}carts-0005.webp`,
       cartType1: `${t.shopList.item7.cartType?.mafia}`,
       cartType2: `${t.shopList.item7.cartType?.don}`,
       cartType3: `${t.shopList.item7.cartType?.sherif}`,
@@ -149,7 +158,7 @@ const Shop: React.FC = () => {
       mainDesk: `${t.shopList.item8.mainDesk}`,
       description1: `${t.shopList.item8.description1}`,
       other: `${t.shopList.item8.other}`,
-      price: 100,
+      price: 249,
       imageUrl1: `${link}shop_item_00027.webp`,
       quantity: 1,
     },
@@ -159,7 +168,7 @@ const Shop: React.FC = () => {
       mainDesk: `${t.shopList.item9.mainDesk}`,
       description1: `${t.shopList.item9.description1}`,
       other: `${t.shopList.item9.other}`,
-      price: 100,
+      price: 299,
       imageUrl1: `${link}pro-n-00001.webp`,
       imageUrl2: `${link}pro-n-00002.webp`,
       quantity: 1,
@@ -170,10 +179,11 @@ const Shop: React.FC = () => {
       mainDesk: `${t.shopList.item10.mainDesk}`,
       description1: `${t.shopList.item10.description1}`,
       other: `${t.shopList.item10.other}`,
-      price: 100,
+      price: 200,
       imageUrl1: `${link}m-hat-00001.webp`,
       imageUrl2: `${link}m-hat-00002.webp`,
       imageUrl3: `${link}m-hat-00003.webp`,
+      imageUrl4: `${link}m-hat-00004.webp`,
       quantity: 1,
     },
     {
@@ -183,7 +193,7 @@ const Shop: React.FC = () => {
       description1: `${t.shopList.item11.description1}`,
       description2: `${t.shopList.item11.description2}`,
       other: `${t.shopList.item11.other}`,
-      price: 100,
+      price: 150,
       imageUrl1: `${link}w-hat-00002.webp`,
       imageUrl2: `${link}w-hat-00001.webp`,
       quantity: 1,
@@ -203,7 +213,7 @@ const Shop: React.FC = () => {
       name: `${t.shopList.item13.name}`,
       mainDesk: `${t.shopList.item13.mainDesk}`,
       other: `${t.shopList.item13.other}`,
-      price: 100,
+      price: 130,
       imageUrl1: `${link}long-gl.webp`,
       quantity: 1,
     },
@@ -212,7 +222,7 @@ const Shop: React.FC = () => {
       name: `${t.shopList.item14.name}`,
       mainDesk: `${t.shopList.item14.mainDesk}`,
       other: `${t.shopList.item14.other}`,
-      price: 100,
+      price: 150,
       imageUrl1: `${link}boa-00004.webp`,
       imageUrl2: `${link}boa-00003.webp`,
       imageUrl3: `${link}boa-00002.webp`,
@@ -224,7 +234,7 @@ const Shop: React.FC = () => {
       name: `${t.shopList.item15.name}`,
       mainDesk: `${t.shopList.item15.mainDesk}`,
       other: `${t.shopList.item15.other}`,
-      price: 100,
+      price: 80,
       imageUrl1: `${link}moutp-00001.webp`,
       imageUrl2: `${link}moutp-00002.webp`,
       quantity: 1,
@@ -243,7 +253,8 @@ const Shop: React.FC = () => {
       name: `${t.shopList.item17.name}`,
       mainDesk: `${t.shopList.item17.mainDesk}`,
       other: `${t.shopList.item17.other}`,
-      price: 100,
+      price: 120,
+      imageUrl1: `${link}mustache.webp`,
       quantity: 1,
     },
     {
@@ -251,11 +262,92 @@ const Shop: React.FC = () => {
       name: `${t.shopList.item18.name}`,
       mainDesk: `${t.shopList.item18.mainDesk}`,
       other: `${t.shopList.item18.other}`,
-      price: 100,
+      price: 150,
       imageUrl1: `${link}shop_item_00031.webp`,
       quantity: 1,
     },
   ];
+
+  const getProductImages = (product: Product): string[] => {
+    return [
+      product.imageUrl1,
+      product.imageUrl2,
+      product.imageUrl3,
+      product.imageUrl4,
+      product.imageUrl5,
+    ].filter((img): img is string => typeof img === "string");
+  };
+  const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+    const [activeImageIndex, setActiveImageIndex] = useState(0);
+    const images = getProductImages(product);
+
+    const swipeHandlers = useSwipeable({
+      onSwipedLeft: () =>
+        setActiveImageIndex((prev) => (prev + 1) % images.length),
+      onSwipedRight: () =>
+        setActiveImageIndex(
+          (prev) => (prev - 1 + images.length) % images.length
+        ),
+      trackMouse: true,
+    });
+
+    return (
+      <li
+        key={product.id}
+        className={css.productItem}
+        onClick={() => handleOpenModal(product)}
+      >
+        <h3 className={css.productName}>{product.name}</h3>
+        <div className={css.imgBg} {...swipeHandlers}>
+          <Image
+            src={images[activeImageIndex]}
+            alt={product.name}
+            width={200}
+            height={200}
+            className={css.img}
+          />
+        </div>
+        <div className={css.imageSliderDots}>
+          {images.map((_, i) => (
+            <span
+              key={i}
+              className={`${css.dot} ${
+                i === activeImageIndex ? css.active : ""
+              }`}
+            />
+          ))}
+        </div>
+
+        <p className={css.product_price}>{product.price} грн</p>
+        <ul className={css.btn_list}>
+          <li>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleOpenModal(product);
+              }}
+              className={css.btn}
+            >
+              <CgDetailsMore className={css.icon} />
+              {t.shopP.btnMore}
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                addToCart(product);
+                notify(product.name);
+              }}
+              className={css.btn}
+            >
+              <LuShoppingCart className={css.icon} /> {t.shopP.btnBuy}
+            </button>
+          </li>
+        </ul>
+      </li>
+    );
+  };
 
   return (
     <div>
@@ -263,50 +355,9 @@ const Shop: React.FC = () => {
         <p className={css.description}>{t.shopP.welcoming}</p>
         <ul className={css.productList}>
           {products.map((product) => (
-            <li
-              key={product.id}
-              className={css.productItem}
-              onClick={() => handleOpenModal(product)}
-            >
-              <h3 className={css.productName}>{product.name}</h3>
-              <div className={css.imgBg}>
-                <Image
-                  src={product.imageUrl1 ? product.imageUrl1 : "/img/logo.png"}
-                  alt={product.name}
-                  width={200}
-                  height={200}
-                  className={css.img}
-                />
-              </div>
-              <p className={css.product_price}>{product.price} грн</p>
-              <ul className={css.btn_list}>
-                <li>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOpenModal(product);
-                    }}
-                    className={css.btn}
-                  >
-                    <CgDetailsMore className={css.icon} />
-                    {t.shopP.btnMore}
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      addToCart(product);
-                      notify(product.name);
-                    }}
-                    className={css.btn}
-                  >
-                    <LuShoppingCart className={css.icon} /> {t.shopP.btnBuy}
-                  </button>
-                </li>
-              </ul>
-            </li>
+            <ProductCard key={product.id} product={product} />
           ))}
+
           <ScrollTopBtn />
         </ul>
         {modalProduct && (
