@@ -24,6 +24,7 @@
   font-weight: 600;
   font-family: var(--font-family-primary);
   text-transform: uppercase;
+  animation: fadeInUp 0.6s ease-out both;
 }
 
 .description2 {

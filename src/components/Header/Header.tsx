@@ -23,9 +23,8 @@ const Header = () => {
       setIsVisible(true);
       document.documentElement.style.overflow = "hidden";
     } else {
-      // Таймер для плавного закриття
-      const timer = setTimeout(() => setIsVisible(false), 1000); // 300 мс — тривалість анімації
-      return () => clearTimeout(timer); // Очищення таймера при повторному виклику
+      const timer = setTimeout(() => setIsVisible(false), 1000);
+      return () => clearTimeout(timer);
     }
 
     return () => {
@@ -37,7 +36,6 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Функція для закриття меню
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
@@ -123,7 +121,7 @@ const Header = () => {
               )}
             </div>
           )}
-          {isMenuOpen && <LangSwitcher />}
+          {(isMenuOpen || isDesktop) && <LangSwitcher />}
         </div>
       </Container>
     </header>

@@ -17,12 +17,13 @@
 }
 
 .logo_text .mafia {
-  font-size: var(--font-size-xl);
+  width: 30vw;
+  font-size: var(--font-size-lg);
   font-weight: 800;
 }
 
 .logo_text .dream {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-xxs);
   color: var(--red);
   font-weight: 800;
   text-shadow: 0px 0px 0.2rem rgb(0, 134, 83, 0.6);

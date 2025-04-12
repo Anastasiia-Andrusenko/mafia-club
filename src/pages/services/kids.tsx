@@ -37,7 +37,7 @@ const KidsPage: React.FC<KidsProps> = ({ imagePaths }) => {
           <p className={css.text5}>5. {t.kidsP.text5}</p>
           <p className={css.details_players}>{t.kidsP.details_players}</p>
           <p className={css.details_taxi}>{t.vipP.taxi}</p>
-          <p className={css.details_coast}>{t.kidsP.details_coast}</p>
+          <p className={css.details_cost}>{t.kidsP.details_cost}</p>
         </section>
         <Overlay />
       </Container>

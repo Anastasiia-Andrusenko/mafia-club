@@ -34,13 +34,13 @@ const CorporatePage: React.FC<CorporateProps> = ({ imagePaths }) => {
           <p className={css.text2}>2. {t.corporateP.text2}</p>
           <p className={css.text3}>3. {t.corporateP.text3}</p>
           <p className={css.text4}>4. {t.corporateP.details_time}</p>
-          <p className={css.text5}>5. {t.corporateP.extraCoast}</p>
+          <p className={css.text5}>5. {t.corporateP.extraCost}</p>
           <p className={css.details_players}>
             {t.corporateP.players_age}
             {t.corporateP.details_players}
           </p>
           <p className={css.details_taxi}>{t.vipP.taxi}</p>
-          <p className={css.details_coast}>{t.corporateP.details_coast}</p>
+          <p className={css.details_cost}>{t.corporateP.details_cost}</p>
         </section>
         <Overlay />
       </Container>

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Loader from "@/components/Loader/Loader";
 import { ToastContainer } from "react-toastify";
+import "@/styles/animations.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false); // Стан лоадера

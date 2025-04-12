@@ -36,7 +36,7 @@ const BirthdayPage: React.FC<BirthdayProps> = ({ imagePaths }) => {
           <p className={css.text4}>4. {t.birthdayP.details_time}</p>
           <p className={css.details_players}>{t.birthdayP.details_players}</p>
           <p className={css.details_taxi}>{t.vipP.taxi}</p>
-          <p className={css.details_coast}>{t.birthdayP.details_coast}</p>
+          <p className={css.details_cost}>{t.birthdayP.details_cost}</p>
         </section>
         <Overlay />
       </Container>

@@ -47,6 +47,7 @@
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  margin-bottom: 10vh;
 }
 
 .service_item {
@@ -78,11 +79,30 @@
   line-height: 1.6;
 }
 
-.service_coast {
+.service_cost {
   font-weight: 600;
   margin-top: 1rem;
   font-size: var(--font-size-md);
   color: var(--red);
+}
+
+.linkToShop {
+  cursor: pointer;
+  width: fit-content;
+  margin: auto;
+  border: 1px solid var(--foreground);
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-size: var(--font-size-md);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.linkToShop span {
+  line-height: var(--font-size-lg);
+  font-size: var(--font-size-lg);
 }
 
 @media screen and (min-width: 768px) {
@@ -108,34 +128,41 @@
     font-size: var(--font-size-3xl);
   }
 
-  @media screen and (min-width: 768px) {
-    .service_item {
-      flex-direction: row;
-      align-items: center;
-    }
+  .service_item {
+    flex-direction: row;
+    align-items: center;
+  }
 
-    .reverse {
-      flex-direction: row-reverse;
-    }
+  .reverse {
+    flex-direction: row-reverse;
+  }
 
-    .image_wrapper {
-      flex: 1;
-      max-width: 50%;
-      padding: 0 2rem;
-    }
+  .image_wrapper {
+    flex: 1;
+    max-width: 50%;
+    padding: 0 2rem;
+  }
 
-    .text_wrapper {
-      flex: 1;
-      padding: 0 2rem;
-    }
+  .text_wrapper {
+    flex: 1;
+    padding: 0 2rem;
+  }
 
-    .service_title {
-      font-size: var(--font-size-3xl);
-    }
+  .service_title {
+    font-size: var(--font-size-3xl);
+  }
 
-    .service_description,
-    .service_coast {
-      font-size: var(--font-size-lg);
-    }
+  .service_description,
+  .service_cost {
+    font-size: var(--font-size-lg);
+  }
+
+  .linkToShop {
+    margin-left: 0;
+  }
+
+  .linkToShop:hover {
+    border-color: var(--red);
+    background-color: var(--red);
   }
 }

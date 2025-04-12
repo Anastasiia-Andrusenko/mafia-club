@@ -13,6 +13,43 @@
 .break {
   display: inline-block;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 3rem auto;
+  flex-wrap: wrap;
+}
+
+.pageBtn {
+  cursor: pointer;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-sm);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--foreground);
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease,
+    border 0.2s ease;
+}
+
+.pageBtn:hover {
+  background: var(--red);
+  color: var(--foreground);
+  border-color: var(--red);
+  transform: scale(1.05);
+}
+
+.active {
+  background: var(--foreground);
+  color: var(--background);
+  border-color: var(--foreground);
+  font-weight: bold;
+}
+
 /* ============================= Desktop  */
 @media screen and (min-width: 768px) {
   .title {

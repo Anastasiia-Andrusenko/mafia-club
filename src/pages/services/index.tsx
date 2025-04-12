@@ -26,7 +26,6 @@ const Services = () => {
     <>
       <div className={css.hero}>
         <Container>
-          {/* <h2 className={css.title}>{t.services.title}</h2> */}
           <h2 className={css.titleWhat}>{t.homeP.what}</h2>
           <p className={css.mafiaText}>{t.homeP.mafia}</p>
         </Container>

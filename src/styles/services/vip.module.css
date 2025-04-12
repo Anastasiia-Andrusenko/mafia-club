@@ -1,5 +1,5 @@
 .bgImg {
-  background-image: url("/img/vipP/vip_l.webp");
+  background-image: url("/img/vip_mob.webp ");
   background-position: center;
   background-size: cover;
   width: 100vw;
@@ -51,7 +51,7 @@
   color: var(--red);
 }
 
-.details_coast {
+.details_cost {
   font-weight: 800;
   margin: 0.5rem;
 }
@@ -114,7 +114,7 @@
     font-size: var(--font-size-lg);
   }
 
-  .details_coast {
+  .details_cost {
     font-size: var(--font-size-lg);
   }
 }

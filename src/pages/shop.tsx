@@ -1,23 +1,16 @@
 // components/Shop.tsx
-
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
-import Image from "next/image";
 import React, { useState } from "react";
 import { useTranslation } from "../hooks/useTranslation";
 import ProductModal from "../components/Product/Product";
-
 import css from "../styles/Shop.module.css";
 import Container from "@/components/Container/Container";
 import { LuShoppingCart } from "react-icons/lu";
-import { CgDetailsMore } from "react-icons/cg";
-
 import { Product } from "@/types/product";
 import Link from "next/link";
-import { useCart } from "@/context/CartContext";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OverlayModal from "@/components/common/OverlayModal";
-import { useSwipeable } from "react-swipeable";
+import ProductCard from "@/components/Shop/ProductCard";
 const link = "https://mafiadream.com.ua/wp-content/images/shop/";
 
 const Shop: React.FC = () => {
@@ -28,9 +21,6 @@ const Shop: React.FC = () => {
   const handleChangeProduct = (product: Product) => {
     setModalProduct(product);
   };
-  const { addToCart } = useCart();
-  const notify = (productName: string) =>
-    toast.success(`${productName} ${t.basket.add}`);
   const handleAddToCart = (product: Product) => {
     setCart([...basket, product]);
   };
@@ -268,94 +258,17 @@ const Shop: React.FC = () => {
     },
   ];
 
-  const getProductImages = (product: Product): string[] => {
-    return [
-      product.imageUrl1,
-      product.imageUrl2,
-      product.imageUrl3,
-      product.imageUrl4,
-      product.imageUrl5,
-    ].filter((img): img is string => typeof img === "string");
-  };
-  const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
-    const [activeImageIndex, setActiveImageIndex] = useState(0);
-    const images = getProductImages(product);
-
-    const swipeHandlers = useSwipeable({
-      onSwipedLeft: () =>
-        setActiveImageIndex((prev) => (prev + 1) % images.length),
-      onSwipedRight: () =>
-        setActiveImageIndex(
-          (prev) => (prev - 1 + images.length) % images.length
-        ),
-      trackMouse: true,
-    });
-
-    return (
-      <li
-        key={product.id}
-        className={css.productItem}
-        onClick={() => handleOpenModal(product)}
-      >
-        <h3 className={css.productName}>{product.name}</h3>
-        <div className={css.imgBg} {...swipeHandlers}>
-          <Image
-            src={images[activeImageIndex]}
-            alt={product.name}
-            width={200}
-            height={200}
-            className={css.img}
-          />
-        </div>
-        <div className={css.imageSliderDots}>
-          {images.map((_, i) => (
-            <span
-              key={i}
-              className={`${css.dot} ${
-                i === activeImageIndex ? css.active : ""
-              }`}
-            />
-          ))}
-        </div>
-
-        <p className={css.product_price}>{product.price} грн</p>
-        <ul className={css.btn_list}>
-          <li>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleOpenModal(product);
-              }}
-              className={css.btn}
-            >
-              <CgDetailsMore className={css.icon} />
-              {t.shopP.btnMore}
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                addToCart(product);
-                notify(product.name);
-              }}
-              className={css.btn}
-            >
-              <LuShoppingCart className={css.icon} /> {t.shopP.btnBuy}
-            </button>
-          </li>
-        </ul>
-      </li>
-    );
-  };
-
   return (
     <div>
       <Container>
         <p className={css.description}>{t.shopP.welcoming}</p>
         <ul className={css.productList}>
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onOpenModal={handleOpenModal}
+            />
           ))}
 
           <ScrollTopBtn />

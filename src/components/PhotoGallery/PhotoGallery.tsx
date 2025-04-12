@@ -14,9 +14,10 @@ interface ImageData {
 
 interface ImageGalleryProps {
   images: ImageData[];
+  allImages: ImageData[];
 }
 
-const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
+const ImageGallery: React.FC<ImageGalleryProps> = ({ images, allImages }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -43,7 +44,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
               className={css.galleryItem}
               onClick={() =>
                 handleImageClick(
-                  images.findIndex((image) => image.id === img.id)
+                  allImages.findIndex((image) => image.id === img.id)
                 )
               }
             >
@@ -62,7 +63,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
       <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        images={images.map((img) => ({ src: img.src, alt: img.alt }))}
+        images={allImages.map((img) => ({ src: img.src, alt: img.alt }))}
         currentIndex={currentIndex}
         onChangeIndex={handleChangeIndex}
       />

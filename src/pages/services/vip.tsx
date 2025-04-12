@@ -35,7 +35,7 @@ const VipPage: React.FC<VipProps> = ({ imagePaths }) => {
           <p className={css.text6}>6. {t.vipP.text6}</p>
           <p className={css.details_players}>{t.vipP.details_players}</p>
           <p className={css.details_taxi}>{t.vipP.taxi}</p>
-          <p className={css.details_coast}>{t.vipP.details_coast}</p>
+          <p className={css.details_cost}>{t.vipP.details_cost}</p>
         </section>
         <Overlay />
       </Container>

@@ -6,6 +6,8 @@ import { useTranslation } from "@/hooks/useTranslation";
 import React from "react";
 import Image from "next/image";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
+import Link from "next/link";
+import { FaSquareArrowUpRight } from "react-icons/fa6";
 
 const ExtrasPage = () => {
   const { t } = useTranslation();
@@ -15,77 +17,77 @@ const ExtrasPage = () => {
       id: "extraGame",
       title: t.extrasP.extraGame,
       description: t.extrasP.extraGame_text,
-      coast: t.extrasP.extraGame_coast,
+      cost: t.extrasP.extraGame_cost,
       image: "/img/extra/time.webp",
     },
     {
       id: "extraPresenter",
       title: t.extrasP.extraPresenter,
       description: t.extrasP.extraPresenter_t,
-      coast: t.extrasP.extraPresenter_coast,
+      cost: t.extrasP.extraPresenter_cost,
       image: "/img/extra/presenter.webp",
     },
     {
       id: "auction",
       title: t.extrasP.auction,
       description: t.extrasP.auction_t,
-      coast: t.extrasP.auction_coast,
+      cost: t.extrasP.auction_cost,
       image: "/img/extra/auction.webp",
     },
     {
       id: "bookmaker",
       title: t.extrasP.bookmaker,
       description: t.extrasP.bookmaker_t,
-      coast: t.extrasP.bookmaker_coast,
+      cost: t.extrasP.bookmaker_cost,
       image: "/img/extra/bookmeker.webp",
     },
     {
       id: "music",
       title: t.extrasP.music,
       description: t.extrasP.music_t,
-      coast: `${t.extrasP.music_coast_0}\n${t.extrasP.music_coast_1}`,
+      cost: [t.extrasP.music_cost_0, t.extrasP.music_cost_1],
       image: "/img/extra/dj.webp",
     },
     {
       id: "photoB",
       title: t.extrasP.photoB,
       description: `${t.extrasP.photoB_t}\n${t.extrasP.photoB_size}`,
-      coast: t.extrasP.photoB_coast,
+      cost: t.extrasP.photoB_cost,
       image: "/img/extra/pirson.webp",
     },
     {
       id: "gun",
       title: t.extrasP.gun,
       description: t.extrasP.gun_t,
-      coast: t.extrasP.gun_coast,
+      cost: t.extrasP.gun_cost,
       image: "/img/extra/gun.webp",
     },
     {
       id: "tableP",
       title: t.extrasP.tableP,
       description: t.extrasP.tableP_t,
-      coast: `${t.extrasP.tableP_coast_0}\n${t.extrasP.tableP_coast_1}`,
+      cost: [t.extrasP.tableP_cost_0, t.extrasP.tableP_cost_1],
       image: "/img/extra/poker.webp",
     },
     {
       id: "tableR",
       title: t.extrasP.tableR,
       description: t.extrasP.tableR_t,
-      coast: `${t.extrasP.tableR_coast_0}\n${t.extrasP.tableR_coast_1}`,
+      cost: [t.extrasP.tableR_cost_0, t.extrasP.tableR_cost_1],
       image: "/img/extra/tableR.webp",
     },
     {
       id: "tableBJ",
       title: t.extrasP.tableBJ,
       description: t.extrasP.tableBJ_t,
-      coast: t.extrasP.tableBJ_coast_1,
+      cost: t.extrasP.tableBJ_cost_1,
       image: "/img/extra/BJ.webp",
     },
     {
       id: "shop",
       title: t.extrasP.shop,
       description: `${t.extrasP.shop_t}`,
-      coast: `${t.extrasP.shop_attention}`,
+      cost: `${t.extrasP.shop_attention}`,
       image: "/img/extra/shop.webp",
     },
   ];
@@ -128,15 +130,31 @@ const ExtrasPage = () => {
                         </span>
                       ))}
                     </p>
-                    {item.coast && (
-                      <p className={css.service_coast}>
-                        {item.coast.split("\n").map((line, i) => (
-                          <span key={i}>
-                            {line}
-                            <br />
-                          </span>
-                        ))}
+                    {item.cost && (
+                      <p className={css.service_cost}>
+                        {Array.isArray(item.cost)
+                          ? item.cost.map((line, i) => (
+                              <span key={i}>
+                                {line}
+                                <br />
+                              </span>
+                            ))
+                          : item.cost.split("\n").map((line, i) => (
+                              <span key={i}>
+                                {line}
+                                <br />
+                              </span>
+                            ))}
                       </p>
+                    )}
+
+                    {item.id === "shop" && (
+                      <Link href="/shop" className={css.linkToShop}>
+                        {t.extrasP.shop_link}
+                        <span>
+                          <FaSquareArrowUpRight />
+                        </span>
+                      </Link>
                     )}
                   </div>
                 </li>

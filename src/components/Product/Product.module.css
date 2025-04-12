@@ -34,6 +34,7 @@
   width: 80%;
   margin: 3rem auto 0;
 }
+
 .btnClose {
   position: absolute;
   z-index: 110;
@@ -42,7 +43,7 @@
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0);
   border-radius: 50%;
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-xxl);
   line-height: 1rem;
   cursor: pointer;
   padding: 0.5rem;
@@ -131,22 +132,65 @@
   right: 8px;
 }
 
+.sliderControls {
+  position: absolute;
+  left: 2%;
+  top: 40%;
+  width: 96%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sliderBtn {
+  font-size: var(--font-size-md);
+  padding: 0.3rem 0.7rem;
+  background: transparent;
+  color: var(--foreground);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sliderBtn:hover {
+  color: var(--red);
+}
+
+@media (max-width: 767px) {
+  .sliderControls {
+    display: none;
+  }
+}
+
 @media screen and (min-width: 768px) {
+  .arrowHintLeft,
+  .arrowHintRight {
+    display: none;
+  }
+
   .modalContent {
-    position: fixed;
+    position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     width: 52vw;
-    height: fit-content;
+    max-height: 80vh;
+    min-height: auto;
     padding: 3rem;
     margin: auto;
     border: 1px solid rgb(255, 255, 255);
   }
 
   .img {
-    width: 50%;
+    width: 90%;
+    height: 40vw;
     margin: auto;
+  }
+
+  .name {
+    width: 60%;
+    font-size: var(--font-size-lg);
+    margin: 2rem auto;
+    margin-top: 0;
   }
 
   .btnClose:hover {

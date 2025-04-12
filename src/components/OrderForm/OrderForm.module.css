@@ -94,7 +94,7 @@
 
 @media screen and (min-width: 768px) {
   .title {
-    margin-left: 3rem;
+    /* margin-left: 3rem; */
   }
   .form {
     width: 50vw;
@@ -112,7 +112,7 @@
     justify-content: flex-end;
     font-size: var(--font-size-xl);
     gap: 0.5rem;
-    width: 31vw;
+    width: 70%;
     margin: auto;
   }
 
@@ -129,20 +129,26 @@
     margin-bottom: 3rem;
   }
 
-  .submit {
+  .submit,
+  .back {
     margin-top: 2rem;
-    padding: 1rem;
-    font-size: var(--font-size-xl);
+    padding: 0.6rem 1rem;
+    font-size: var(--font-size-md-lg);
     transition: all 250ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 
-  .submit:hover {
+  .submit:hover,
+  .back:hover {
     background: rgba(0, 0, 0, 0.5);
     color: var(--foreground);
     box-shadow: var(--box-shadow);
   }
 
-  .back {
+  .submit:hover svg {
+    color: var(--foreground);
+  }
+
+  /* .back {
     padding: 1rem;
     font-size: var(--font-size-xl);
     margin: 5rem auto;
@@ -152,5 +158,5 @@
     background: transparent;
     color: var(--foreground);
     box-shadow: var(--box-shadow);
-  }
+  } */
 }

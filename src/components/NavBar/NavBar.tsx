@@ -5,6 +5,7 @@ import { useTranslation } from "../../hooks/useTranslation";
 import Overlay from "../Overlay/Overlay";
 import { MdContactPhone } from "react-icons/md";
 import { LuShoppingCart } from "react-icons/lu";
+import { useState } from "react";
 
 type NavBarProps = {
   closeMenu: () => void;
@@ -17,6 +18,7 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
     path === "/" ? router.pathname === "/" : router.pathname.startsWith(path);
 
   const { t } = useTranslation();
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   return (
     <nav className={css.nav}>
@@ -31,9 +33,9 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
           </Link>
         </li>
         <li
-          className={css.services}
-          // onMouseEnter={() => isDesktop && setIsServicesOpen(true)}
-          // onMouseLeave={() => isDesktop && setIsServicesOpen(false)}
+          className={`${css.services} ${isServicesOpen ? css.open : ""}`}
+          onMouseEnter={() => isDesktop && setIsServicesOpen(true)}
+          onMouseLeave={() => isDesktop && setIsServicesOpen(false)}
         >
           <Link
             href="/services"
@@ -98,7 +100,7 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
                 }`}
               >
                 <Link href="/services/extras" onClick={closeMenu}>
-                  Додаткові послуги
+                  {t.extrasP.pageName}
                 </Link>
               </li>
             </ul>

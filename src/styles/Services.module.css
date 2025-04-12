@@ -5,51 +5,43 @@
       rgba(0, 0, 0, 0.6)
     ),
     url("../../public/img/party.webp");
-  height: 30vh;
+  /* height: 30vh; */
   width: 100vw;
-  padding: 120px 0 0 0;
+  padding: 1rem;
   background-size: cover;
   background-position: center;
 }
 
-.title {
-  text-align: center;
-  font-size: var(--font-size-xl);
-  line-height: 1.5rem;
-  letter-spacing: 0.05rem;
-  max-width: 80vw;
-  margin: auto;
-  text-transform: uppercase;
-}
-
 .titleWhat {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   text-transform: uppercase;
-  margin-top: 1vh;
   text-align: center;
-  margin-bottom: 20px;
-  color: var(--red);
+  color: rgba(255, 0, 0, 0.6);
+  margin-top: 10vh;
 }
 
 .mafiaText {
-  font-size: var(--font-size-md);
-  letter-spacing: 0.01rem;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.02rem;
+  line-height: 1.2rem;
   max-width: 90vw;
+  padding-top: 1rem;
   margin: auto;
-  margin-top: 16vh;
   text-align: justify;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .services {
   border-top: 1px solid white;
   border-bottom: 1px solid white;
-  padding: 20px 0;
-  margin-top: 30vh;
+  padding: 1rem;
+  margin-top: 2rem;
 }
 
 .listTitle {
   text-align: center;
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   text-transform: uppercase;
 }
 
@@ -200,18 +192,6 @@
   text-transform: uppercase;
   color: var(--red);
   letter-spacing: 0.05rem;
-}
-
-.info_text {
-}
-
-.mainButton {
-  /* position: fixed;
-  bottom: 4vh;
-  left: 50vw;
-  transform: translateX(-50%);
-  z-index: 1000;
-  box-shadow: var(--box-shadow); */
 }
 
 .thumb_overlay_more {

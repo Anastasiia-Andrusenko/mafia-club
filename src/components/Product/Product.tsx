@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSwipeable } from "react-swipeable";
 import { motion } from "framer-motion";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 interface ProductModalProps {
   product: Product;
@@ -97,9 +98,9 @@ const ProductModal: React.FC<ProductModalProps> = ({
       <motion.div
         key={product.id}
         className={css.modalContent}
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -50 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         {...handlers}
       >
@@ -117,6 +118,30 @@ const ProductModal: React.FC<ProductModalProps> = ({
             height={300}
             className={css.img}
           />
+          {images.length > 1 && (
+            <div className={css.sliderControls}>
+              <button
+                className={css.sliderBtn}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveImageIndex(
+                    (prev) => (prev - 1 + images.length) % images.length
+                  );
+                }}
+              >
+                <FaChevronLeft />
+              </button>
+              <button
+                className={css.sliderBtn}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveImageIndex((prev) => (prev + 1) % images.length);
+                }}
+              >
+                <FaChevronRight />
+              </button>
+            </div>
+          )}
         </div>
         <div className={css.imageSliderDots}>
           {images.map((_, i) => (
