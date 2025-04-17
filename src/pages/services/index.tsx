@@ -8,6 +8,7 @@ import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { GiClick } from "react-icons/gi";
+import FaqSection from "@/components/FAQ/FaqSection";
 
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -249,33 +250,11 @@ const Services = () => {
           </ul>
         </div>
         <ExtraServices />
-
         <Overlay />
+        <Container>
+          <FaqSection />
+        </Container>
 
-        <div className={css.info}>
-          <ul className={css.info_list}>
-            <li className={css.info_item}>
-              <p className={css.info_title}>{t.info.place}</p>
-              <p className={css.info_text}>{t.info.placeText}</p>
-            </li>
-            <li className={css.info_item}>
-              <p className={css.info_title}>{t.info.time}</p>
-              <p className={css.info_text}>{t.info.timeText}</p>
-            </li>
-            <li className={css.info_item}>
-              <p className={css.info_title}>{t.info.rule}</p>
-              <p className={css.info_text}>{t.info.ruleText}</p>
-            </li>
-            <li className={css.info_item}>
-              <p className={css.info_title}>{t.info.players}</p>
-              <p className={css.info_text}>{t.info.playersText}</p>
-            </li>
-            <li className={css.info_item}>
-              <p className={css.info_title}>{t.info.extra}</p>
-              <p className={css.info_text}>{t.info.extraText}</p>
-            </li>
-          </ul>
-        </div>
         <Overlay />
       </Container>
       <ScrollTopBtn />
