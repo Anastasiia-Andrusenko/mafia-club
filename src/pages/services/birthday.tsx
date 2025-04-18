@@ -6,7 +6,7 @@ import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";
 import Algorithm from "@/components/Algorithm/Algorithm";
 import Thread from "@/components/Thread/Thread";
-import path from "../../components/PhotoGallery/imagesCorporate.json";
+import path from "../../components/PhotoGallery/imagesBirth.json";
 
 interface BirthdayProps {
   imagePaths: string[];

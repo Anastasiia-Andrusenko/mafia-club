@@ -6,7 +6,7 @@ import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";
 import Algorithm from "@/components/Algorithm/Algorithm";
 import Thread from "@/components/Thread/Thread";
-import path from "../../components/PhotoGallery/imagesVip.json";
+import path from "../../components/PhotoGallery/imagesOut.json";
 
 interface OutdoorProps {
   imagePaths: string[];
