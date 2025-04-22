@@ -1,5 +1,5 @@
 import Container from "@/components/Container/Container";
-import css from "../../styles/services/corporate.module.css";
+import css from "../../styles/services/vip.module.css";
 import styles from "../../styles/services/outdor.module.css";
 import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";

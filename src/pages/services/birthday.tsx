@@ -1,6 +1,6 @@
 import Container from "@/components/Container/Container";
 import styles from "../../styles/services/birthday.module.css";
-import css from "../../styles/services/corporate.module.css";
+import css from "../../styles/services/vip.module.css";
 import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";

@@ -1,26 +1,29 @@
 .table {
   width: 84vw;
-  margin: auto;
-  margin-top: 6rem;
-  margin-bottom: 6rem;
+  margin: 6rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.table_body {
+.table_row {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  flex-wrap: nowrap;
   gap: 2rem;
 }
 
 .column {
+  width: 100%;
+  max-width: 300px;
+  flex-shrink: 0;
   display: flex;
-  height: 16rem;
-  width: 84vw;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* border: 1px solid rgba(255, 255, 255, 0.6); */
   box-shadow: var(--box-shadow);
   padding: 0.5rem;
+  transition: 0.3s ease;
 }
 
 .table_service {
@@ -84,18 +87,11 @@
 
 @media screen and (min-width: 768px) {
   .table {
-    max-width: 100%;
-  }
-
-  .table_body {
-    display: flex;
-    max-width: 1400px;
+    width: 100%;
+    flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    /* align-items: stretch; */
-    /* justify-content: space-between; */
-    /* gap: 4rem; */
   }
 
   .table_service {
@@ -104,7 +100,7 @@
 
   .column {
     height: 30rem;
-    flex: 1;
+    width: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -126,8 +122,6 @@
     background-color: var(--red);
   }
 
-  .table_service {
-  }
   .table_price {
     gap: 0.5rem;
     font-size: var(--font-size-xl);
@@ -135,7 +129,7 @@
 
   .age {
     margin-left: 0.5rem;
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-md);
   }
 
   .money {

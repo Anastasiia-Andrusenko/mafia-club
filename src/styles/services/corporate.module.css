@@ -4,66 +4,6 @@
   background-size: cover;
   width: 100vw;
   height: 15rem;
-  /* opacity: 0.6; */
-}
-
-.pageTitle {
-  position: static;
-  transform: translateY(-460%);
-  text-align: center;
-  font-size: var(--font-size-sm);
-  line-height: 2rem;
-  color: var(--foreground);
-  margin: auto;
-  width: 100vw;
-  text-shadow: 0px 0px 3rem rgba(0, 0, 0, 0.6);
-}
-
-.description {
-  position: absolute;
-  width: 80%;
-  top: -10vh;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: var(--font-size-md);
-  text-align: center;
-  font-weight: 200;
-}
-
-.details {
-  margin: 3rem auto 5rem;
-  width: 90vw;
-}
-
-.details_title {
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.text1,
-.text2,
-.text3,
-.text4,
-.text5 {
-  width: 100%;
-  margin: 2rem 0.5rem;
-  font-weight: 300;
-  letter-spacing: 0.03rem;
-}
-
-.details_players {
-  width: 100%;
-  margin: 2rem 0.5rem;
-}
-
-.details_taxi {
-  margin: 0.5rem;
-  color: var(--red);
-}
-
-.details_cost {
-  font-weight: 800;
-  margin: 0.5rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -75,60 +15,5 @@
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.6;
-  }
-
-  .pageTitle {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: 60vw;
-    left: 50vw;
-    transform: translateX(-50%);
-    top: 18rem;
-    text-align: center;
-    font-size: var(--font-size-3xl);
-    line-height: 4rem;
-    text-shadow: 0px 0px 3rem rgba(0, 0, 0);
-  }
-
-  .description {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: -14rem;
-    font-size: var(--font-size-3xl);
-    text-align: center;
-  }
-
-  .emotionalImg {
-  }
-
-  .details {
-    width: 100%;
-    margin: 4rem auto;
-  }
-
-  .details_title {
-    font-size: var(--font-size-3xl);
-  }
-
-  .text1,
-  .text2,
-  .text3,
-  .text4 {
-    font-size: var(--font-size-lg);
-  }
-
-  .details_players {
-    font-size: var(--font-size-lg);
-  }
-
-  .details_taxi {
-    font-size: var(--font-size-lg);
-  }
-
-  .details_cost {
-    font-size: var(--font-size-lg);
   }
 }

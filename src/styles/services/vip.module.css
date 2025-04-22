@@ -102,19 +102,15 @@
   .text3,
   .text4,
   .text5,
-  .text6 {
+  .text6,
+  .details_players,
+  .details_taxi,
+  .details_cost {
     font-size: var(--font-size-lg);
+    line-height: normal;
   }
 
   .details_players {
-    font-size: var(--font-size-lg);
-  }
-
-  .details_taxi {
-    font-size: var(--font-size-lg);
-  }
-
-  .details_cost {
-    font-size: var(--font-size-lg);
+    font-weight: 300;
   }
 }

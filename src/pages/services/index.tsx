@@ -51,7 +51,7 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>{t.table.specificVip}</p>
+                      <p className={css.thumb_text_p}>{t.table.description2}</p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>
@@ -85,9 +85,7 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>
-                        {t.table.specificCorporate}
-                      </p>
+                      <p className={css.thumb_text_p}>{t.table.description1}</p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>
@@ -121,9 +119,7 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>
-                        {t.outdoorP.description}
-                      </p>
+                      <p className={css.thumb_text_p}>{t.table.description5}</p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>
@@ -157,7 +153,7 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>{t.kidsP.description}</p>
+                      <p className={css.thumb_text_p}>{t.table.description3}</p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>
@@ -191,9 +187,7 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>
-                        {t.birthdayP.description}
-                      </p>
+                      <p className={css.thumb_text_p}>{t.table.description4}</p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>
@@ -227,9 +221,7 @@ const Services = () => {
                     }
                   >
                     <div className={css.thumb_text}>
-                      <p className={css.thumb_text_p}>
-                        {t.extrasP.description}
-                      </p>
+                      <p className={css.thumb_text_p}>{t.table.description6}</p>
                       <p className={css.thumb_overlay_more}>
                         {t.services.forMore}
                       </p>

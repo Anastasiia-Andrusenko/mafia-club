@@ -1,5 +1,5 @@
 .img {
-  background-image: url(../../public/img/anonymus.png);
+  background-image: url("/img/anonymus.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right;
@@ -8,7 +8,7 @@
   margin-left: auto;
   background-color: black;
   position: absolute;
-  z-index: -1;
+  /* z-index: -1;  */
 }
 
 .rules_title {

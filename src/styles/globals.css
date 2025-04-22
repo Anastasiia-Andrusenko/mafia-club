@@ -22,16 +22,7 @@
   --background: #240000;
   --foreground: #e3e3e3;
   --red: #d92929;
-  --bg-gradient: linear-gradient(
-    to bottom,
-    #000 0%,
-    #750000 15%,
-    #000 30%,
-    #750000 45%,
-    #000 60%,
-    #750000 75%,
-    #000 100%
-  );
+  --bg-gradient: linear-gradient(to bottom, #000 0%, #750000 50%, #000 100%);
 
   --box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.7);
 }
@@ -58,6 +49,10 @@ body {
   margin: 0;
   color: var(--foreground);
   background: var(--bg-gradient);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   font-family: var(--font-family-primary);
   font-size: var(--font-size-md);
   -webkit-font-smoothing: antialiased;
@@ -91,10 +86,6 @@ a {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-}
-
-* {
-  transition: all 0.3s ease;
 }
 
 b,
