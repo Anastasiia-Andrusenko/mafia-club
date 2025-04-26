@@ -5,7 +5,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { GiClick } from "react-icons/gi";
 import FaqSection from "@/components/FAQ/FaqSection";
@@ -23,14 +23,44 @@ const Services = () => {
   };
 
   const { t } = useTranslation();
+
+  const heroRef = useRef<HTMLDivElement>(null);
+  const heroTextRef = useRef<HTMLDivElement>(null);
+
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const hero = heroRef.current;
+  //     const heroText = heroTextRef.current;
+  //     if (!hero || !heroText) return;
+
+  //     const heroTextRect = heroText.getBoundingClientRect();
+  //     const headerHeight = 6 * 16; // 6rem = 96px
+
+  //     if (heroTextRect.top <= headerHeight) {
+  //       hero.style.position = "static";
+  //     } else {
+  //       hero.style.position = "fixed";
+  //       hero.style.top = "6rem";
+  //     }
+  //   };
+
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
+
   return (
     <>
-      <div className={css.hero}>
-        <Container>
+      <div className={css.hero_wrapper}>
+        <div ref={heroRef} className={css.hero}></div>
+        <div ref={heroTextRef} className={css.hero_text}>
           <h2 className={css.titleWhat}>{t.homeP.what}</h2>
           <p className={css.mafiaText}>{t.homeP.mafia}</p>
-        </Container>
+        </div>
       </div>
+
       <Container>
         <div className={css.services} id="services">
           <h4 className={css.listTitle}>{t.services.listTitle}</h4>

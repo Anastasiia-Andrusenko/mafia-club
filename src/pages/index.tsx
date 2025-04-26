@@ -9,6 +9,7 @@ import path from "../components/PhotoGallery/imagesMainPage.json";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 import { useEffect, useState } from "react";
 import Thread from "@/components/Thread/Thread";
+import FaqSection from "@/components/FAQ/FaqSection";
 
 interface HomeProps {
   imagePaths: string[];
@@ -104,6 +105,9 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
               allowFullScreen
             ></iframe>
           </div>
+          <Container>
+            <FaqSection />
+          </Container>
           <ClientsList />
           <ScrollTopBtn />
         </main>

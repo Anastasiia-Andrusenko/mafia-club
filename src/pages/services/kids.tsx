@@ -7,6 +7,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Algorithm from "@/components/Algorithm/Algorithm";
 import Thread from "@/components/Thread/Thread";
 import path from "../../components/PhotoGallery/imagesKids.json";
+import FaqSection from "@/components/FAQ/FaqSection";
 
 interface KidsProps {
   imagePaths: string[];
@@ -42,6 +43,9 @@ const KidsPage: React.FC<KidsProps> = ({ imagePaths }) => {
         <Overlay />
       </Container>
       <ExtraServices />
+      <Container>
+        <FaqSection />
+      </Container>
     </>
   );
 };

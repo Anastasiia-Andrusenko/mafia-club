@@ -7,6 +7,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Algorithm from "@/components/Algorithm/Algorithm";
 import Thread from "@/components/Thread/Thread";
 import path from "../../components/PhotoGallery/imagesOut.json";
+import FaqSection from "@/components/FAQ/FaqSection";
 
 interface OutdoorProps {
   imagePaths: string[];
@@ -41,6 +42,9 @@ const OutdoorPage: React.FC<OutdoorProps> = ({ imagePaths }) => {
         <Overlay />
       </Container>
       <ExtraServices />
+      <Container>
+        <FaqSection />
+      </Container>
     </>
   );
 };

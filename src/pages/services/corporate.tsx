@@ -7,6 +7,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Algorithm from "@/components/Algorithm/Algorithm";
 import path from "../../components/PhotoGallery/imagesCorporate.json";
 import Thread from "@/components/Thread/Thread";
+import FaqSection from "@/components/FAQ/FaqSection";
 
 interface CorporateProps {
   imagePaths: string[];
@@ -45,6 +46,9 @@ const CorporatePage: React.FC<CorporateProps> = ({ imagePaths }) => {
         <Overlay />
       </Container>
       <ExtraServices />
+      <Container>
+        <FaqSection />
+      </Container>
     </>
   );
 };

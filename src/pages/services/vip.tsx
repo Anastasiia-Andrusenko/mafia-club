@@ -6,6 +6,7 @@ import { useTranslation } from "@/hooks/useTranslation";
 import Algorithm from "@/components/Algorithm/Algorithm";
 import Thread from "@/components/Thread/Thread";
 import path from "../../components/PhotoGallery/imagesVip.json";
+import FaqSection from "@/components/FAQ/FaqSection";
 
 interface VipProps {
   imagePaths: string[];
@@ -40,6 +41,9 @@ const VipPage: React.FC<VipProps> = ({ imagePaths }) => {
         <Overlay />
       </Container>
       <ExtraServices />
+      <Container>
+        <FaqSection />
+      </Container>
     </>
   );
 };

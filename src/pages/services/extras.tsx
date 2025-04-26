@@ -8,6 +8,7 @@ import Image from "next/image";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 import Link from "next/link";
 import { FaSquareArrowUpRight } from "react-icons/fa6";
+import FaqSection from "@/components/FAQ/FaqSection";
 
 const ExtrasPage = () => {
   const { t } = useTranslation();
@@ -163,6 +164,9 @@ const ExtrasPage = () => {
             ))}
           </ul>
         </section>
+      </Container>
+      <Container>
+        <FaqSection />
       </Container>
       <ScrollTopBtn />
     </>

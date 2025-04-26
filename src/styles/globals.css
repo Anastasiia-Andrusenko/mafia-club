@@ -21,7 +21,7 @@
 
   --background: #240000;
   --foreground: #e3e3e3;
-  --red: #d92929;
+  --red: #c61100;
   --bg-gradient: linear-gradient(to bottom, #000 0%, #750000 50%, #000 100%);
 
   --box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.7);
@@ -46,6 +46,7 @@ a {
 }
 
 body {
+  position: relative;
   margin: 0;
   color: var(--foreground);
   background: var(--bg-gradient);
@@ -59,6 +60,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   overflow-x: hidden;
+  z-index: -2;
 }
 
 svg,
