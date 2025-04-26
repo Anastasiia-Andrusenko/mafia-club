@@ -3,7 +3,7 @@ import css from "../../styles/services/extras.module.css";
 
 import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 import Link from "next/link";
@@ -92,15 +92,26 @@ const ExtrasPage = () => {
       image: "/img/extra/shop.webp",
     },
   ];
+  const [opacity, setOpacity] = useState(1);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(1 - scrollY / 300, 0);
+      setOpacity(newOpacity);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <>
       <div className={`${css.bgImg} `}></div>
-      <div className={css.pageTitle}>
+      <div className={css.pageTitle} style={{ opacity }}>
         <h2 className={css.title1}>{t.extrasP.title}</h2>
       </div>
       <Container>
-        <section className={css.main}>
+        <section className={css.main} style={{ opacity }}>
           <p className={css.description}>{t.extrasP.description}</p>
         </section>
         <div className={css.emotionalImg}></div>
@@ -165,9 +176,7 @@ const ExtrasPage = () => {
           </ul>
         </section>
       </Container>
-      <Container>
-        <FaqSection />
-      </Container>
+      <FaqSection />
       <ScrollTopBtn />
     </>
   );

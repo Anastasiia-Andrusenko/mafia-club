@@ -142,13 +142,6 @@
     display: none;
   }
 
-  .header {
-    position: relative;
-    width: 100%;
-    height: fit-content;
-    z-index: 10;
-  }
-
   .headerWrapper {
     display: flex;
     align-items: center;

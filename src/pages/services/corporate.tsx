@@ -8,6 +8,7 @@ import Algorithm from "@/components/Algorithm/Algorithm";
 import path from "../../components/PhotoGallery/imagesCorporate.json";
 import Thread from "@/components/Thread/Thread";
 import FaqSection from "@/components/FAQ/FaqSection";
+import { useEffect, useState } from "react";
 
 interface CorporateProps {
   imagePaths: string[];
@@ -15,14 +16,27 @@ interface CorporateProps {
 
 const CorporatePage: React.FC<CorporateProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(1 - scrollY / 300, 0);
+      setOpacity(newOpacity);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <div className={`${styles.bgImg}`}></div>
-      <div className={css.pageTitle}>
+      <div className={css.pageTitle} style={{ opacity }}>
         <h2 className={css.title}>{t.corporateP.title}</h2>
       </div>
       <Container>
-        <section className={css.main}>
+        <section className={css.main} style={{ opacity: opacity + 0.5 }}>
           <p className={css.description}>{t.corporateP.description}</p>
         </section>
 
@@ -46,9 +60,7 @@ const CorporatePage: React.FC<CorporateProps> = ({ imagePaths }) => {
         <Overlay />
       </Container>
       <ExtraServices />
-      <Container>
-        <FaqSection />
-      </Container>
+      <FaqSection />
     </>
   );
 };

@@ -79,7 +79,10 @@ const Gallery: React.FC<GalleryProps> = ({ imagesFiles }) => {
             </button>
           ))}
         </div>
-        <Overlay />
+        <div className={css.mainBtnWrapForMargin}>
+          <Overlay />
+        </div>
+
         <ScrollTopBtn />
       </Container>
     </>

@@ -8,6 +8,7 @@ import Algorithm from "@/components/Algorithm/Algorithm";
 import Thread from "@/components/Thread/Thread";
 import path from "../../components/PhotoGallery/imagesOut.json";
 import FaqSection from "@/components/FAQ/FaqSection";
+import { useEffect, useState } from "react";
 
 interface OutdoorProps {
   imagePaths: string[];
@@ -15,14 +16,28 @@ interface OutdoorProps {
 
 const OutdoorPage: React.FC<OutdoorProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
+
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(1 - scrollY / 300, 0);
+      setOpacity(newOpacity);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <div className={`${styles.bgImg} ${css.vip}`}></div>
-      <div className={css.pageTitle}>
+      <div className={css.pageTitle} style={{ opacity }}>
         <h2 className={css.title1}>{t.outdoorP.title}</h2>
       </div>
       <Container>
-        <section className={css.main}>
+        <section className={css.main} style={{ opacity: opacity + 0.5 }}>
           <p className={css.description}>{t.outdoorP.description}</p>
         </section>
         <div className={css.emotionalImg}></div>
@@ -42,9 +57,7 @@ const OutdoorPage: React.FC<OutdoorProps> = ({ imagePaths }) => {
         <Overlay />
       </Container>
       <ExtraServices />
-      <Container>
-        <FaqSection />
-      </Container>
+      <FaqSection />
     </>
   );
 };

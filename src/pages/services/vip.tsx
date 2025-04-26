@@ -7,6 +7,7 @@ import Algorithm from "@/components/Algorithm/Algorithm";
 import Thread from "@/components/Thread/Thread";
 import path from "../../components/PhotoGallery/imagesVip.json";
 import FaqSection from "@/components/FAQ/FaqSection";
+import { useEffect, useState } from "react";
 
 interface VipProps {
   imagePaths: string[];
@@ -14,14 +15,29 @@ interface VipProps {
 
 const VipPage: React.FC<VipProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(1 - scrollY / 300, 0);
+      setOpacity(newOpacity);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <div className={`${css.bgImg} ${css.vip}`}></div>
-      <div className={css.pageTitle}>
+      <div className={css.pageTitle} style={{ opacity }}>
         <h2 className={css.title1}>{t.vipP.title}</h2>
       </div>
       <Container>
-        <section className={css.main}></section>
+        <section className={css.main} style={{ opacity: opacity + 0.5 }}>
+          <p className={css.description}>{t.vipP.description}</p>
+        </section>
         <div className={css.emotionalImg}></div>
         <Algorithm />
         <Overlay />
@@ -41,9 +57,7 @@ const VipPage: React.FC<VipProps> = ({ imagePaths }) => {
         <Overlay />
       </Container>
       <ExtraServices />
-      <Container>
-        <FaqSection />
-      </Container>
+      <FaqSection />
     </>
   );
 };

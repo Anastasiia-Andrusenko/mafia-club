@@ -1,10 +1,7 @@
 .faqWrapper {
   position: relative;
   padding: 2rem 1.5rem;
-  /* background-color: rgba(0, 0, 0, 0.6);
-  border-radius: var(--border-radius); */
-  /* box-shadow: var(--box-shadow); */
-  max-width: 1000px;
+  width: 100%;
   margin: 3rem auto;
   text-align: left;
   overflow: hidden;
@@ -32,26 +29,21 @@
 
 .faqToggleBtn {
   display: block;
-  width: 60%;
+  width: 80%;
   font-family: var(--font-family-secondary);
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   font-weight: 900;
   font-size: var(--font-size-md-lg);
   background-color: transparent;
-  border: 2px solid var(--red);
-  color: var(--red);
-  padding: 0.5rem 1.5rem;
+  border: 2px solid var(--foreground);
+  color: var(--foreground);
+  padding: 1rem 1.5rem;
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0 auto 2rem auto;
   text-align: center;
-}
-
-.faqToggleBtn:hover {
-  background-color: var(--red);
-  color: #fff;
 }
 
 .faqList {
@@ -132,15 +124,25 @@
 
 @media screen and (min-width: 768px) {
   .faqWrapper {
-    padding: 3rem;
+    padding: 4rem;
   }
 
   .faqToggleBtn {
+    width: 30rem;
+    font-size: var(--font-size-xl);
+  }
+  .faqToggleBtn:hover {
+    background-color: var(--red);
+    border-color: var(--red);
+  }
+  .faqTitle {
     font-size: var(--font-size-xl);
   }
 
-  .faqTitle {
-    font-size: var(--font-size-xl);
+  .faqList {
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
   }
 
   .faqText {

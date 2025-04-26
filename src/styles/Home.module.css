@@ -12,6 +12,7 @@
   width: 100vw;
   height: 34vh;
   text-align: center;
+  margin-top: 6rem;
 }
 
 .description {
@@ -109,7 +110,7 @@
 }
 
 .video {
-  width: 80vw;
+  width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -131,6 +132,7 @@
 
   .hero {
     height: 1000px;
+    background-attachment: fixed;
   }
 
   .description {

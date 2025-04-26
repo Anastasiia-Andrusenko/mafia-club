@@ -5,6 +5,7 @@
   width: 100vw;
   height: 15rem;
   /* opacity: 0.6; */
+  margin-top: 6rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -16,5 +17,6 @@
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.6;
+    background-attachment: fixed;
   }
 }

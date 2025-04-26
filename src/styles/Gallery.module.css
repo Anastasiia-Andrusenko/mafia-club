@@ -4,6 +4,7 @@
   padding: 10px 20px;
   margin: 40px 0;
   line-height: 2rem;
+  margin-top: 6rem;
 }
 
 .club {
@@ -50,6 +51,9 @@
   font-weight: bold;
 }
 
+.mainBtnWrapForMargin {
+  margin-bottom: 4rem;
+}
 /* ============================= Desktop  */
 @media screen and (min-width: 768px) {
   .title {

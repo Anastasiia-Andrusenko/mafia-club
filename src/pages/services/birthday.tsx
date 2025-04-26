@@ -8,6 +8,7 @@ import Algorithm from "@/components/Algorithm/Algorithm";
 import Thread from "@/components/Thread/Thread";
 import path from "../../components/PhotoGallery/imagesBirth.json";
 import FaqSection from "@/components/FAQ/FaqSection";
+import { useEffect, useState } from "react";
 
 interface BirthdayProps {
   imagePaths: string[];
@@ -15,14 +16,28 @@ interface BirthdayProps {
 
 const BirthdayPage: React.FC<BirthdayProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
+
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(1 - scrollY / 300, 0);
+      setOpacity(newOpacity);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <div className={`${styles.bgImg} `}></div>
-      <div className={css.pageTitle}>
+      <div className={css.pageTitle} style={{ opacity }}>
         <h2 className={css.title1}>{t.birthdayP.title}</h2>
       </div>
       <Container>
-        <section className={css.main}>
+        <section className={css.main} style={{ opacity: opacity + 0.5 }}>
           <p className={css.description}>{t.birthdayP.description}</p>
         </section>
         <div className={css.emotionalImg}></div>
@@ -42,9 +57,7 @@ const BirthdayPage: React.FC<BirthdayProps> = ({ imagePaths }) => {
         <Overlay />
       </Container>
       <ExtraServices />
-      <Container>
-        <FaqSection />
-      </Container>
+      <FaqSection />
     </>
   );
 };

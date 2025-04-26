@@ -19,6 +19,7 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
 
   const [isMobile, setIsMobile] = useState(false);
+  const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,6 +30,17 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(1 - scrollY / 300, 0);
+      setOpacity(newOpacity);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -43,7 +55,7 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
         <main>
           <div className={css.hero}>
             <Container>
-              <h1 className={css.description}>
+              <h1 className={css.description} style={{ opacity }}>
                 {t.homeP.description1}
                 <span className={css.description2}>{t.homeP.description2}</span>
               </h1>
@@ -89,25 +101,25 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
             <Table />
           </Container>
           {isMobile && <Overlay />}
-          <div className={css.video}>
-            <iframe
-              src="https://www.youtube.com/embed/tUHAoshTRQ0?si=zuLF6Ij4gPv7G3bo"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
-            <iframe
-              src="https://www.youtube.com/embed/CY4_zTEm_sk?si=aN5_bPGc3OMPlLku"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
-          </div>
           <Container>
-            <FaqSection />
+            <div className={css.video}>
+              <iframe
+                src="https://www.youtube.com/embed/tUHAoshTRQ0?si=zuLF6Ij4gPv7G3bo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+              <iframe
+                src="https://www.youtube.com/embed/CY4_zTEm_sk?si=aN5_bPGc3OMPlLku"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            </div>
           </Container>
+          <FaqSection />
           <ClientsList />
           <ScrollTopBtn />
         </main>
