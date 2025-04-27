@@ -35,7 +35,9 @@ html {
   width: 100vw;
   overflow-x: hidden;
   background-color: #000;
+  scroll-behavior: smooth;
 }
+
 a {
   cursor: pointer;
 }

@@ -19,6 +19,7 @@
 }
 
 .extras_item {
+  scroll-margin-top: 8rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -69,6 +70,7 @@
     font-size: var(--font-size-md);
     gap: 10px;
     padding: 10px;
+    /* scroll-margin-top: 8rem; */
   }
 
   .icon {

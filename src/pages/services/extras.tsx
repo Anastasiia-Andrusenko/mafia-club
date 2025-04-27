@@ -120,6 +120,7 @@ const ExtrasPage = () => {
             {Extras.map((item, index) => (
               <React.Fragment key={item.id}>
                 <li
+                  id={item.id}
                   className={`${css.service_item} ${
                     index % 2 !== 0 ? css.reverse : ""
                   }`}

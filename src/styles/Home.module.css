@@ -124,6 +124,7 @@
   .video {
     justify-content: space-around;
     flex-direction: row;
+    margin-top: 10rem;
   }
   .video iframe {
     width: 560px;
@@ -171,7 +172,15 @@
   }
 
   .about {
-    margin: 60px auto;
+    margin: 2rem auto 6rem auto;
+  }
+
+  .about_title {
+    text-align: center;
+    margin-top: 6rem;
+    margin-bottom: 2rem;
+    font-size: var(--font-size-xl);
+    text-transform: uppercase;
   }
 
   .about__counter {
@@ -203,14 +212,6 @@
     font-size: 100px;
     font-weight: 900;
     display: block;
-  }
-
-  .about_title {
-    text-align: center;
-    margin-top: 60px;
-    margin-bottom: 20px;
-    font-size: var(--font-size-xl);
-    text-transform: uppercase;
   }
 
   .about_text {

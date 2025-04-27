@@ -47,12 +47,12 @@ const FaqSection = () => {
               key={key}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className={css.faqQuestionRow}>
+              <div
+                className={css.faqQuestionRow}
+                onClick={() => toggleAnswer(key)}
+              >
                 <p className={css.faqTitle}>{t.info[key]}</p>
-                <button
-                  className={css.faqIconBtn}
-                  onClick={() => toggleAnswer(key)}
-                >
+                <button className={css.faqIconBtn}>
                   {activeAnswer === key ? (
                     <AiOutlineCheckCircle />
                   ) : (

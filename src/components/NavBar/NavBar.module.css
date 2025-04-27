@@ -98,7 +98,7 @@
 
   .basket:hover,
   .contactHeader:hover {
-    border-radius: 50%;
+    border-radius: 30%;
     box-shadow: var(--box-shadow);
   }
 

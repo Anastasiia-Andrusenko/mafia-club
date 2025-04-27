@@ -6,6 +6,8 @@ import Overlay from "../Overlay/Overlay";
 import { MdContactPhone } from "react-icons/md";
 import { LuShoppingCart } from "react-icons/lu";
 import { useState } from "react";
+import { TfiShoppingCartFull } from "react-icons/tfi";
+import { useCart } from "@/context/CartContext";
 
 type NavBarProps = {
   closeMenu: () => void;
@@ -18,6 +20,8 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
     path === "/" ? router.pathname === "/" : router.pathname.startsWith(path);
 
   const { t } = useTranslation();
+  const { cart } = useCart();
+
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   return (
@@ -152,7 +156,7 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
           )}
           {isDesktop && (
             <Link href="/basket" className={css.basket}>
-              <LuShoppingCart />
+              {cart.length > 0 ? <TfiShoppingCartFull /> : <LuShoppingCart />}
             </Link>
           )}
         </div>

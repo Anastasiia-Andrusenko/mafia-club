@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Header />
         {loading && <Loader />}
         <Component {...pageProps} />
-        <ToastContainer theme="dark" newestOnTop />
+        <ToastContainer theme="dark" newestOnTop autoClose={3000} />
         <Footer />
       </CartProvider>
     </LanguageProvider>

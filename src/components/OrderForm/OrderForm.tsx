@@ -19,7 +19,7 @@ interface OrderFormProps {
 const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
   const { t } = useTranslation();
   const total = cart.reduce(
     (sum: number, product: Product) => sum + product.price * product.quantity,
@@ -79,6 +79,9 @@ ${safeMessage}
 
           await sendTelegramMessage(messageForTelegram);
 
+          setName("");
+          setPhone("");
+          clearCart();
           onBack();
         },
         (err) => {

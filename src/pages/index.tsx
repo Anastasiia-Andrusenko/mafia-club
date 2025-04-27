@@ -18,19 +18,19 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
 
-  const [isMobile, setIsMobile] = useState(false);
+  // const [isMobile, setIsMobile] = useState(false);
   const [opacity, setOpacity] = useState(1);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsMobile(window.innerWidth <= 768);
+  //   };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
+  //   handleResize();
+  //   window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,11 +96,10 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
             </div>
           </Container>
           <Thread imagePaths={imagePaths} double />
-          <Overlay />
           <Container>
             <Table />
           </Container>
-          {isMobile && <Overlay />}
+          <Overlay />
           <Container>
             <div className={css.video}>
               <iframe
