@@ -18,29 +18,36 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
 
-  // const [isMobile, setIsMobile] = useState(false);
   const [opacity, setOpacity] = useState(1);
+  const [pageLoaded, setPageLoaded] = useState(false);
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     setIsMobile(window.innerWidth <= 768);
-  //   };
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setPageLoaded(true);
+    }, 100);
 
-  //   handleResize();
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
+    return () => clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const newOpacity = Math.max(1 - scrollY / 300, 0);
+      const newOpacity = Math.max(1 - scrollY / 200, 0);
       setOpacity(newOpacity);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      document.querySelectorAll(".fadeInUp").forEach((el) => {
+        el.classList.add("fadeInUpVisible");
+      });
+    }, 200); // трохи затримки перед появою
+
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
@@ -55,16 +62,29 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
         <main>
           <div className={css.hero}>
             <Container>
-              <h1 className={css.description} style={{ opacity }}>
-                {t.homeP.description1}
-                <span className={css.description2}>{t.homeP.description2}</span>
+              <h1
+                className={`${css.title} fadeInUp ${
+                  pageLoaded ? "fadeInUpVisible" : ""
+                }`}
+                style={{ opacity }}
+              >
+                <span className={css.slogan}>{t.homeP.sloganMain}</span>
+                <span className={css.slogan}>{t.homeP.sloganSub}</span>
               </h1>
+              <p
+                className={`${css.heroDescription} fadeInUp ${
+                  pageLoaded ? "fadeInUpVisible" : ""
+                }`}
+                style={{ opacity }}
+              >
+                {t.homeP.heroDescription}
+              </p>
             </Container>
           </div>
           <Container>
             <div className={css.about}>
               <div className={css.about__counter}>
-                <ul className={css.about__counter_list}>
+                <ul className={`${css.about__counter_list} fadeInUp`}>
                   <li className={css.item}>
                     <p className={css.counter_text}>
                       <span className={css.sum}>14</span>
@@ -91,7 +111,9 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
                   </li>
                 </ul>
               </div>
-              <h2 className={css.about_title}>{t.homeP.aboutTitle}</h2>
+              <h2 className={`${css.about_title} fadeInUp`}>
+                {t.homeP.aboutTitle}
+              </h2>
               <p className={css.about_text}>{t.homeP.aboutText}</p>
             </div>
           </Container>
