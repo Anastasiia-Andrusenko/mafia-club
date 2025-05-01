@@ -53,14 +53,14 @@
 @media screen and (min-width: 768px) {
   .nav {
     background-color: transparent;
-    padding: 1rem;
+    padding: 0.7rem;
     min-height: fit-content;
     height: fit-content;
     width: fit-content;
     margin: auto;
     display: flex;
     align-items: center;
-    gap: calc(100vw / 20);
+    gap: calc(100vw / 30);
   }
 
   .navList {
@@ -70,7 +70,7 @@
 
   .link {
     color: rgba(255, 255, 255, 0.65);
-    font-size: var(--font-size-md-lg);
+    font-size: var(--font-size-md);
   }
 
   .link:hover {
@@ -86,6 +86,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    transform: scale(0.9);
   }
 
   .basket,

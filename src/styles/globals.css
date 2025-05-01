@@ -3,6 +3,7 @@
   --font-family-secondary: "Spectral SC", serif;
 
   /* Font sizes */
+  --font-size-micro: 0.65rem;
   --font-size-xxs: 0.75rem; /* 12px - var(--font-size-xxs); */
   --font-size-xs: 0.8125rem; /* 13px - var(--font-size-xs); */
   --font-size-sm: 0.875rem; /* 14px - var(--font-size-sm); */
