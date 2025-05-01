@@ -159,6 +159,7 @@
 
   .title {
     width: 50vw;
+    max-width: 30rem;
     padding-top: 20vh;
     font-size: var(--font-size-4xl);
     gap: 1rem;
