@@ -35,20 +35,25 @@ const Table: React.FC = () => {
 
             return (
               <Link href={href} className={css.column} key={id}>
-                <p className={css.table_service}>
-                  {service}
-                  {id === 3 && (
-                    <>
-                      <br />
-                      <span className={css.age}>{t.table.age}</span>
-                    </>
-                  )}
-                </p>
-                <p className={css.thumb_text_p}>{description}</p>
-                <p className={css.table_price}>
-                  <span className={css.money}>{price}</span> грн
-                </p>
-                <p className={css.more}>{t.table.more}</p>
+                <div className={css.cardTop}>
+                  <p className={css.table_service}>
+                    {service}
+                    {id === 3 && (
+                      <>
+                        <br />
+                        <span className={css.age}>{t.table.age}</span>
+                      </>
+                    )}
+                  </p>
+                  <p className={css.thumb_text_p}>{description}</p>
+                </div>
+
+                <div className={css.cardBottom}>
+                  <p className={css.table_price}>
+                    <span className={css.money}>{price}</span> грн
+                  </p>
+                  <p className={css.more}>{t.table.more}</p>
+                </div>
               </Link>
             );
           })}

@@ -28,6 +28,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <div id="overlay-root"></div>
       </body>
     </Html>
   );

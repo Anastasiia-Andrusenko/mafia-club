@@ -249,4 +249,8 @@
     font-size: var(--font-size-lg);
     font-weight: 300;
   }
+
+  .mainPageBtn {
+    transform: scale(1.3);
+  }
 }

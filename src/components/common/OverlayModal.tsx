@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import css from "../Overlay/Overlay.module.css";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 
 type Props = {
   isOpen: boolean;
@@ -9,6 +10,12 @@ type Props = {
 };
 
 const OverlayModal: React.FC<Props> = ({ isOpen, onClose, children }) => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -46,9 +53,9 @@ const OverlayModal: React.FC<Props> = ({ isOpen, onClose, children }) => {
     };
   }, [isOpen]);
 
-  //   if (!isOpen) return null;
+  if (!mounted) return null;
 
-  return (
+  const content = (
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -72,6 +79,7 @@ const OverlayModal: React.FC<Props> = ({ isOpen, onClose, children }) => {
       )}
     </AnimatePresence>
   );
+  return createPortal(content, document.getElementById("overlay-root")!);
 };
 
 export default OverlayModal;

@@ -121,7 +121,10 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
           <Container>
             <Table />
           </Container>
-          <Overlay />
+          <div className={css.mainPageBtn}>
+            <Overlay />
+          </div>
+
           <Container>
             <div className={css.video}>
               <iframe

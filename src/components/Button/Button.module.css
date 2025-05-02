@@ -10,7 +10,7 @@
   padding: 10px 14px;
   transition: all 400ms ease-in-out;
   color: var(--foreground);
-
+  border-radius: 0.3rem;
   width: 160px;
   margin: 0 auto;
 }
