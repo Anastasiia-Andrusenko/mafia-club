@@ -23,7 +23,7 @@ const ImageGallery = dynamic(
   () => import("@/components/PhotoGallery/PhotoGallery"),
   { ssr: false }
 );
-const link = "https://mafiadream.com.ua/wp-content/images/";
+const link = "/images/";
 
 export async function getStaticProps() {
   const imagesFiles: ImageFile[] = imagePaths.images

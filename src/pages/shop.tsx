@@ -11,7 +11,7 @@ import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
 import OverlayModal from "@/components/common/OverlayModal";
 import ProductCard from "@/components/Shop/ProductCard";
-const link = "https://mafiadream.com.ua/wp-content/images/shop/";
+const link = "/images/shop/";
 
 const Shop: React.FC = () => {
   const { t } = useTranslation();

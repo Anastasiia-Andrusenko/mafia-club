@@ -1,7 +1,7 @@
 import Image from "next/image";
 import css from "./Thread.module.css";
 
-const link = "https://mafiadream.com.ua/wp-content/images/";
+const link = "/images/";
 
 interface ThreadProps {
   imagePaths: string[];
