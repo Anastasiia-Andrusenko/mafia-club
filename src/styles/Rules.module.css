@@ -31,6 +31,7 @@
 }
 
 .rules_description {
+  text-align: justify;
   letter-spacing: 0.06rem;
   line-height: 1.4rem;
   width: 60vw;
