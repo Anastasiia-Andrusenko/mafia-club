@@ -70,7 +70,8 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
         <meta name="theme-color" content="#000000" />
         <meta name="mobile-web-app-capable" content="yes" />
 
-        <link rel="icon" href="/favicon.png" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
       <div>
         <main>
