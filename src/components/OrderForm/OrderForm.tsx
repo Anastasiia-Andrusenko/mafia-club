@@ -10,7 +10,7 @@ import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useScrollLock } from "@/hooks/useScrollLock";
-import { sendTelegramMessage } from "../utils/telegram";
+// import { sendTelegramMessage } from "../utils/telegram";
 
 interface OrderFormProps {
   onBack: () => void;
@@ -77,7 +77,11 @@ ${safeMessage}
         async (response) => {
           console.log("SUCCESS!", response.status, response.text);
 
-          await sendTelegramMessage(messageForTelegram);
+          await fetch("/api/sendToTelegram", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: messageForTelegram }),
+          });
 
           setName("");
           setPhone("");

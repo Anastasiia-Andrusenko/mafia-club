@@ -19,7 +19,7 @@ import OverlayModal from "../common/OverlayModal";
 import NameInput from "./NameInput";
 import PhoneInput from "./PhoneInput";
 import CommentTextarea from "./CommentTextarea";
-import { sendTelegramMessage } from "../utils/telegram";
+// import { sendTelegramMessage } from "../utils/telegram";
 
 const Overlay = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,8 +79,14 @@ const Overlay = () => {
       .then(
         async (response) => {
           console.log("SUCCESS!", response.status, response.text);
+
+          await fetch("/api/sendToTelegram", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: messageForTelegram }),
+          });
           notify(true, `${name}, супер, ми вам перезвоним!`);
-          await sendTelegramMessage(messageForTelegram);
+          console.log("📤 Sending to Telegram...");
           resetForm();
           setIsSubmitting(false);
           setIsOpen(false);
