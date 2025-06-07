@@ -77,19 +77,32 @@ ${safeMessage}
         async (response) => {
           console.log("SUCCESS!", response.status, response.text);
 
-          await fetch("/api/sendToTelegram", {
+          const telegramRes = await fetch("/api/sendToTelegram", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: messageForTelegram }),
           });
 
-          setName("");
-          setPhone("");
-          clearCart();
-          onBack();
+          const telegramData = await telegramRes.json();
+
+          if (!telegramRes.ok) {
+            console.error(
+              "❌ Telegram не надіслав повідомлення:",
+              telegramData
+            );
+            toast.error("Telegram не надіслав повідомлення 😔");
+          } else {
+            console.log("✅ Telegram повідомлення надіслано!", telegramData);
+            notify(templateParams.name);
+            setName("");
+            setPhone("");
+            clearCart();
+            onBack();
+          }
         },
         (err) => {
           console.error("FAILED...", err);
+          toast.error("Сталася помилка при відправці. Спробуйте ще.");
         }
       );
   };

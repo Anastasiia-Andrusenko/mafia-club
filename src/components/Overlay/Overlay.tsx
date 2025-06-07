@@ -80,16 +80,27 @@ const Overlay = () => {
         async (response) => {
           console.log("SUCCESS!", response.status, response.text);
 
-          await fetch("/api/sendToTelegram", {
+          const telegramRes = await fetch("/api/sendToTelegram", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: messageForTelegram }),
           });
-          notify(true, `${name}, супер, ми вам перезвоним!`);
-          console.log("📤 Sending to Telegram...");
-          resetForm();
-          setIsSubmitting(false);
-          setIsOpen(false);
+
+          const telegramData = await telegramRes.json();
+
+          if (!telegramRes.ok) {
+            console.error(
+              "❌ Telegram не надіслав повідомлення:",
+              telegramData
+            );
+            notify(false, "Telegram не надіслав повідомлення 😔");
+          } else {
+            console.log("✅ Telegram повідомлення надіслано!", telegramData);
+            notify(true, `${name}, супер, ми вам перезвоним!`);
+            resetForm();
+            setIsSubmitting(false);
+            setIsOpen(false);
+          }
         },
         (err) => {
           console.error("FAILED...", err);
