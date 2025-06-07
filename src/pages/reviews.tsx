@@ -26,9 +26,12 @@ const Reviews: React.FC = () => {
     try {
       const response = await fetch("/api/reviews");
       if (!response.ok) {
-        throw new Error("Failed to fetch reviews");
+        throw new Error("Failed to fetch reviews"); // ця помилка на проді замість відгуків
       }
       const data: Review[] = await response.json();
+      data.sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
       setReviews(data);
     } catch (error) {
       console.error("Error fetching reviews:", error);

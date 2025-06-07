@@ -18,13 +18,18 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const [rows] = await db.query<RowDataPacket[]>(
-        "SELECT * FROM reviews ORDER BY id DESC"
+        "SELECT * FROM reviews ORDER BY date DESC"
       );
-      const reviews: Review[] = rows as Review[];
+
+      const reviews = rows as Review[];
       res.status(200).json(reviews);
     } catch (err) {
-      console.error("DB READ error:", err);
-      res.status(500).json({ message: "Failed to fetch reviews" });
+      console.error("🔥 DB READ error:", err);
+      const message =
+        err instanceof Error ? err.message : "Unknown DB read error";
+      res
+        .status(500)
+        .json({ message: "Failed to fetch reviews", error: message });
     }
   }
 
@@ -42,8 +47,10 @@ export default async function handler(
       ]);
       res.status(200).json({ message: "Review added successfully!" });
     } catch (err) {
-      console.error("DB WRITE error:", err);
-      res.status(500).json({ message: "Failed to add review" });
+      console.error("🔥 DB WRITE error:", err);
+      const message =
+        err instanceof Error ? err.message : "Unknown DB write error";
+      res.status(500).json({ message: "Failed to add review", error: message });
     }
   }
 
