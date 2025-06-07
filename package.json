@@ -3,18 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "deploy": "gh-pages -d out",
-    "start": "next start",
-    "lint": "next lint"
+    "import-reviews": "cross-env NODE_ENV=development node dist-scripts/src/components/utils/import-reviews.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@lottiefiles/dotlottie-react": "^0.12.1",
     "build": "^0.1.4",
+    "dotenv": "^16.5.0",
     "framer-motion": "^12.6.3",
     "modern-normalize": "^3.0.1",
+    "mysql2": "^3.14.1",
     "next": "14.2.13",
     "next-seo": "^6.6.0",
     "react": "^18",
@@ -27,9 +25,11 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
     "gh-pages": "^6.1.1",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

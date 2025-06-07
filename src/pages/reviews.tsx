@@ -6,7 +6,6 @@ import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 import { useTranslation } from "@/hooks/useTranslation";
 import css from "../styles/Reviews.module.css";
 
-// Тип для одного відгуку
 interface Review {
   id: string;
   name: string;
@@ -15,7 +14,7 @@ interface Review {
 }
 
 const Reviews: React.FC = () => {
-  const [reviews, setReviews] = useState<Review[]>([]); // Типізуємо масив відгуків
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [updateTrigger, setUpdateTrigger] = useState(0);
   const { t } = useTranslation();
   const handleReviewAdded = () => {
@@ -29,7 +28,7 @@ const Reviews: React.FC = () => {
       if (!response.ok) {
         throw new Error("Failed to fetch reviews");
       }
-      const data: Review[] = await response.json(); // Типізуємо дані
+      const data: Review[] = await response.json();
       setReviews(data);
     } catch (error) {
       console.error("Error fetching reviews:", error);
@@ -37,8 +36,8 @@ const Reviews: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchReviews(); // Викликаємо fetch при першому завантаженні
-  }, [updateTrigger]); // Оновлюємо список відгуків кожен раз, коли додається новий
+    fetchReviews();
+  }, [updateTrigger]);
 
   return (
     <>

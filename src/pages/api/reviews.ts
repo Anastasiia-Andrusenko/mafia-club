@@ -1,67 +1,54 @@
 // pages/api/reviews.ts
-import fs from "fs";
-import path from "path";
+
+import type { NextApiRequest, NextApiResponse } from "next";
+import { db } from "@/lib/db";
+import type { RowDataPacket } from "mysql2";
 
 interface Review {
-  id: string;
+  id: number;
   name: string;
   comment: string;
   date: string;
 }
 
-//
-function handler(
-  req: { method: string; body: Review },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  res: { status: (code: number) => { json: (data: any) => void } }
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
 ) {
-  const reviewsPath = path.join(process.cwd(), "public/reviews.json");
-
-  // GET
   if (req.method === "GET") {
     try {
-      const data = fs.readFileSync(reviewsPath, "utf-8");
-      res.status(200).json(JSON.parse(data));
-    } catch (err: unknown) {
-      console.error("Error reading reviews:", err);
-      if (err instanceof Error) {
-        res
-          .status(500)
-          .json({ message: "Error reading reviews", error: err.message });
-      } else {
-        res
-          .status(500)
-          .json({ message: "Unknown error occurred while reading reviews" });
-      }
+      const [rows] = await db.query<RowDataPacket[]>(
+        "SELECT * FROM reviews ORDER BY id DESC"
+      );
+      const reviews: Review[] = rows as Review[];
+      res.status(200).json(reviews);
+    } catch (err) {
+      console.error("DB READ error:", err);
+      res.status(500).json({ message: "Failed to fetch reviews" });
     }
   }
 
-  // POST
   if (req.method === "POST") {
-    try {
-      const newReview: Review = req.body;
-      const data = fs.readFileSync(reviewsPath, "utf-8");
-      const reviews: Review[] = JSON.parse(data);
+    const { name, comment } = req.body;
 
-      // new review
-      newReview.id = (reviews.length + 1).toString();
-      reviews.push(newReview);
-
-      fs.writeFileSync(reviewsPath, JSON.stringify(reviews, null, 2));
-
-      res.status(200).json({ message: "Review added successfully!" });
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        res
-          .status(500)
-          .json({ message: "Error adding review", error: err.message });
-      } else {
-        res
-          .status(500)
-          .json({ message: "Unknown error occurred while adding review" });
-      }
+    if (!name || !comment) {
+      return res.status(400).json({ message: "Missing name or comment" });
     }
+
+    try {
+      await db.query("INSERT INTO reviews (name, comment) VALUES (?, ?)", [
+        name,
+        comment,
+      ]);
+      res.status(200).json({ message: "Review added successfully!" });
+    } catch (err) {
+      console.error("DB WRITE error:", err);
+      res.status(500).json({ message: "Failed to add review" });
+    }
+  }
+
+  if (req.method !== "GET" && req.method !== "POST") {
+    res.setHeader("Allow", ["GET", "POST"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
-
-export default handler;

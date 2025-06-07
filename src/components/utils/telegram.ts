@@ -2,8 +2,8 @@ export const escapeMarkdown = (text: string): string =>
   text.replace(/[_*[\]()~`>#+\-=|{}.!]/g, "\\$&");
 
 export const sendTelegramMessage = async (message: string) => {
-  const TELEGRAM_BOT_TOKEN = process.env.NEXT_PUBLIC_TG_BOT_TOKEN!;
-  const TELEGRAM_CHAT_ID = process.env.NEXT_PUBLIC_TG_CHAT_ID!;
+  const TELEGRAM_BOT_TOKEN = process.env.TG_BOT_TOKEN;
+  const TELEGRAM_CHAT_ID = process.env.TG_CHAT_ID;
 
   const response = await fetch(
     `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
