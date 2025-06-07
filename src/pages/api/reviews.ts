@@ -18,7 +18,7 @@ export default async function handler(
   if (req.method === "GET") {
     try {
       const [rows] = await db.query<RowDataPacket[]>(
-        "SELECT * FROM reviews ORDER BY id DESC"
+        "SELECT * FROM reviews ORDER BY date DESC"
       );
 
       const reviews = rows as Review[];
