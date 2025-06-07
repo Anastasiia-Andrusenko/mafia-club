@@ -1,6 +1,6 @@
 // export const escapeMarkdown = (text: string): string =>
 //   text.replace(/[_*[\]()~`>#+\-=|{}.!]/g, "\\$&");
-
+// old api
 // export const sendTelegramMessage = async (message: string) => {
 //   const TELEGRAM_BOT_TOKEN = process.env.TG_BOT_TOKEN;
 //   const TELEGRAM_CHAT_ID = process.env.TG_CHAT_ID;
