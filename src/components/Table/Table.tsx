@@ -52,6 +52,9 @@ const Table: React.FC = () => {
                   <p className={css.table_price}>
                     <span className={css.money}>{price}</span> грн
                   </p>
+                  <span className={css.notification}>
+                    *{t.tempMessage.notification}
+                  </span>
                   <p className={css.more}>{t.table.more}</p>
                 </div>
               </Link>

@@ -53,6 +53,7 @@ const OutdoorPage: React.FC<OutdoorProps> = ({ imagePaths }) => {
           <p className={css.details_players}>{t.outdoorP.details_players}</p>
           <p className={css.details_taxi}>{t.vipP.taxi}</p>
           <p className={css.details_cost}>{t.outdoorP.details_cost}</p>
+          <p className={css.notification}>* {t.tempMessage.notification}</p>
         </section>
         <Overlay />
       </Container>

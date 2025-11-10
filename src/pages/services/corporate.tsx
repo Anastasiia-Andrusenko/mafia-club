@@ -56,6 +56,7 @@ const CorporatePage: React.FC<CorporateProps> = ({ imagePaths }) => {
           </p>
           <p className={css.details_taxi}>{t.vipP.taxi}</p>
           <p className={css.details_cost}>{t.corporateP.details_cost}</p>
+          <p className={css.notification}>* {t.tempMessage.notification}</p>
         </section>
         <Overlay />
       </Container>

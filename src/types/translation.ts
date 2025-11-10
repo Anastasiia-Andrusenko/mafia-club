@@ -85,4 +85,7 @@ export interface Translation {
   extrasP: {
     [key: string]: string;
   };
+  tempMessage: {
+    [key: string]: string;
+  };
 }
