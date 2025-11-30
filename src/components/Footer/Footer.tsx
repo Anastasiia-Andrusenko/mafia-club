@@ -9,6 +9,7 @@ import { FaYoutube } from "react-icons/fa";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { FaTelegram } from "react-icons/fa";
 import Overlay from "../Overlay/Overlay";
+import SnowContainer from "../SnowContainer/SnowContainer";
 // import { RiInstagramFill } from "react-icons/ri";
 
 const Footer: React.FC = () => {
@@ -16,6 +17,11 @@ const Footer: React.FC = () => {
 
   return (
     <footer className={css.footer} id="footer">
+      <div className={css.mobileSnow}>
+        <SnowContainer snowflakeCount={50}>
+          <></>
+        </SnowContainer>
+      </div>
       <Container>
         <div className={css.wrapper}>
           <Link href="/" className={css.logo}>

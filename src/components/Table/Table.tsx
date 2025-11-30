@@ -2,6 +2,8 @@ import React from "react";
 import css from "./Table.module.css";
 import { useTranslation } from "../../hooks/useTranslation";
 import Link from "next/link";
+import SnowContainer from "../SnowContainer/SnowContainer";
+import { PiTreeEvergreen } from "react-icons/pi";
 
 const serviceItems = [
   { id: 1, href: "/services/corporate" },
@@ -33,8 +35,19 @@ const Table: React.FC = () => {
             const description = t.table[`description${id}`];
             const price = t.table[`price${id}`];
 
+            const showSnow = true;
+
             return (
               <Link href={href} className={css.column} key={id}>
+                {showSnow && (
+                  <SnowContainer
+                    className={css.snowOverlay}
+                    snowflakeCount={50}
+                  >
+                    <></>
+                  </SnowContainer>
+                )}
+
                 <div className={css.cardTop}>
                   <p className={css.table_service}>
                     {service}
@@ -52,8 +65,9 @@ const Table: React.FC = () => {
                   <p className={css.table_price}>
                     <span className={css.money}>{price}</span> грн
                   </p>
+                  <PiTreeEvergreen className={css.treeIcon} />
                   <span className={css.notification}>
-                    *{t.tempMessage.notification}
+                    {t.tempMessage.notification}
                   </span>
                   <p className={css.more}>{t.table.more}</p>
                 </div>

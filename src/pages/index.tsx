@@ -98,29 +98,30 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
           </div>
           <Container>
             <div className={css.about}>
+              <p className={css.funFact}> {t.homeP.funFact}</p>
               <div className={css.about__counter}>
                 <ul className={`${css.about__counter_list} fadeInUp`}>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <span className={css.sum}>14</span>
+                      <span className={css.sum}>15</span>
                       {t.homeP.years}
                     </p>
                   </li>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <span className={css.sum}>382</span>
+                      <span className={css.sum}>402</span>
                       {t.homeP.kids}
                     </p>
                   </li>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <span className={css.sum}>679</span>
+                      <span className={css.sum}>713</span>
                       {t.homeP.adult}
                     </p>
                   </li>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <span className={css.sum}>737</span>
+                      <span className={css.sum}>752</span>
                       {t.homeP.corporate}
                     </p>
                   </li>

@@ -19,6 +19,7 @@ import OverlayModal from "../common/OverlayModal";
 import NameInput from "./NameInput";
 import PhoneInput from "./PhoneInput";
 import CommentTextarea from "./CommentTextarea";
+import SnowContainer from "../SnowContainer/SnowContainer";
 // import { sendTelegramMessage } from "../utils/telegram";
 
 const Overlay = () => {
@@ -181,6 +182,11 @@ const Overlay = () => {
       <OverlayModal isOpen={isOpen} onClose={handleClose}>
         <Container>
           <div className={css.formWrapper}>
+            <div className={css.snowBackground}>
+              <SnowContainer snowflakeCount={100}>
+                <></>
+              </SnowContainer>
+            </div>
             <form className={css.form} onSubmit={handleSubmit}>
               <p className={css.formTitle}>{t.services.formTitle}</p>
               <button

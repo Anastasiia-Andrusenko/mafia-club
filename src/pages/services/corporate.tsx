@@ -9,6 +9,7 @@ import path from "../../components/PhotoGallery/imagesCorporate.json";
 import Thread from "@/components/Thread/Thread";
 import FaqSection from "@/components/FAQ/FaqSection";
 import { useEffect, useState } from "react";
+import { PiTreeEvergreen } from "react-icons/pi";
 
 interface CorporateProps {
   imagePaths: string[];
@@ -56,7 +57,11 @@ const CorporatePage: React.FC<CorporateProps> = ({ imagePaths }) => {
           </p>
           <p className={css.details_taxi}>{t.vipP.taxi}</p>
           <p className={css.details_cost}>{t.corporateP.details_cost}</p>
-          <p className={css.notification}>* {t.tempMessage.notification}</p>
+
+          <p className={css.notification}>
+            <PiTreeEvergreen className={css.treeIcon} />{" "}
+            {t.tempMessage.notification}
+          </p>
         </section>
         <Overlay />
       </Container>

@@ -65,6 +65,42 @@
   margin: 0.5rem;
 }
 
+.holidayNote {
+  display: flex;
+  align-items: flex-start; /* Вирівнюємо по верху тексту */
+  gap: 10px;
+  margin-top: 1rem;
+  opacity: 0.9;
+}
+
+.noteText {
+  font-size: var(--font-size-xs); /* Або твій розмір тексту */
+  font-weight: 200;
+  line-height: 1.4;
+}
+
+.treeIcon {
+  font-size: 1.5rem; /* Трохи більша за текст */
+  color: #ffd700; /* Золотий колір (пасує до мафії і свята) */
+  flex-shrink: 0; /* Щоб іконку не сплющило, якщо тексту багато */
+
+  /* Анімація сяйва */
+  filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5));
+  animation: treeGlow 2s ease-in-out infinite alternate;
+}
+
+/* Анімація мерехтіння */
+@keyframes treeGlow {
+  from {
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
+    transform: scale(1);
+  }
+  to {
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+    transform: scale(1.1); /* Легке збільшення */
+  }
+}
+
 @media screen and (min-width: 768px) {
   .bgImg {
     width: 100%;
