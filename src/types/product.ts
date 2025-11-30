@@ -16,6 +16,11 @@ export interface Product {
   imageUrl3?: string;
   imageUrl4?: string;
   imageUrl5?: string;
+  imageUrl6?: string;
+  imageUrl7?: string;
+  imageUrl8?: string;
+  imageUrl9?: string;
+  imageUrl10?: string;
 
   cartType1?: string;
   cartType2?: string;

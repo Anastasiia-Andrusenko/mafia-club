@@ -48,6 +48,11 @@ export interface Translation {
       imageUrl3?: string;
       imageUrl4?: string;
       imageUrl5?: string;
+      imageUrl6?: string;
+      imageUrl7?: string;
+      imageUrl8?: string;
+      imageUrl9?: string;
+      imageUrl10?: string;
 
       cartType?: {
         mafia?: string;

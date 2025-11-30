@@ -29,6 +29,11 @@ const getProductImages = (product: Product): string[] => {
     product.imageUrl3,
     product.imageUrl4,
     product.imageUrl5,
+    product.imageUrl6,
+    product.imageUrl7,
+    product.imageUrl8,
+    product.imageUrl9,
+    product.imageUrl10,
   ].filter((img): img is string => typeof img === "string");
 };
 
