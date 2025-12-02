@@ -51,6 +51,7 @@ const OutdoorPage: React.FC<OutdoorProps> = ({ imagePaths }) => {
           <p className={css.text2}>2. {t.outdoorP.text2}</p>
           <p className={css.text3}>3. {t.outdoorP.text3}</p>
           <p className={css.text6}>4. {t.outdoorP.details_time}</p>
+          <p className={css.text6}>5. {t.outdoorP.extraCost}</p>
           <p className={css.details_players}>{t.outdoorP.details_players}</p>
           <p className={css.details_taxi}>{t.vipP.taxi}</p>
           <p className={css.details_cost}>{t.outdoorP.details_cost}</p>
