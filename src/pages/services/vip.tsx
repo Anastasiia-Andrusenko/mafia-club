@@ -50,7 +50,8 @@ const VipPage: React.FC<VipProps> = ({ imagePaths }) => {
           <p className={css.text3}>3. {t.vipP.text3}</p>
           <p className={css.text4}>4. {t.vipP.text4}</p>
           <p className={css.text5}>5. {t.vipP.text5}</p>
-          <p className={css.text6}>6. {t.vipP.text6}</p>
+          <p className={css.text6}>6. {t.vipP.details_time}</p>
+          <p className={css.text6}>7. {t.vipP.extraCost}</p>
           <p className={css.details_players}>{t.vipP.details_players}</p>
           <p className={css.details_taxi}>{t.vipP.taxi}</p>
           <p className={css.details_cost}>{t.vipP.details_cost}</p>
