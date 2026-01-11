@@ -160,6 +160,17 @@
     font-size: var(--font-size-lg);
   }
 
+  .service_about {
+    margin-top: 1rem;
+  }
+
+  .weight,
+  .size,
+  .capacity {
+    font-weight: 200;
+    font-size: var(--font-size-sm);
+  }
+
   .linkToShop {
     margin-left: 0;
   }
