@@ -9,7 +9,7 @@ import Thread from "@/components/Thread/Thread";
 import path from "../../components/PhotoGallery/imagesKids.json";
 import FaqSection from "@/components/FAQ/FaqSection";
 import { useEffect, useState } from "react";
-import { PiTreeEvergreen } from "react-icons/pi";
+// import { PiTreeEvergreen } from "react-icons/pi";
 
 interface KidsProps {
   imagePaths: string[];
@@ -54,10 +54,10 @@ const KidsPage: React.FC<KidsProps> = ({ imagePaths }) => {
           <p className={css.details_players}>{t.kidsP.details_players}</p>
           <p className={css.details_taxi}>{t.vipP.taxi}</p>
           <p className={css.details_cost}>{t.kidsP.details_cost}</p>
-          <p className={css.notification}>
+          {/* <p className={css.notification}>
             <PiTreeEvergreen className={css.treeIcon} />{" "}
             {t.tempMessage.notification}
-          </p>
+          </p> */}
         </section>
         <Overlay />
       </Container>

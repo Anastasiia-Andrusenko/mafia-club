@@ -68,6 +68,9 @@ const ExtrasPage = () => {
       title: t.extrasP.tableP,
       description: t.extrasP.tableP_t,
       cost: [t.extrasP.tableP_cost_0, t.extrasP.tableP_cost_1],
+      weight: t.extrasP.tableP_weight,
+      size: t.extrasP.tableP_size,
+      capacity: t.extrasP.tableP_capacity,
       image: "/img/extra/poker.webp",
     },
     {
@@ -75,6 +78,9 @@ const ExtrasPage = () => {
       title: t.extrasP.tableR,
       description: t.extrasP.tableR_t,
       cost: [t.extrasP.tableR_cost_0, t.extrasP.tableR_cost_1],
+      weight: t.extrasP.tableR_weight,
+      size: t.extrasP.tableR_size,
+      capacity: t.extrasP.tableR_capacity,
       image: "/img/extra/tableR.webp",
     },
     {
@@ -82,6 +88,9 @@ const ExtrasPage = () => {
       title: t.extrasP.tableBJ,
       description: t.extrasP.tableBJ_t,
       cost: t.extrasP.tableBJ_cost_1,
+      weight: t.extrasP.tableBJ_weight,
+      size: t.extrasP.tableBJ_size,
+      capacity: t.extrasP.tableBJ_capacity,
       image: "/img/extra/BJ.webp",
     },
     {
@@ -160,6 +169,16 @@ const ExtrasPage = () => {
                             ))}
                       </p>
                     )}
+
+                    <div className={css.service_about}>
+                      {item.weight && (
+                        <p className={css.weight}>{item.weight}</p>
+                      )}
+                      {item.size && <p className={css.size}>{item.size}</p>}
+                      {item.capacity && (
+                        <p className={css.capacity}>{item.capacity}</p>
+                      )}
+                    </div>
 
                     {item.id === "shop" && (
                       <Link href="/shop" className={css.linkToShop}>
