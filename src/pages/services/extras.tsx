@@ -87,7 +87,7 @@ const ExtrasPage = () => {
       id: "tableBJ",
       title: t.extrasP.tableBJ,
       description: t.extrasP.tableBJ_t,
-      cost: t.extrasP.tableBJ_cost_1,
+      cost: [t.extrasP.tableBJ_cost_0, t.extrasP.tableBJ_cost_1],
       weight: t.extrasP.tableBJ_weight,
       size: t.extrasP.tableBJ_size,
       capacity: t.extrasP.tableBJ_capacity,
