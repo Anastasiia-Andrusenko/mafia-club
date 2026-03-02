@@ -1,5 +1,5 @@
 // components/Modal.tsx
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import Image from "next/image";
 import css from "./Modal.module.css";
 import { TfiClose } from "react-icons/tfi";
@@ -21,18 +21,18 @@ const Modal: React.FC<ModalProps> = ({
   currentIndex,
   onChangeIndex,
 }) => {
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     if (currentIndex > 0) {
       onChangeIndex(currentIndex - 1);
     }
-  };
+  }, [currentIndex, onChangeIndex]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (currentIndex < images.length - 1) {
       onChangeIndex(currentIndex + 1);
     }
-  };
-  // Обробка клавіш і блокування скролу
+  }, [currentIndex, onChangeIndex, images.length]);
+
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -57,10 +57,10 @@ const Modal: React.FC<ModalProps> = ({
     }
 
     return () => {
-      document.documentElement.style.overflow = ""; // Повернути скрол
+      document.documentElement.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, currentIndex, onClose]);
+  }, [isOpen, onClose, handlePrev, handleNext]);
 
   if (!isOpen) return null;
 

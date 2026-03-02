@@ -22,13 +22,13 @@ const OverlayModal: React.FC<Props> = ({ isOpen, onClose, children }) => {
     }
   };
 
-  const handleEscPress = (e: KeyboardEvent) => {
-    if (e.key === "Escape") {
-      onClose();
-    }
-  };
-
   useEffect(() => {
+    const handleEscPress = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
     const disableScroll = () => {
       document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
@@ -51,7 +51,7 @@ const OverlayModal: React.FC<Props> = ({ isOpen, onClose, children }) => {
       enableScroll();
       document.removeEventListener("keydown", handleEscPress);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   if (!mounted) return null;
 
