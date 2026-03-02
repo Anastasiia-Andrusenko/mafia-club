@@ -21,7 +21,6 @@ const Reviews: React.FC = () => {
     setUpdateTrigger((prev) => prev + 1);
   };
 
-  // Завантажуємо відгуки з API
   const fetchReviews = async () => {
     try {
       const response = await fetch("/api/reviews");
@@ -30,10 +29,10 @@ const Reviews: React.FC = () => {
       }
       const data: Review[] = await response.json();
       data.sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
       );
       setReviews(data);
-      console.log(data); // лог такий я я хочу
+      console.log(data);
     } catch (error) {
       console.error("Error fetching reviews:", error);
     }
