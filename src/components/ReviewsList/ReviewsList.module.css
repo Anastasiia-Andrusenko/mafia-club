@@ -44,7 +44,7 @@
     justify-content: center;
     gap: 1rem;
     width: calc((100% - 4rem) / 2);
-    height: fit-content;
+    height: auto;
 
     padding: 1.5rem;
     border: 1px solid white;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import css from "./ReviewsList.module.css";
 import Container from "../Container/Container";
 
@@ -14,16 +14,6 @@ interface ReviewsListProps {
 }
 
 const ReviewsList: React.FC<ReviewsListProps> = ({ reviews }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, [reviews]);
-
-  if (isLoading) {
-    return <p>Loading reviews...</p>;
-  }
-
   return (
     <Container>
       <ul className={css.list}>
