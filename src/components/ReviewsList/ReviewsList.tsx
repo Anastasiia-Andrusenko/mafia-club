@@ -1,9 +1,7 @@
-// components/ReviewsList/ReviewsList.tsx
 import React, { useEffect, useState } from "react";
 import css from "./ReviewsList.module.css";
 import Container from "../Container/Container";
 
-// Тип для одного відгуку
 interface Review {
   id: string;
   name: string;
@@ -11,7 +9,6 @@ interface Review {
   date: string;
 }
 
-// Тип для пропсів компонента
 interface ReviewsListProps {
   reviews: Review[];
 }
@@ -26,7 +23,6 @@ const ReviewsList: React.FC<ReviewsListProps> = ({ reviews }) => {
   if (isLoading) {
     return <p>Loading reviews...</p>;
   }
-  // const sortedReviews = [...reviews].sort((a, b) => parseInt(b.id) - parseInt(a.id));
 
   return (
     <Container>

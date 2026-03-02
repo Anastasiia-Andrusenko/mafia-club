@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import css from "./SnowContainer.module.css";
+import { ENABLE_SNOW } from "../../config/features";
 
 interface SnowContainerProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ const SnowContainer: React.FC<SnowContainerProps> = ({
   className = "",
 }) => {
   const snowflakes = useMemo(() => {
+    if (!ENABLE_SNOW) return [];
     return Array.from({ length: snowflakeCount }).map((_, index) => {
       const randomLeft = Math.random() * 100;
       const randomDuration = 5 + Math.random() * 10;
@@ -37,6 +39,10 @@ const SnowContainer: React.FC<SnowContainerProps> = ({
       );
     });
   }, [snowflakeCount]);
+
+  if (!ENABLE_SNOW) {
+    return <div className={css.content}>{children}</div>;
+  }
 
   return (
     <div className={`${css.container} ${className}`}>

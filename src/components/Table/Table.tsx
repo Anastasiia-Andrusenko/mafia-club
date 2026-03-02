@@ -35,18 +35,14 @@ const Table: React.FC = () => {
             const description = t.table[`description${id}`];
             const price = t.table[`price${id}`];
 
-            const showSnow = true;
-
             return (
               <Link href={href} className={css.column} key={id}>
-                {showSnow && (
-                  <SnowContainer
-                    className={css.snowOverlay}
-                    snowflakeCount={50}
-                  >
-                    <></>
-                  </SnowContainer>
-                )}
+                <SnowContainer
+                  className={css.snowOverlay}
+                  snowflakeCount={50}
+                >
+                  <></>
+                </SnowContainer>
 
                 <div className={css.cardTop}>
                   <p className={css.table_service}>
