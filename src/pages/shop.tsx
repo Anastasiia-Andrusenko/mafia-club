@@ -177,7 +177,7 @@ const Shop: React.FC = () => {
       mainDesk: `${t.shopList.item9.mainDesk}`,
       description1: `${t.shopList.item9.description1}`,
       other: `${t.shopList.item9.other}`,
-      price: 900,
+      price: 1100,
       imageUrl1: `${link}pro-n-00001.webp`,
       imageUrl2: `${link}pro-n-00002.webp`,
       imageUrl3: `${link}pro-n-00003.webp`,

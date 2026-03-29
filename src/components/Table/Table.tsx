@@ -2,7 +2,7 @@ import React from "react";
 import css from "./Table.module.css";
 import { useTranslation } from "../../hooks/useTranslation";
 import Link from "next/link";
-import SnowContainer from "../SnowContainer/SnowContainer";
+// import SnowContainer from "../SnowContainer/SnowContainer";
 // import { PiTreeEvergreen } from "react-icons/pi";
 
 const serviceItems = [
@@ -37,12 +37,12 @@ const Table: React.FC = () => {
 
             return (
               <Link href={href} className={css.column} key={id}>
-                <SnowContainer
+                {/* <SnowContainer
                   className={css.snowOverlay}
                   snowflakeCount={50}
                 >
                   <></>
-                </SnowContainer>
+                </SnowContainer> */}
 
                 <div className={css.cardTop}>
                   <p className={css.table_service}>

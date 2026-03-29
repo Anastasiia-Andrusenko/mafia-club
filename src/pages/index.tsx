@@ -8,26 +8,26 @@ import ClientsList from "@/components/Clients/Clients";
 import path from "../components/PhotoGallery/imagesMainPage.json";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Thread from "@/components/Thread/Thread";
 import FaqSection from "@/components/FAQ/FaqSection";
+import AnimatedCounter from "@/components/common/AnimatedCounter";
 
 interface HomeProps {
   imagePaths: string[];
 }
 
+const scrollReveal = {
+  initial: { opacity: 0, y: 50 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.6, ease: "easeOut" as const },
+};
+
 const Home: React.FC<HomeProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
 
   const [opacity, setOpacity] = useState(1);
-  const [pageLoaded, setPageLoaded] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setPageLoaded(true);
-    }, 100);
-
-    return () => clearTimeout(timeout);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,16 +38,6 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      document.querySelectorAll(".fadeInUp").forEach((el) => {
-        el.classList.add("fadeInUpVisible");
-      });
-    }, 200); // трохи затримки перед появою
-
-    return () => clearTimeout(timeout);
   }, []);
 
   return (
@@ -77,21 +67,11 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
         <main>
           <div className={css.hero}>
             <Container>
-              <h1
-                className={`${css.title} fadeInUp ${
-                  pageLoaded ? "fadeInUpVisible" : ""
-                }`}
-                style={{ opacity }}
-              >
+              <h1 className={css.title} style={{ opacity }}>
                 <span className={css.slogan}>{t.homeP.sloganMain}</span>
                 <span className={css.slogan}>{t.homeP.sloganSub}</span>
               </h1>
-              <p
-                className={`${css.heroDescription} fadeInUp ${
-                  pageLoaded ? "fadeInUpVisible" : ""
-                }`}
-                style={{ opacity }}
-              >
+              <p className={css.heroDescription} style={{ opacity }}>
                 {t.homeP.heroDescription}
               </p>
             </Container>
@@ -100,49 +80,51 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
             <div className={css.about}>
               <p className={css.funFact}> {t.homeP.funFact}</p>
               <div className={css.about__counter}>
-                <ul className={`${css.about__counter_list} fadeInUp`}>
+                <ul className={css.about__counter_list}>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <span className={css.sum}>15</span>
+                      <AnimatedCounter value={15} className={css.sum} />
                       {t.homeP.years}
                     </p>
                   </li>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <span className={css.sum}>402</span>
+                      <AnimatedCounter value={402} className={css.sum} />
                       {t.homeP.kids}
                     </p>
                   </li>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <span className={css.sum}>713</span>
+                      <AnimatedCounter value={713} className={css.sum} />
                       {t.homeP.adult}
                     </p>
                   </li>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <span className={css.sum}>752</span>
+                      <AnimatedCounter value={752} className={css.sum} />
                       {t.homeP.corporate}
                     </p>
                   </li>
                 </ul>
               </div>
-              <h2 className={`${css.about_title} fadeInUp`}>
-                {t.homeP.aboutTitle}
-              </h2>
-              <p className={css.about_text}>{t.homeP.aboutText}</p>
+              <motion.div {...scrollReveal}>
+                <h2 className={css.about_title}>{t.homeP.aboutTitle}</h2>
+                <p className={css.about_text}>{t.homeP.aboutText}</p>
+              </motion.div>
             </div>
           </Container>
           <Thread imagePaths={imagePaths} double />
           <Container>
-            <Table />
+            <motion.div {...scrollReveal}>
+              <Table />
+            </motion.div>
           </Container>
           <div className={css.mainPageBtn}>
             <Overlay />
           </div>
 
           <Container>
-            <div className={css.video}>
+            <motion.div className={css.video} {...scrollReveal}>
               <iframe
                 src="https://www.youtube.com/embed/tUHAoshTRQ0?si=zuLF6Ij4gPv7G3bo"
                 frameBorder="0"
@@ -157,7 +139,7 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               ></iframe>
-            </div>
+            </motion.div>
           </Container>
           <FaqSection />
           <ClientsList />

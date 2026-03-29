@@ -114,97 +114,99 @@ const ProductModal: React.FC<ProductModalProps> = ({
         <button onClick={onClose} className={css.btnClose}>
           <TfiClose />
         </button>
-        <h2 className={css.name}>{product.name}</h2>
-        <div className={css.imgWrapper} {...imageSwipeHandlers}>
-          <Image
-            src={images[activeImageIndex] || "/img/logo.png"}
-            alt={product.name}
-            width={300}
-            height={300}
-            className={css.img}
-          />
-          {images.length > 1 && (
-            <div className={css.sliderControls}>
+        <div className={css.scrollArea}>
+          <h2 className={css.name}>{product.name}</h2>
+          <div className={css.imgWrapper} {...imageSwipeHandlers}>
+            <Image
+              src={images[activeImageIndex] || "/img/logo.png"}
+              alt={product.name}
+              width={300}
+              height={300}
+              className={css.img}
+            />
+            {images.length > 1 && (
+              <div className={css.sliderControls}>
+                <button
+                  className={css.sliderBtn}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveImageIndex(
+                      (prev) => (prev - 1 + images.length) % images.length
+                    );
+                  }}
+                >
+                  <FaChevronLeft />
+                </button>
+                <button
+                  className={css.sliderBtn}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveImageIndex((prev) => (prev + 1) % images.length);
+                  }}
+                >
+                  <FaChevronRight />
+                </button>
+              </div>
+            )}
+          </div>
+          <div className={css.imageSliderDots}>
+            {images.map((_, i) => (
+              <span
+                key={i}
+                className={`${css.dot} ${
+                  i === activeImageIndex ? css.active : ""
+                }`}
+              />
+            ))}
+          </div>
+
+          <p className={css.product_desk}>{product.mainDesk}</p>
+          {product.description1 ? (
+            <p className={css.product_desk}>{product.description1}</p>
+          ) : (
+            ""
+          )}
+          {product.description2 ? (
+            <p className={css.product_desk}>{product.description2}</p>
+          ) : (
+            ""
+          )}
+          {product.description3 ? (
+            <p className={css.product_desk}>{product.description3}</p>
+          ) : (
+            ""
+          )}
+          <p className={css.product_desk}>{product.other}</p>
+          {product.cartType1 ? (
+            <ul>
+              <li>{product.cartType1}</li>
+              <li>{product.cartType2}</li>
+              <li>{product.cartType3}</li>
+              <li>{product.cartType4}</li>
+              <li>{product.cartType5}</li>
+              <li>{product.cartType6}</li>
+              <li>{product.cartType7}</li>
+            </ul>
+          ) : (
+            ""
+          )}
+          {!isBasket && (
+            <div className={css.btn_list}>
+              <p className={css.product_price}>{product.price} грн</p>
               <button
-                className={css.sliderBtn}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveImageIndex(
-                    (prev) => (prev - 1 + images.length) % images.length
-                  );
+                className={css.btn}
+                onClick={() => {
+                  addToCart(product);
+                  notify();
+                  onClose();
                 }}
               >
-                <FaChevronLeft />
-              </button>
-              <button
-                className={css.sliderBtn}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveImageIndex((prev) => (prev + 1) % images.length);
-                }}
-              >
-                <FaChevronRight />
+                <LuShoppingCart />
+                {t.shopP.btnBuy}
               </button>
             </div>
           )}
         </div>
-        <div className={css.imageSliderDots}>
-          {images.map((_, i) => (
-            <span
-              key={i}
-              className={`${css.dot} ${
-                i === activeImageIndex ? css.active : ""
-              }`}
-            />
-          ))}
-        </div>
-
-        <p className={css.product_desk}>{product.mainDesk}</p>
-        {product.description1 ? (
-          <p className={css.product_desk}>{product.description1}</p>
-        ) : (
-          ""
-        )}
-        {product.description2 ? (
-          <p className={css.product_desk}>{product.description2}</p>
-        ) : (
-          ""
-        )}
-        {product.description3 ? (
-          <p className={css.product_desk}>{product.description3}</p>
-        ) : (
-          ""
-        )}
-        <p className={css.product_desk}>{product.other}</p>
-        {product.cartType1 ? (
-          <ul>
-            <li>{product.cartType1}</li>
-            <li>{product.cartType2}</li>
-            <li>{product.cartType3}</li>
-            <li>{product.cartType4}</li>
-            <li>{product.cartType5}</li>
-            <li>{product.cartType6}</li>
-            <li>{product.cartType7}</li>
-          </ul>
-        ) : (
-          ""
-        )}
-        {!isBasket && (
-          <div className={css.btn_list}>
-            <p className={css.product_price}>{product.price} грн</p>
-            <button
-              className={css.btn}
-              onClick={() => {
-                addToCart(product);
-                notify();
-                onClose();
-              }}
-            >
-              <LuShoppingCart />
-              {t.shopP.btnBuy}
-            </button>
-          </div>
-        )}
       </motion.div>
     </>
   );

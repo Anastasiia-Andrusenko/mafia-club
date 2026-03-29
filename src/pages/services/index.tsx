@@ -7,8 +7,12 @@ import Overlay from "@/components/Overlay/Overlay";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { GiClick } from "react-icons/gi";
 import FaqSection from "@/components/FAQ/FaqSection";
+
+const SERVICE_THUMB_SIZES =
+  "(max-width: 767px) 80vw, calc((100vw - 80px) / 3)";
 
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -49,7 +53,15 @@ const Services = () => {
               >
                 <Link href="/services/vip">
                   <div className={css.thumb}>
-                    <div className={`${css.img} ${css.vip}`}></div>
+                    <div className={css.img}>
+                      <Image
+                        src="/img/vip_mob.webp"
+                        alt={t.services.vip}
+                        fill
+                        sizes={SERVICE_THUMB_SIZES}
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
                     <div
                       className={
                         activeIndex === 0
@@ -85,7 +97,15 @@ const Services = () => {
               >
                 <Link href="/services/corporate">
                   <div className={css.thumb}>
-                    <div className={`${css.img} ${css.office}`}></div>
+                    <div className={css.img}>
+                      <Image
+                        src="/img/corporate_mob.webp"
+                        alt={t.services.corporate}
+                        fill
+                        sizes={SERVICE_THUMB_SIZES}
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
                     <div
                       className={
                         activeIndex === 1
@@ -121,7 +141,15 @@ const Services = () => {
               >
                 <Link href="/services/outdoor">
                   <div className={css.thumb}>
-                    <div className={`${css.img} ${css.outdoor}`}></div>
+                    <div className={css.img}>
+                      <Image
+                        src="/img/picnic.webp"
+                        alt={t.services.outdoor}
+                        fill
+                        sizes={SERVICE_THUMB_SIZES}
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
                     <div
                       className={
                         activeIndex === 2
@@ -157,7 +185,15 @@ const Services = () => {
               >
                 <Link href="/services/kids">
                   <div className={css.thumb}>
-                    <div className={`${css.img} ${css.kids}`}></div>
+                    <div className={css.img}>
+                      <Image
+                        src="/img/services/children.webp"
+                        alt={t.services.kids}
+                        fill
+                        sizes={SERVICE_THUMB_SIZES}
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
                     <div
                       className={
                         activeIndex === 3
@@ -193,7 +229,15 @@ const Services = () => {
               >
                 <Link href="/services/birthday">
                   <div className={css.thumb}>
-                    <div className={`${css.img} ${css.birthday}`}></div>
+                    <div className={css.img}>
+                      <Image
+                        src="/img/birthday_mob.webp"
+                        alt={t.services.birth}
+                        fill
+                        sizes={SERVICE_THUMB_SIZES}
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
                     <div
                       className={
                         activeIndex === 4
@@ -229,7 +273,15 @@ const Services = () => {
               >
                 <Link href="/services/extras">
                   <div className={css.thumb}>
-                    <div className={`${css.img} ${css.extras}`}></div>
+                    <div className={css.img}>
+                      <Image
+                        src="/img/extra_mob.webp"
+                        alt={t.services.extrasP}
+                        fill
+                        sizes={SERVICE_THUMB_SIZES}
+                        style={{ objectFit: "cover" }}
+                      />
+                    </div>
                     <div
                       className={
                         activeIndex === 5

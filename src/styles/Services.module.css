@@ -10,13 +10,13 @@
       rgba(0, 0, 0, 0.6),
       rgba(0, 0, 0, 0.6)
     ),
-    url("../../public/img/party.webp");
+    url("/img/party.webp");
   height: 30vh;
   width: 100vw;
   padding: 1rem;
   background-size: cover;
   background-position: center;
-  z-index: -1;
+  z-index: 0;
   transition: all 0.3s ease;
 }
 
@@ -97,35 +97,11 @@
 }
 
 .img {
-  background-position: center;
-  background-size: cover;
+  position: relative;
   width: 100%;
   height: 300px;
+  overflow: hidden;
   opacity: 0.7;
-}
-
-.vip {
-  background-image: url("/img/vip_mob.webp");
-}
-
-.office {
-  background-image: url("/img/corporate_mob.webp");
-}
-
-.kids {
-  background-image: url("/img/kids_mob.webp");
-}
-
-.outdoor {
-  background-image: url("/img/picnic.webp");
-}
-
-.birthday {
-  background-image: url("/img/birthday_mob.webp");
-}
-
-.extras {
-  background-image: url("/img/extra_mob.webp");
 }
 
 .thumb_overlay {
@@ -273,7 +249,7 @@
     height: 1000px;
     width: 100vw;
     padding: 0;
-    z-index: -1;
+    z-index: 0;
     background-attachment: fixed;
   }
 
@@ -343,10 +319,10 @@
   }
 
   .img {
-    background-position: center;
-    background-size: cover;
+    position: relative;
     width: 100%;
     height: 300px;
+    overflow: hidden;
     opacity: 0.7;
   }
 
