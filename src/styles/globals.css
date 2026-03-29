@@ -25,7 +25,9 @@
   --red: #c61100;
   --bg-gradient: linear-gradient(to bottom, #000 0%, #750000 50%, #000 100%);
 
-  --box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.7);
+  --box-shadow:
+    0 0 15px 10px rgba(255, 255, 255, 0.1),
+    0 0 10px 4px rgba(255, 255, 255, 0.1), 0 0 5px 3px rgba(255, 255, 255, 0.2);
 }
 
 html {

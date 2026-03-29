@@ -32,7 +32,7 @@ const KidsPage: React.FC<KidsProps> = ({ imagePaths }) => {
 
   return (
     <>
-      <div className={`${styles.bgImg} `}></div>
+      <div className={styles.bgImg}></div>
       <div className={css.pageTitle} style={{ opacity }}>
         <h2 className={css.title}>{t.kidsP.title}</h2>
       </div>
