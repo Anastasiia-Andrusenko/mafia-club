@@ -83,25 +83,25 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
                 <ul className={css.about__counter_list}>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <AnimatedCounter value={15} className={css.sum} />
+                      <AnimatedCounter value={16} className={css.sum} />
                       {t.homeP.years}
                     </p>
                   </li>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <AnimatedCounter value={402} className={css.sum} />
+                      <AnimatedCounter value={437} className={css.sum} />
                       {t.homeP.kids}
                     </p>
                   </li>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <AnimatedCounter value={713} className={css.sum} />
+                      <AnimatedCounter value={749} className={css.sum} />
                       {t.homeP.adult}
                     </p>
                   </li>
                   <li className={css.item}>
                     <p className={css.counter_text}>
-                      <AnimatedCounter value={752} className={css.sum} />
+                      <AnimatedCounter value={801} className={css.sum} />
                       {t.homeP.corporate}
                     </p>
                   </li>
