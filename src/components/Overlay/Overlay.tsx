@@ -20,7 +20,7 @@ import NameInput from "./NameInput";
 import PhoneInput from "./PhoneInput";
 import CommentTextarea from "./CommentTextarea";
 import SnowContainer from "../SnowContainer/SnowContainer";
-// import { sendTelegramMessage } from "../utils/telegram";
+import { GOOGLE_CONVERSIONS } from "@/constants/analytics";
 
 const Overlay = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +75,7 @@ const Overlay = () => {
         "service_awhca1b",
         "template_5etqtqn",
         templateParams,
-        "nBlfFj-daI3JM87lR"
+        "nBlfFj-daI3JM87lR",
       )
       .then(
         async (response) => {
@@ -90,14 +90,27 @@ const Overlay = () => {
           const telegramData = await telegramRes.json();
 
           if (!telegramRes.ok) {
-            console.error(
-              "❌ Telegram не надіслав повідомлення:",
-              telegramData
-            );
+            console.error("❌ Telegram did not send a message:", telegramData);
             notify(false, "Telegram не надіслав повідомлення 😔");
           } else {
-            console.log("✅ Telegram повідомлення надіслано!", telegramData);
+            console.log("✅ Telegram message sent!", telegramData);
             notify(true, `${name}, супер, ми вам перезвоним!`);
+
+            if (typeof window !== "undefined" && window.gtag) {
+              window.gtag("event", "conversion", {
+                send_to: `${GOOGLE_CONVERSIONS.LEAD_SUCCESS}`,
+                event_callback: function () {
+                  console.log(
+                    "✅ [Analytics Debug] Conversion event sent to Google Ads",
+                  );
+                },
+              });
+            } else {
+              console.warn(
+                "❌ [Analytics Debug] gtag is not defined. Conversion event not sent.",
+              );
+            }
+
             resetForm();
             setIsSubmitting(false);
             setIsOpen(false);
@@ -107,7 +120,7 @@ const Overlay = () => {
           console.error("FAILED...", err);
           notify(false, "Сталася помилка при відправці. Спробуйте ще.");
           setIsSubmitting(false);
-        }
+        },
       );
   };
 
@@ -136,7 +149,7 @@ const Overlay = () => {
     setServices((prevServices) =>
       checked
         ? [...prevServices, value]
-        : prevServices.filter((s) => s !== value)
+        : prevServices.filter((s) => s !== value),
     );
   };
 
@@ -148,6 +161,13 @@ const Overlay = () => {
 
   const handleOpen = () => {
     setIsOpen(true);
+
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "form_open", {
+        event_category: "engagement",
+        event_label: "Overlay Order Form Opened",
+      });
+    }
   };
 
   const handleClose = () => {
