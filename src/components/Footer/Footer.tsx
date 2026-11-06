@@ -10,10 +10,26 @@ import { FaSquareFacebook } from "react-icons/fa6";
 import { FaTelegram } from "react-icons/fa";
 import Overlay from "../Overlay/Overlay";
 import SnowContainer from "../SnowContainer/SnowContainer";
-// import { RiInstagramFill } from "react-icons/ri";
+import { GOOGLE_CONVERSIONS } from "@/constants/analytics";
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
+
+  const handlePhoneClick = () => {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "conversion", {
+        send_to: `${GOOGLE_CONVERSIONS.PHONE_CLICK}`,
+      });
+    }
+  };
+
+  const handleTelegramClick = () => {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "conversion", {
+        send_to: `${GOOGLE_CONVERSIONS.TELEGRAM_CLICK}`,
+      });
+    }
+  };
 
   return (
     <footer className={css.footer} id="footer">
@@ -44,16 +60,18 @@ const Footer: React.FC = () => {
               <span className={css.contact_text}>{t.footer.call}</span>
               <Link
                 target="blank"
-                href="tel:+380976258545 "
+                href="tel:+380976258545"
                 className={css.contact_link}
+                onClick={handlePhoneClick}
               >
                 <FaPhoneSquareAlt className={css.contact_icon} />
                 +380 97 625 85 45
               </Link>
               <Link
                 target="blank"
-                href="tel:+380665986425 "
+                href="tel:+380665986425"
                 className={css.contact_link}
+                onClick={handlePhoneClick}
               >
                 <FaPhoneSquareAlt className={css.contact_icon} />
                 +380 66 598 64 25
@@ -77,6 +95,7 @@ const Footer: React.FC = () => {
                   href="https://t.me/Khovaka"
                   className={css.social_link}
                   target="blank"
+                  onClick={handleTelegramClick}
                 >
                   <FaTelegram />
                 </Link>

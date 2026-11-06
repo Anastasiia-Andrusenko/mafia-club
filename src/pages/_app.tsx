@@ -9,6 +9,8 @@ import { useRouter } from "next/router";
 import Loader from "@/components/Loader/Loader";
 import { ToastContainer } from "react-toastify";
 import "@/styles/animations.css";
+import Script from "next/script";
+import { GOOGLE_ADS_TAG } from "@/constants/analytics";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(true);
@@ -22,10 +24,10 @@ export default function App({ Component, pageProps }: AppProps) {
       setLoading(false);
       setInitialLoadDone(true);
 
-      // Після завершення анімації сховати Loader з DOM
+      //After the animation is finished, hide the Loader from the DOM
       setTimeout(() => {
         setShowLoader(false);
-      }, 1000); // час повинен бути таким же, як transition: opacity 1s
+      }, 1000); // time should be the same as transition: opacity 1s
     }, 3000);
 
     return () => clearTimeout(timer);
@@ -36,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
     const handleStart = () => {
       setLoading(true);
-      setShowLoader(true); // показати Loader на початку переходу
+      setShowLoader(true); // show Loader at start of transition
     };
     const handleComplete = () => {
       setLoading(false);
@@ -65,15 +67,37 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [initialLoadDone]);
 
   return (
-    <LanguageProvider>
-      <CartProvider>
-        <Header />
-        {showLoader && <Loader hide={!loading} />}
+    <>
+      {/* Google Tag (gtag.js) */}
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_TAG}`}
+      />
 
-        <Component {...pageProps} />
-        <ToastContainer theme="dark" newestOnTop autoClose={3000} />
-        <Footer />
-      </CartProvider>
-    </LanguageProvider>
+      {/* DataLayer and Google Ads initialization */}
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GOOGLE_ADS_TAG}');
+          `,
+        }}
+      />
+
+      <LanguageProvider>
+        <CartProvider>
+          <Header />
+          {showLoader && <Loader hide={!loading} />}
+
+          <Component {...pageProps} />
+          <ToastContainer theme="dark" newestOnTop autoClose={3000} />
+          <Footer />
+        </CartProvider>
+      </LanguageProvider>
+    </>
   );
 }

@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "import-reviews": "cross-env NODE_ENV=development node dist-scripts/src/components/utils/import-reviews.js"
   },
   "dependencies": {
@@ -25,18 +29,13 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "baseline-browser-mapping": "^2.11.34",
+    "caniuse-lite": "^1.0.30001820",
     "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
     "gh-pages": "^6.1.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "import-reviews": "cross-env NODE_ENV=development node dist-scripts/src/components/utils/import-reviews.js"
   }
 }
