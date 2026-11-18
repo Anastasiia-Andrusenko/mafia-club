@@ -10,6 +10,9 @@ const translationsMap: Record<"ua" | "ru", Translation> = {
   ru: ru as Translation,
 };
 
+// Значення атрибута <html lang> для кожної мови
+const HTML_LANG: Record<"ua" | "ru", string> = { ua: "uk", ru: "ru" };
+
 // Створюємо контекст
 export const LanguageContext = createContext<{
   language: "ua" | "ru";
@@ -29,13 +32,13 @@ export const LanguageProvider = ({
   initialLanguage?: "ua" | "ru"; // Параметр для початкової мови
 }) => {
   const [language, setLanguage] = useState<"ua" | "ru">(initialLanguage);
-  const [t, setTranslations] = useState<Translation>(
-    translationsMap[initialLanguage]
-  );
 
-  // Оновлюємо переклад при зміні мови
+  // Переклад виводиться напряму з мови, без додаткового стану (немає відставання на один рендер)
+  const t = translationsMap[language];
+
+  // Тримаємо <html lang> у відповідності до обраної мови (SSR віддає lang="uk")
   useEffect(() => {
-    setTranslations(translationsMap[language]);
+    document.documentElement.lang = HTML_LANG[language];
   }, [language]);
 
   const changeLanguage = (lang: "ua" | "ru") => {

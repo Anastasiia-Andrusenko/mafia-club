@@ -35,7 +35,7 @@ const BirthdayPage: React.FC<BirthdayProps> = ({ imagePaths }) => {
     <>
       <div className={`${styles.bgImg} `}></div>
       <div className={css.pageTitle} style={{ opacity }}>
-        <h2 className={css.title1}>{t.birthdayP.title}</h2>
+        <h1 className={css.pageHeading}>{t.birthdayP.title}</h1>
       </div>
       <Container>
         <section className={css.main} style={{ opacity: opacity + 0.5 }}>

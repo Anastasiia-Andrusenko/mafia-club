@@ -20,7 +20,7 @@ interface BasketProps {
 }
 
 const Basket: React.FC<BasketProps> = () => {
-  const { cart, removeFromCart, updateQuantity } = useCart();
+  const { cart, removeFromCart, updateQuantity, isHydrated } = useCart();
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
   const [confirmForm, setConfirmForm] = useState(false);
   const { t } = useTranslation();
@@ -69,8 +69,9 @@ const Basket: React.FC<BasketProps> = () => {
 
   return (
     <div className={css.overlay}>
-      <h2 className={css.title}>{t.basket.title}</h2>
-      {isEmpty ? (
+      <h1 className={css.title}>{t.basket.title}</h1>
+      {/* Show the "empty" message only after the stored cart has been loaded */}
+      {isEmpty && isHydrated ? (
         <>
           {" "}
           <p className={css.titleEmpty}>{t.basket.empty}</p>{" "}

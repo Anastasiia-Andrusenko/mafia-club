@@ -35,7 +35,7 @@ const OutdoorPage: React.FC<OutdoorProps> = ({ imagePaths }) => {
     <>
       <div className={`${styles.bgImg} ${css.vip}`}></div>
       <div className={css.pageTitle} style={{ opacity }}>
-        <h2 className={css.title1}>{t.outdoorP.title}</h2>
+        <h1 className={css.pageHeading}>{t.outdoorP.title}</h1>
       </div>
       <Container>
         <section className={css.main} style={{ opacity: opacity + 0.5 }}>

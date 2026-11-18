@@ -5,6 +5,7 @@ type CheckboxItemProps = {
   id: string;
   label: string;
   value: string;
+  checked: boolean;
   icon: React.ReactNode;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -13,6 +14,7 @@ const CheckboxItem: React.FC<CheckboxItemProps> = ({
   id,
   label,
   value,
+  checked,
   icon,
   onChange,
 }) => (
@@ -22,6 +24,7 @@ const CheckboxItem: React.FC<CheckboxItemProps> = ({
     <input
       className={css.check}
       type="checkbox"
+      checked={checked}
       onChange={onChange}
       id={id}
       name={id}

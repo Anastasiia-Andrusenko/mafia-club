@@ -117,7 +117,7 @@ const ExtrasPage = () => {
     <>
       <div className={`${css.bgImg} `}></div>
       <div className={css.pageTitle} style={{ opacity }}>
-        <h2 className={css.title1}>{t.extrasP.title}</h2>
+        <h1 className={css.pageHeading}>{t.extrasP.title}</h1>
       </div>
       <Container>
         <section className={css.main} style={{ opacity }}>

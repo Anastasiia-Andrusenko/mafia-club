@@ -87,6 +87,11 @@
   color: var(--background);
 }
 
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .back {
   margin: 3rem auto;
   color: var(--foreground);

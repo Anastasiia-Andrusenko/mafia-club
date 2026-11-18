@@ -40,40 +40,37 @@ const Footer: React.FC = () => {
       </div>
       <Container>
         <div className={css.wrapper}>
-          <Link href="/" className={css.logo}>
-            <Image src={"/img/logo.png"} alt="logo" width={60} height={60} />
+          <Link href="/" className={css.logo} aria-label={t.footer.homeLabel}>
+            <Image src={"/img/logo.png"} alt="" width={60} height={60} />
           </Link>
           <Overlay />
           <ul className={css.contacts}>
             <li className={css.contact_item}>
               <span className={css.contact_text}>{t.footer.mail}</span>
               <Link
-                target="blank"
                 href="mailto:info@mafiadream.com.ua"
                 className={css.contact_link}
               >
-                <IoMdMail className={css.contact_icon} />
+                <IoMdMail className={css.contact_icon} aria-hidden="true" />
                 info@mafiadream.com.ua
               </Link>
             </li>
             <li className={css.contact_item}>
               <span className={css.contact_text}>{t.footer.call}</span>
               <Link
-                target="blank"
                 href="tel:+380976258545"
                 className={css.contact_link}
                 onClick={handlePhoneClick}
               >
-                <FaPhoneSquareAlt className={css.contact_icon} />
+                <FaPhoneSquareAlt className={css.contact_icon} aria-hidden="true" />
                 +380 97 625 85 45
               </Link>
               <Link
-                target="blank"
                 href="tel:+380665986425"
                 className={css.contact_link}
                 onClick={handlePhoneClick}
               >
-                <FaPhoneSquareAlt className={css.contact_icon} />
+                <FaPhoneSquareAlt className={css.contact_icon} aria-hidden="true" />
                 +380 66 598 64 25
               </Link>
             </li>
@@ -85,28 +82,34 @@ const Footer: React.FC = () => {
                 <Link
                   href="https://www.youtube.com/user/MafiaDreamClub"
                   className={css.social_link}
-                  target="blank"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={t.footer.youtubeLabel}
                 >
-                  <FaYoutube />
+                  <FaYoutube aria-hidden="true" />
                 </Link>
               </li>
               <li className={css.social_item}>
                 <Link
                   href="https://t.me/Khovaka"
                   className={css.social_link}
-                  target="blank"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={t.footer.telegramLabel}
                   onClick={handleTelegramClick}
                 >
-                  <FaTelegram />
+                  <FaTelegram aria-hidden="true" />
                 </Link>
               </li>
               <li className={css.social_item}>
                 <Link
                   href="https://www.facebook.com/MafiaDreamClub"
                   className={css.social_link}
-                  target="blank"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={t.footer.facebookLabel}
                 >
-                  <FaSquareFacebook />
+                  <FaSquareFacebook aria-hidden="true" />
                 </Link>
               </li>
             </ul>

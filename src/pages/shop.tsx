@@ -11,6 +11,8 @@ import Link from "next/link";
 import "react-toastify/dist/ReactToastify.css";
 import OverlayModal from "@/components/common/OverlayModal";
 import ProductCard from "@/components/Shop/ProductCard";
+import JsonLd from "@/components/Seo/JsonLd";
+import { SITE_NAME, SITE_URL } from "@/constants/site";
 const link = "/images/shop/";
 
 const Shop: React.FC = () => {
@@ -281,7 +283,33 @@ const Shop: React.FC = () => {
 
   return (
     <div>
+      {/* Product structured data, built from the same list/prices rendered below */}
+      <JsonLd
+        id="ld-products"
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          itemListElement: products.map((product, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "Product",
+              name: product.name,
+              description: product.mainDesk,
+              image: `${SITE_URL}${product.imageUrl1}`,
+              brand: { "@type": "Brand", name: SITE_NAME },
+              offers: {
+                "@type": "Offer",
+                url: `${SITE_URL}/shop/`,
+                price: product.price,
+                priceCurrency: "UAH",
+              },
+            },
+          })),
+        }}
+      />
       <Container>
+        <h1 className="srOnly">{t.nav.shop}</h1>
         <p className={css.description}>{t.shopP.welcoming}</p>
         <ul className={css.productList}>
           {products.map((product) => (

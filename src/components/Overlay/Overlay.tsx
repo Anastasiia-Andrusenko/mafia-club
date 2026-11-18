@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Button from "../Button/Button";
 import Container from "../Container/Container";
 import css from "./Overlay.module.css";
@@ -10,7 +10,6 @@ import { BiLandscape } from "react-icons/bi";
 import { PiOfficeChair } from "react-icons/pi";
 import { MdChildCare } from "react-icons/md";
 import { LiaMaskSolid } from "react-icons/lia";
-import emailjs from "@emailjs/browser";
 import "react-toastify/dist/ReactToastify.css";
 import { validateOverlayForm } from "../utils/validateOverlayForm";
 import CheckboxItem from "./CheckboxItem";
@@ -21,6 +20,9 @@ import PhoneInput from "./PhoneInput";
 import CommentTextarea from "./CommentTextarea";
 import SnowContainer from "../SnowContainer/SnowContainer";
 import { GOOGLE_CONVERSIONS } from "@/constants/analytics";
+import { deliverLead } from "@/lib/leadDelivery";
+import { formatUaPhone } from "@/lib/phone";
+import { escapeMarkdown, telLink } from "@/lib/telegram";
 
 const Overlay = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,119 +31,83 @@ const Overlay = () => {
   const [services, setServices] = useState<string[]>([]);
   const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // Synchronous guard: state updates are async, so two quick submits could both pass.
+  const submittingRef = useRef(false);
 
   const { t } = useTranslation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSubmitting) return;
+    if (submittingRef.current) return;
 
-    const error = validateOverlayForm({ name, phone, services });
-    if (error) {
-      notify(false, error);
+    const errorKey = validateOverlayForm({ name, phone, services });
+    if (errorKey) {
+      notify(false, t.validation[errorKey]);
       return;
     }
 
-    notify(true, "Дані успішно перевірені. Відправляємо заявку...");
+    submittingRef.current = true;
     setIsSubmitting(true);
+    notify(true, t.validation.leadChecking);
 
-    const templateParams = {
-      name: name.trim(),
-      phone: phone.trim(),
-      services: services.join(", "),
-      comment: comment.trim(),
-    };
+    try {
+      const templateParams = {
+        name: name.trim(),
+        phone: phone.trim(),
+        services: services.join(", "),
+        comment: comment.trim(),
+      };
 
-    const escapeMarkdown = (text: string) =>
-      text.replace(/[_*[\]()~`>#+\-=|{}.!]/g, "\\$&");
-
-    const safeName = escapeMarkdown(templateParams.name);
-    const safePhone = escapeMarkdown(templateParams.phone);
-    const safeServices = escapeMarkdown(templateParams.services);
-    const safeComment = escapeMarkdown(templateParams.comment);
-    const rawPhone = templateParams.phone.replace(/\s/g, "");
-    const safePhoneLink = `tel:${rawPhone.replace(/\+/g, "%2B")}`;
-
-    const messageForTelegram = `
+      const messageForTelegram = `
 📩 *ХОЧУТЬ СВЯТО:*
-👤 *Імʼя:* ${safeName}
-📞 *Телефон:* [${safePhone}](${safePhoneLink})
-🧩 *Послуги:* ${safeServices}
-💬 *Коментар:* ${safeComment}
+👤 *Імʼя:* ${escapeMarkdown(templateParams.name)}
+📞 *Телефон:* [${escapeMarkdown(templateParams.phone)}](${telLink(templateParams.phone)})
+🧩 *Послуги:* ${escapeMarkdown(templateParams.services)}
+💬 *Коментар:* ${escapeMarkdown(templateParams.comment)}
 `.trim();
 
-    emailjs
-      .send(
-        "service_awhca1b",
-        "template_5etqtqn",
+      // EmailJS and Telegram are independent: one failing must not lose the lead.
+      const result = await deliverLead({
+        templateId: "template_5etqtqn",
         templateParams,
-        "nBlfFj-daI3JM87lR",
-      )
-      .then(
-        async (response) => {
-          console.log("SUCCESS!", response.status, response.text);
+        telegramMessage: messageForTelegram,
+      });
 
-          const telegramRes = await fetch("/api/sendToTelegram", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: messageForTelegram }),
-          });
+      if (!result.ok) {
+        notify(false, t.validation.sendFailed);
+        return;
+      }
 
-          const telegramData = await telegramRes.json();
+      notify(true, `${templateParams.name}, ${t.validation.leadSuccess}`);
 
-          if (!telegramRes.ok) {
-            console.error("❌ Telegram did not send a message:", telegramData);
-            notify(false, "Telegram не надіслав повідомлення 😔");
-          } else {
-            console.log("✅ Telegram message sent!", telegramData);
-            notify(true, `${name}, супер, ми вам перезвоним!`);
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "conversion", {
+          send_to: `${GOOGLE_CONVERSIONS.LEAD_SUCCESS}`,
+          event_callback: function () {
+            console.log(
+              "✅ [Analytics Debug] Conversion event sent to Google Ads",
+            );
+          },
+        });
+      } else {
+        console.warn(
+          "❌ [Analytics Debug] gtag is not defined. Conversion event not sent.",
+        );
+      }
 
-            if (typeof window !== "undefined" && window.gtag) {
-              window.gtag("event", "conversion", {
-                send_to: `${GOOGLE_CONVERSIONS.LEAD_SUCCESS}`,
-                event_callback: function () {
-                  console.log(
-                    "✅ [Analytics Debug] Conversion event sent to Google Ads",
-                  );
-                },
-              });
-            } else {
-              console.warn(
-                "❌ [Analytics Debug] gtag is not defined. Conversion event not sent.",
-              );
-            }
-
-            resetForm();
-            setIsSubmitting(false);
-            setIsOpen(false);
-          }
-        },
-        (err) => {
-          console.error("FAILED...", err);
-          notify(false, "Сталася помилка при відправці. Спробуйте ще.");
-          setIsSubmitting(false);
-        },
-      );
+      resetForm();
+      setIsOpen(false);
+    } catch (err) {
+      console.error("Lead submission failed unexpectedly:", err);
+      notify(false, t.validation.sendFailed);
+    } finally {
+      submittingRef.current = false;
+      setIsSubmitting(false);
+    }
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let digits = e.target.value.replace(/\D/g, "");
-
-    if (!digits.startsWith("380")) {
-      digits = "380";
-    }
-
-    digits = digits.slice(0, 12);
-
-    const parts = [
-      "+380",
-      digits.slice(3, 5),
-      digits.slice(5, 7),
-      digits.slice(7, 9),
-      digits.slice(9, 12),
-    ].filter(Boolean);
-
-    setPhone(parts.join(" "));
+    setPhone(formatUaPhone(e.target.value));
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -170,9 +136,9 @@ const Overlay = () => {
     }
   };
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setIsOpen(false);
-  };
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -237,6 +203,7 @@ const Overlay = () => {
                     label={t.services.vip}
                     value="Віп Мафія"
                     icon={<IoDiamondOutline />}
+                    checked={services.includes("Віп Мафія")}
                     onChange={handleCheckboxChange}
                   />
                   <CheckboxItem
@@ -244,6 +211,7 @@ const Overlay = () => {
                     label={t.services.corporateShort}
                     value="Корпоратив"
                     icon={<PiOfficeChair />}
+                    checked={services.includes("Корпоратив")}
                     onChange={handleCheckboxChange}
                   />
                   <CheckboxItem
@@ -251,6 +219,7 @@ const Overlay = () => {
                     label={t.services.outdoor}
                     value="Виїзна Мафія"
                     icon={<BiLandscape />}
+                    checked={services.includes("Виїзна Мафія")}
                     onChange={handleCheckboxChange}
                   />
                   <CheckboxItem
@@ -258,6 +227,7 @@ const Overlay = () => {
                     label={t.services.kids}
                     value="Дитяче Свято"
                     icon={<MdChildCare />}
+                    checked={services.includes("Дитяче Свято")}
                     onChange={handleCheckboxChange}
                   />
                   <CheckboxItem
@@ -265,6 +235,7 @@ const Overlay = () => {
                     label={t.services.birth}
                     value="День народження"
                     icon={<LiaBirthdayCakeSolid />}
+                    checked={services.includes("День народження")}
                     onChange={handleCheckboxChange}
                   />
                   <CheckboxItem
@@ -272,6 +243,7 @@ const Overlay = () => {
                     label={t.services.other}
                     value="Ще не вирішили"
                     icon={<LiaMaskSolid />}
+                    checked={services.includes("Ще не вирішили")}
                     onChange={handleCheckboxChange}
                   />
                 </div>

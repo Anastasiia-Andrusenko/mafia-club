@@ -9,6 +9,8 @@ import { Product } from "@/types/product";
 
 interface CartContextProps {
   cart: Product[];
+  /** false during SSR and the first client render; true once localStorage was read. */
+  isHydrated: boolean;
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
   updateQuantity: (productId: number, quantity: number) => void;
@@ -20,20 +22,31 @@ const CartContext = createContext<CartContextProps | undefined>(undefined);
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  // The server and the first client render both start with an empty cart, so
+  // the full page markup can be server-rendered without hydration mismatches.
+  // The stored cart is loaded right after hydration (see effect below).
   const [cart, setCart] = useState<Product[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
+    try {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        const parsed = JSON.parse(storedCart);
+        if (Array.isArray(parsed)) setCart(parsed);
+      }
+    } catch {
+      // Corrupted or unavailable storage: start with an empty cart.
     }
     setIsHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (isHydrated) {
+    if (!isHydrated) return;
+    try {
       localStorage.setItem("cart", JSON.stringify(cart));
+    } catch {
+      // Storage full / disabled: the cart still works in memory.
     }
   }, [cart, isHydrated]);
 
@@ -80,13 +93,16 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     setCart([]);
   };
 
-  if (!isHydrated) {
-    return null;
-  }
-
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}
+      value={{
+        cart,
+        isHydrated,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>

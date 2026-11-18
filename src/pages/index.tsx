@@ -1,4 +1,3 @@
-import Head from "next/head";
 import css from "../styles/Home.module.css";
 import { useTranslation } from "../hooks/useTranslation";
 import Container from "@/components/Container/Container";
@@ -42,27 +41,6 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
 
   return (
     <>
-      <Head>
-        <title>Організація гри в мафію - Mafia Dream Club</title>
-        <meta
-          name="description"
-          content="Професійна організація гри в мафію для дітей, дорослих і корпоративів. Проведення свят, VIP вечірок і виїзних ігор."
-        />
-        <meta name="robots" content="index, follow" />
-        <meta
-          name="keywords"
-          content="мафія, гра в мафію, мафія Київ, організація мафії, свято для дітей, мафія корпоратив, Mafia Dream"
-        />
-        <meta name="author" content="Mafia Dream" />
-
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <meta name="theme-color" content="#000000" />
-        <meta name="mobile-web-app-capable" content="yes" />
-
-        <link rel="icon" href="/favicon-v2.ico" type="image/x-icon" />
-        <link rel="shortcut icon" href="/favicon-v2.ico" type="image/x-icon" />
-      </Head>
       <div>
         <main>
           <div className={css.hero}>
@@ -127,6 +105,8 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
             <motion.div className={css.video} {...scrollReveal}>
               <iframe
                 src="https://www.youtube.com/embed/tUHAoshTRQ0?si=zuLF6Ij4gPv7G3bo"
+                title={t.homeP.videoTitle1}
+                loading="lazy"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
@@ -134,6 +114,8 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
               ></iframe>
               <iframe
                 src="https://www.youtube.com/embed/CY4_zTEm_sk?si=aN5_bPGc3OMPlLku"
+                title={t.homeP.videoTitle2}
+                loading="lazy"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"

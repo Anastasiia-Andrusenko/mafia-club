@@ -19,6 +19,7 @@ const Rules = () => {
     <>
       <div className={css.img}></div>
       <Container>
+        <h1 className="srOnly">{t.nav.rules}</h1>
         <p className={css.question}>{t.rules.qw}</p>
         <p className={css.rules_description}>{t.rules.text}</p>
         <>
@@ -29,7 +30,8 @@ const Rules = () => {
               // width="840"
               // height="473"
               src="https://www.youtube.com/embed/GqgDMsWyFHY?si=VnFkm1m6B6N24UTS"
-              title="YouTube video player"
+              title={`${t.rules.classicTitle} — YouTube`}
+              loading="lazy"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
@@ -102,7 +104,8 @@ const Rules = () => {
               // width="840"
               // height="473"
               src="https://www.youtube.com/embed/DkMNdCm51wU?si=n4d6e0t7wAin09KG"
-              title="YouTube video player"
+              title={`${t.rules.balaganTitle} — YouTube`}
+              loading="lazy"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"

@@ -124,6 +124,50 @@ const Header = () => {
           {(isMenuOpen || isDesktop) && <LangSwitcher />}
         </div>
       </Container>
+      {/* The interactive menu mounts after a viewport check on the client, so
+          expose the primary links in the server HTML for crawlers / no-JS. */}
+      <noscript>
+        <nav aria-label="Main">
+          <ul>
+            <li>
+              <Link href="/">{t.nav.main}</Link>
+            </li>
+            <li>
+              <Link href="/services/">{t.nav.services}</Link>
+            </li>
+            <li>
+              <Link href="/services/vip/">{t.services.vip}</Link>
+            </li>
+            <li>
+              <Link href="/services/corporate/">{t.services.corporate}</Link>
+            </li>
+            <li>
+              <Link href="/services/outdoor/">{t.services.outdoor}</Link>
+            </li>
+            <li>
+              <Link href="/services/kids/">{t.services.kids}</Link>
+            </li>
+            <li>
+              <Link href="/services/birthday/">{t.services.birth}</Link>
+            </li>
+            <li>
+              <Link href="/services/extras/">{t.extrasP.pageName}</Link>
+            </li>
+            <li>
+              <Link href="/gallery/">{t.nav.gallery}</Link>
+            </li>
+            <li>
+              <Link href="/rules/">{t.nav.rules}</Link>
+            </li>
+            <li>
+              <Link href="/shop/">{t.nav.shop}</Link>
+            </li>
+            <li>
+              <Link href="/reviews/">{t.nav.reviews}</Link>
+            </li>
+          </ul>
+        </nav>
+      </noscript>
     </header>
   );
 };

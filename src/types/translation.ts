@@ -93,4 +93,7 @@ export interface Translation {
   tempMessage: {
     [key: string]: string;
   };
+  validation: {
+    [key: string]: string;
+  };
 }

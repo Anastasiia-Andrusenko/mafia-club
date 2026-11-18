@@ -40,7 +40,7 @@ const Services = () => {
       <Container>
         <div className={css.containerBg}>
           <div ref={heroTextRef} className={css.hero_text}>
-            <h2 className={css.titleWhat}>{t.homeP.what}</h2>
+            <h1 className={css.titleWhat}>{t.homeP.what}</h1>
             <p className={css.mafiaText}>{t.homeP.mafia}</p>
           </div>
           <div className={css.services} id="services">

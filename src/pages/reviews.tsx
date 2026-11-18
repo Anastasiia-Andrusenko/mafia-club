@@ -15,6 +15,7 @@ interface Review {
 
 const Reviews: React.FC = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [updateTrigger, setUpdateTrigger] = useState(0);
   const { t } = useTranslation();
   const handleReviewAdded = () => {
@@ -31,10 +32,11 @@ const Reviews: React.FC = () => {
       data.sort(
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
       );
-      setReviews(data);
-      console.log(data);
+      setReviews(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error("Error fetching reviews:", error);
+    } finally {
+      setIsLoaded(true);
     }
   };
 
@@ -44,7 +46,7 @@ const Reviews: React.FC = () => {
 
   return (
     <>
-      <h2 className={css.title}>{t.reviews.giveFeedBack}</h2>
+      <h1 className={css.title}>{t.reviews.giveFeedBack}</h1>
       <p className={css.description}>{t.reviews.description}</p>
       <ReviewForm onReviewAdded={handleReviewAdded} />
       {reviews.length > 0 ? (
@@ -53,7 +55,7 @@ const Reviews: React.FC = () => {
           <ReviewsList reviews={reviews} />
         </>
       ) : (
-        <p>{t.reviews.noReviews}</p>
+        isLoaded && <p>{t.reviews.noReviews}</p>
       )}
       <ScrollTopBtn />
     </>
