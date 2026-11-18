@@ -49,14 +49,18 @@ const Reviews: React.FC = () => {
       <h1 className={css.title}>{t.reviews.giveFeedBack}</h1>
       <p className={css.description}>{t.reviews.description}</p>
       <ReviewForm onReviewAdded={handleReviewAdded} />
-      {reviews.length > 0 ? (
-        <>
-          <h2 className={css.title}>{t.reviews.title}</h2>
-          <ReviewsList reviews={reviews} />
-        </>
-      ) : (
-        isLoaded && <p>{t.reviews.noReviews}</p>
-      )}
+      {/* The list arrives from /api/reviews after hydration. Reserve its
+          space so the footer below does not jump down when it is inserted. */}
+      <div className={css.listSlot}>
+        {reviews.length > 0 ? (
+          <>
+            <h2 className={css.title}>{t.reviews.title}</h2>
+            <ReviewsList reviews={reviews} />
+          </>
+        ) : (
+          isLoaded && <p>{t.reviews.noReviews}</p>
+        )}
+      </div>
       <ScrollTopBtn />
     </>
   );

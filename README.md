@@ -22,6 +22,24 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Project notes
+
+- **Gallery photos** live in `public/images/<set>-large/` (full size, shown in
+  the modal). The grid and the Home "Thread" strip use 640px previews from
+  `public/images/<set>-thumb/`. After adding photos, run
+  `npm run media:thumbs` (needs `sharp`, already a devDependency) and commit
+  the generated thumbnails. They are plain static files, so no Vercel image
+  optimization quota is used (`images.unoptimized` stays on).
+- **Slow-load indicator**: `src/lotties/load.json` is a *dotLottie* archive
+  (a ZIP despite the `.json` name). `scripts/dotlottie-loader.cjs` unpacks it
+  at build time (`import ... from "@/lotties/load.json?dotlottie"`), and
+  `lottie-web`'s light SVG player renders it from a lazily loaded chunk.
+- **Security headers** (CSP, X-Frame-Options, COOP, Referrer-Policy, HSTS, ...)
+  are set for production in `next.config.mjs`. When adding a third-party
+  script, image host or API, add its origin to the CSP there.
+- **Fonts** (Oswald, Spectral SC) are self-hosted via `next/font/google` in
+  `src/pages/_app.tsx`.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

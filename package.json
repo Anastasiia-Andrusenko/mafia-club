@@ -7,12 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "media:thumbs": "node scripts/generate-thumbs.mjs",
     "db:setup": "cross-env TS_NODE_PROJECT=tsconfig.scripts.json node --env-file=.env.local -r ts-node/register/transpile-only scripts/db-setup.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@neondatabase/serverless": "^1.2.1",
     "framer-motion": "^12.6.3",
+    "lottie-web": "^5.13.0",
     "modern-normalize": "^3.0.1",
     "next": "14.2.13",
     "react": "^18",
@@ -30,6 +32,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.13",
+    "sharp": "^0.35.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

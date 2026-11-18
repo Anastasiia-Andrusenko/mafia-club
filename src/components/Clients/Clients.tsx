@@ -7,7 +7,7 @@ const ClientsList = () => {
 
   return (
     <Container>
-      <h4 className={css.title}>{t.homeP.clients}</h4>
+      <h2 className={css.title}>{t.homeP.clients}</h2>
       <ul className={css.list}>
         <li className={css.item}>
           <div className={css.contactis}></div>

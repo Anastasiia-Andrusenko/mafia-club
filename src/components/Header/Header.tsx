@@ -45,7 +45,16 @@ const Header = () => {
       <Container>
         <div className={css.headerWrapper}>
           <Link href="/" className={css.logo}>
-            <Image src={"/img/logo.png"} alt="logo" width={40} height={44} />
+            {/* Decorative: the brand name is right next to it. 36x44 matches the
+                real 327x398 artwork (the old 40x44 stretched it); it is above
+                the fold on every page, so never lazy-load it. */}
+            <Image
+              src="/img/logo-sm.webp"
+              alt=""
+              width={36}
+              height={44}
+              loading="eager"
+            />
             <div className={css.logo_text}>
               <p className={css.mafia}>MAFIA</p>
               <span className={css.dream}>DREAM CLUB</span>
@@ -59,29 +68,37 @@ const Header = () => {
                   href="#footer"
                   className={isMenuOpen ? css.menuContacts : css.contacts}
                   onClick={closeMenu}
+                  aria-label={t.a11y.contacts}
                 >
-                  <MdContactPhone />
+                  <MdContactPhone aria-hidden="true" />
                 </Link>
               )}
 
               {!isMenuOpen && (
-                <Link href="/basket" className={css.basketBtn}>
-                  <LuShoppingCart />
+                <Link
+                  href="/basket"
+                  className={css.basketBtn}
+                  aria-label={t.a11y.basket}
+                >
+                  <LuShoppingCart aria-hidden="true" />
                 </Link>
               )}
               <button
+                type="button"
                 className={`${css.menuButton} ${
                   isMenuOpen ? css.menuButtonOpen : ""
                 }`}
                 onClick={toggleMenu}
+                aria-label={isMenuOpen ? t.a11y.menuClose : t.a11y.menuOpen}
+                aria-expanded={isMenuOpen}
               >
                 {isMenuOpen ? (
                   <span className={css.closeIcon}>
-                    <RiCloseLargeLine />
+                    <RiCloseLargeLine aria-hidden="true" />
                   </span>
                 ) : (
                   <span className={css.burgerIcon}>
-                    <GiHamburgerMenu />
+                    <GiHamburgerMenu aria-hidden="true" />
                   </span>
                 )}
               </button>

@@ -1,11 +1,11 @@
 import Container from "@/components/Container/Container";
 import css from "../../styles/Services.module.css";
-// import Overlay from "@/components/Overlay/Overlay";
 import { useTranslation } from "@/hooks/useTranslation";
 import ExtraServices from "@/components/ExtraServices/ExtraServices";
 import Overlay from "@/components/Overlay/Overlay";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { GiClick } from "react-icons/gi";
@@ -14,302 +14,136 @@ import FaqSection from "@/components/FAQ/FaqSection";
 const SERVICE_THUMB_SIZES =
   "(max-width: 767px) 80vw, calc((100vw - 80px) / 3)";
 
+// Card order, anchors, links and images. Titles / descriptions come from the
+// translation keys named here.
+const SERVICE_CARDS = [
+  {
+    id: "vip",
+    href: "/services/vip",
+    image: "/img/vip_mob.webp",
+    title: "vip",
+    description: "description2",
+  },
+  {
+    id: "corporate",
+    href: "/services/corporate",
+    image: "/img/corporate_mob.webp",
+    title: "corporate",
+    description: "description1",
+  },
+  {
+    id: "out",
+    href: "/services/outdoor",
+    image: "/img/picnic.webp",
+    title: "outdoor",
+    description: "description5",
+  },
+  {
+    id: "kids",
+    href: "/services/kids",
+    image: "/img/services/children-card.webp",
+    title: "kids",
+    description: "description3",
+  },
+  {
+    id: "birthday",
+    href: "/services/birthday",
+    image: "/img/birthday_mob.webp",
+    title: "birth",
+    description: "description4",
+  },
+  {
+    id: "extras",
+    href: "/services/extras",
+    image: "/img/extra_mob.webp",
+    title: "extrasP",
+    description: "description6",
+  },
+] as const;
+
 const Services = () => {
+  // Which card's description is slid up. Only the mobile (tap) layout reacts
+  // to it: on desktop the overlay is driven by :hover and the "more" badge is
+  // hidden, both purely in CSS, so no viewport check / re-render is needed.
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [isDesktop, setIsDesktop] = useState<boolean>(false);
 
-  useEffect(() => {
-    setIsDesktop(window.innerWidth > 768);
-  }, [isDesktop]);
-
-  const handleClickMore = (index: number | null) => {
+  const handleClickMore = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
   const { t } = useTranslation();
 
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroTextRef = useRef<HTMLDivElement>(null);
-
   return (
     <>
+      <Head>
+        {/* LCP: the fixed hero background is a CSS image (found late), so
+            preload it at high priority. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/img/party.webp"
+          {...{ fetchpriority: "high" }}
+        />
+      </Head>
       <div className={css.hero_wrapper}>
-        <div ref={heroRef} className={css.hero}></div>
+        <div className={css.hero}></div>
       </div>
 
       <Container>
         <div className={css.containerBg}>
-          <div ref={heroTextRef} className={css.hero_text}>
+          <div className={css.hero_text}>
             <h1 className={css.titleWhat}>{t.homeP.what}</h1>
             <p className={css.mafiaText}>{t.homeP.mafia}</p>
           </div>
           <div className={css.services} id="services">
-            <h4 className={css.listTitle}>{t.services.listTitle}</h4>
+            <h2 className={css.listTitle}>{t.services.listTitle}</h2>
             <ul className={css.cards}>
-              <li
-                className={css.item}
-                id="vip"
-                onClick={() => !isDesktop && handleClickMore(0)}
-              >
-                <Link href="/services/vip">
-                  <div className={css.thumb}>
-                    <div className={css.img}>
-                      <Image
-                        src="/img/vip_mob.webp"
-                        alt={t.services.vip}
-                        fill
-                        sizes={SERVICE_THUMB_SIZES}
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
-                    <div
-                      className={
-                        activeIndex === 0
-                          ? css.thumb_overlay_show
-                          : css.thumb_overlay
-                      }
-                    >
-                      <div className={css.thumb_text}>
-                        <p className={css.thumb_text_p}>
-                          {t.table.description2}
-                        </p>
-                        <p className={css.thumb_overlay_more}>
-                          {t.services.forMore}
-                        </p>
-                      </div>
-                    </div>
-                    {!isDesktop && (
-                      <p className={css.moreMob}>
-                        <GiClick />
-                        {t.table.more}
-                      </p>
-                    )}
-                  </div>
-                  <div className={css.card}>
-                    <h3 className={css.card_title}>{t.services.vip}</h3>
-                  </div>
-                </Link>
-              </li>
-              <li
-                className={css.item}
-                id="corporate"
-                onClick={() => !isDesktop && handleClickMore(1)}
-              >
-                <Link href="/services/corporate">
-                  <div className={css.thumb}>
-                    <div className={css.img}>
-                      <Image
-                        src="/img/corporate_mob.webp"
-                        alt={t.services.corporate}
-                        fill
-                        sizes={SERVICE_THUMB_SIZES}
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
-                    <div
-                      className={
-                        activeIndex === 1
-                          ? css.thumb_overlay_show
-                          : css.thumb_overlay
-                      }
-                    >
-                      <div className={css.thumb_text}>
-                        <p className={css.thumb_text_p}>
-                          {t.table.description1}
-                        </p>
-                        <p className={css.thumb_overlay_more}>
-                          {t.services.forMore}
+              {SERVICE_CARDS.map((card, index) => {
+                const title = t.services[card.title];
+                return (
+                  <li
+                    key={card.id}
+                    className={css.item}
+                    id={card.id}
+                    onClick={() => handleClickMore(index)}
+                  >
+                    <Link href={card.href}>
+                      <div className={css.thumb}>
+                        <div className={css.img}>
+                          <Image
+                            src={card.image}
+                            alt={title}
+                            fill
+                            sizes={SERVICE_THUMB_SIZES}
+                            style={{ objectFit: "cover" }}
+                          />
+                        </div>
+                        <div
+                          className={`${css.thumb_overlay} ${
+                            activeIndex === index ? css.thumb_overlay_show : ""
+                          }`}
+                        >
+                          <div className={css.thumb_text}>
+                            <p className={css.thumb_text_p}>
+                              {t.table[card.description]}
+                            </p>
+                            <p className={css.thumb_overlay_more}>
+                              {t.services.forMore}
+                            </p>
+                          </div>
+                        </div>
+                        <p className={css.moreMob}>
+                          <GiClick aria-hidden="true" />
+                          {t.table.more}
                         </p>
                       </div>
-                    </div>
-                    {!isDesktop && (
-                      <p className={css.moreMob}>
-                        <GiClick />
-                        {t.table.more}
-                      </p>
-                    )}
-                  </div>
-                  <div className={css.card}>
-                    <h3 className={css.card_title}>{t.services.corporate}</h3>
-                  </div>
-                </Link>
-              </li>
-              <li
-                className={css.item}
-                id="out"
-                onClick={() => !isDesktop && handleClickMore(2)}
-              >
-                <Link href="/services/outdoor">
-                  <div className={css.thumb}>
-                    <div className={css.img}>
-                      <Image
-                        src="/img/picnic.webp"
-                        alt={t.services.outdoor}
-                        fill
-                        sizes={SERVICE_THUMB_SIZES}
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
-                    <div
-                      className={
-                        activeIndex === 2
-                          ? css.thumb_overlay_show
-                          : css.thumb_overlay
-                      }
-                    >
-                      <div className={css.thumb_text}>
-                        <p className={css.thumb_text_p}>
-                          {t.table.description5}
-                        </p>
-                        <p className={css.thumb_overlay_more}>
-                          {t.services.forMore}
-                        </p>
+                      <div className={css.card}>
+                        <h3 className={css.card_title}>{title}</h3>
                       </div>
-                    </div>
-                    {!isDesktop && (
-                      <p className={css.moreMob}>
-                        <GiClick />
-                        {t.table.more}
-                      </p>
-                    )}
-                  </div>
-                  <div className={css.card}>
-                    <h3 className={css.card_title}>{t.services.outdoor}</h3>
-                  </div>
-                </Link>
-              </li>
-              <li
-                className={css.item}
-                id="kids"
-                onClick={() => !isDesktop && handleClickMore(3)}
-              >
-                <Link href="/services/kids">
-                  <div className={css.thumb}>
-                    <div className={css.img}>
-                      <Image
-                        src="/img/services/children.webp"
-                        alt={t.services.kids}
-                        fill
-                        sizes={SERVICE_THUMB_SIZES}
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
-                    <div
-                      className={
-                        activeIndex === 3
-                          ? css.thumb_overlay_show
-                          : css.thumb_overlay
-                      }
-                    >
-                      <div className={css.thumb_text}>
-                        <p className={css.thumb_text_p}>
-                          {t.table.description3}
-                        </p>
-                        <p className={css.thumb_overlay_more}>
-                          {t.services.forMore}
-                        </p>
-                      </div>
-                    </div>
-                    {!isDesktop && (
-                      <p className={css.moreMob}>
-                        <GiClick />
-                        {t.table.more}
-                      </p>
-                    )}
-                  </div>
-                  <div className={css.card}>
-                    <h3 className={css.card_title}>{t.services.kids}</h3>
-                  </div>
-                </Link>
-              </li>
-              <li
-                className={css.item}
-                id="birthday"
-                onClick={() => !isDesktop && handleClickMore(4)}
-              >
-                <Link href="/services/birthday">
-                  <div className={css.thumb}>
-                    <div className={css.img}>
-                      <Image
-                        src="/img/birthday_mob.webp"
-                        alt={t.services.birth}
-                        fill
-                        sizes={SERVICE_THUMB_SIZES}
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
-                    <div
-                      className={
-                        activeIndex === 4
-                          ? css.thumb_overlay_show
-                          : css.thumb_overlay
-                      }
-                    >
-                      <div className={css.thumb_text}>
-                        <p className={css.thumb_text_p}>
-                          {t.table.description4}
-                        </p>
-                        <p className={css.thumb_overlay_more}>
-                          {t.services.forMore}
-                        </p>
-                      </div>
-                    </div>
-                    {!isDesktop && (
-                      <p className={css.moreMob}>
-                        <GiClick />
-                        {t.table.more}
-                      </p>
-                    )}
-                  </div>
-                  <div className={css.card}>
-                    <h3 className={css.card_title}>{t.services.birth}</h3>
-                  </div>
-                </Link>
-              </li>
-              <li
-                className={css.item}
-                id="extras"
-                onClick={() => !isDesktop && handleClickMore(5)}
-              >
-                <Link href="/services/extras">
-                  <div className={css.thumb}>
-                    <div className={css.img}>
-                      <Image
-                        src="/img/extra_mob.webp"
-                        alt={t.services.extrasP}
-                        fill
-                        sizes={SERVICE_THUMB_SIZES}
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
-                    <div
-                      className={
-                        activeIndex === 5
-                          ? css.thumb_overlay_show
-                          : css.thumb_overlay
-                      }
-                    >
-                      <div className={css.thumb_text}>
-                        <p className={css.thumb_text_p}>
-                          {t.table.description6}
-                        </p>
-                        <p className={css.thumb_overlay_more}>
-                          {t.services.forMore}
-                        </p>
-                      </div>
-                    </div>
-                    {!isDesktop && (
-                      <p className={css.moreMob}>
-                        <GiClick />
-                        {t.table.more}
-                      </p>
-                    )}
-                  </div>
-                  <div className={css.card}>
-                    <h3 className={css.card_title}>{t.services.extrasP}</h3>
-                  </div>
-                </Link>
-              </li>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <ExtraServices />
