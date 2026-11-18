@@ -3,28 +3,30 @@ import css from "./FaqSection.module.css";
 import { useState } from "react";
 import { AiOutlineQuestionCircle, AiOutlineCheckCircle } from "react-icons/ai";
 
+export const FAQ_KEYS = [
+  "place",
+  "time",
+  "rule",
+  "cost",
+  "player",
+  "extraTime",
+  "crowd",
+  "kids",
+  "vip",
+  "buy",
+  "tooFewPlayers",
+  "notInKyiv",
+  "tableRent",
+  "alcohol",
+  "gift",
+];
+
 const FaqSection = () => {
   const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState(false);
   const [activeAnswer, setActiveAnswer] = useState<string | null>(null);
 
-  const faqKeys = [
-    "place",
-    "time",
-    "rule",
-    "cost",
-    "player",
-    "extraTime",
-    "crowd",
-    "kids",
-    "vip",
-    "buy",
-    "tooFewPlayers",
-    "notInKyiv",
-    "tableRent",
-    "alcohol",
-    "gift",
-  ];
+  const faqKeys = FAQ_KEYS;
 
   const toggleAnswer = (key: string) => {
     setActiveAnswer((prev) => (prev === key ? null : key));
