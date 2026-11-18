@@ -13,7 +13,10 @@ import {
 const MAX_MESSAGE_LENGTH = 4096;
 const RATE_LIMIT = 8; // requests ...
 const RATE_WINDOW_MS = 10 * 60 * 1000; // ... per 10 minutes per IP
-const TELEGRAM_TIMEOUT_MS = 10000;
+// Must stay well below the platform's function limit (10s on Hobby): if the
+// abort fires at/after that limit Vercel kills the invocation first and the
+// client gets a bare 504 instead of our 502 + a useful log line.
+const TELEGRAM_TIMEOUT_MS = 6000;
 
 // Raw bodies above this are rejected by Next with 413 before reaching us.
 export const config = {
@@ -91,9 +94,11 @@ export default async function handler(
     return res.status(200).json({ message: "Success" });
   } catch (error) {
     // Do not log the error object: fetch errors can embed the bot-token URL.
+    const name = error instanceof Error ? error.name : "unknown";
     console.error(
-      "❌ Telegram request failed:",
-      error instanceof Error ? error.name : "unknown",
+      name === "TimeoutError"
+        ? `❌ Telegram did not answer within ${TELEGRAM_TIMEOUT_MS}ms`
+        : `❌ Telegram request failed: ${name}`,
     );
     return sendError(res, 502, "Failed to send message");
   }
