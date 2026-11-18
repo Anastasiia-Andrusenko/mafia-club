@@ -41,6 +41,8 @@
 }
 
 .details_title {
+  /* h2 now (was an h4 under the h1): keep the old h4 size */
+  font-size: var(--font-size-md);
   text-align: center;
   margin: 2rem auto;
   text-transform: uppercase;

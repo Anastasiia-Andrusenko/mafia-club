@@ -141,14 +141,11 @@ const Overlay = () => {
   }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      document.documentElement.style.overflow = "hidden";
-      document.addEventListener("keydown", handleEscPress);
-    } else {
-      document.documentElement.style.overflow = "";
-      document.removeEventListener("keydown", handleEscPress);
-    }
-
+    // Only lock / unlock while this modal is open, so a closed instance (e.g.
+    // the one inside the mobile menu) never releases a lock held elsewhere.
+    if (!isOpen) return;
+    document.documentElement.style.overflow = "hidden";
+    document.addEventListener("keydown", handleEscPress);
     return () => {
       document.documentElement.style.overflow = "";
       document.removeEventListener("keydown", handleEscPress);
@@ -165,23 +162,32 @@ const Overlay = () => {
   return (
     <>
       <Button text={t.overlay.text} typeBtn="button" onClick={handleOpen} />
-      <OverlayModal isOpen={isOpen} onClose={handleClose}>
+      <OverlayModal
+        isOpen={isOpen}
+        onClose={handleClose}
+        overlayClassName={css.overlayLead}
+        wrapperClassName={css.wrapperLead}
+      >
         <Container>
-          <div className={css.formWrapper}>
+          <div className={css.leadPanel}>
             <div className={css.snowBackground}>
               <SnowContainer snowflakeCount={100}>
                 <></>
               </SnowContainer>
             </div>
+            {/* Outside the scrolling <form> (its backdrop-filter would make it
+                the containing block), so the X stays reachable on short
+                windows. */}
+            <button
+              type="button"
+              className={css.btnClose}
+              onClick={handleClose}
+              aria-label={t.a11y.closePhoto}
+            >
+              <TfiClose aria-hidden="true" />
+            </button>
             <form className={css.form} onSubmit={handleSubmit}>
               <p className={css.formTitle}>{t.services.formTitle}</p>
-              <button
-                type="button"
-                className={css.btnClose}
-                onClick={handleClose}
-              >
-                <TfiClose />
-              </button>
               <div className={css.namePhone}>
                 <NameInput
                   value={name}

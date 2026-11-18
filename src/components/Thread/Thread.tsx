@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import css from "./Thread.module.css";
 import { toThumb } from "@/lib/images";
@@ -25,7 +26,10 @@ const Thread: React.FC<ThreadProps> = ({ imagePaths, double = false }) => {
 
   return (
     <div className={css.gallery}>
-      <ul className={css.gallery_list}>
+      <ul
+        className={`${css.gallery_list} ${double ? css.marquee : ""}`}
+        style={{ "--thread-count": imagesFiles.length } as CSSProperties}
+      >
         {finalImages.map((img, index) => {
           // The second copy only exists to make the marquee loop seamlessly:
           // hide it from assistive tech so every photo is announced once.

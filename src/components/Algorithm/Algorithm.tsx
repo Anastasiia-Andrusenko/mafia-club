@@ -7,9 +7,9 @@ const Algorithm: React.FC = () => {
   return (
     <>
       <section className={css.instruction}>
-        <h4 className={css.instruction_title}>
+        <h2 className={css.instruction_title}>
           {t.corporateP.instruction_title}
-        </h4>
+        </h2>
         <div className={css.algorithm}>
           <div className={css.algorithm_item}>
             <div className={css.algorithm_icon}>

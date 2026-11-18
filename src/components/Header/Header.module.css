@@ -6,6 +6,7 @@
   z-index: 10;
   top: 0;
   background-color: var(--background);
+  padding-right: var(--scrollbar-comp, 0px);
 }
 
 .logo {
@@ -15,6 +16,7 @@
   align-items: center;
   top: 1.1rem;
   left: 4vw;
+  z-index: 16; /* above the full-screen drawer */
   transform: scale(1.2);
   width: 15%;
   /* padding-left: 0.7rem; */
@@ -42,6 +44,21 @@
   font-size: 10px;
 }
 
+/* Mobile / tablet drawer: a fixed full-viewport layer, independent of the
+   padded header <Container> it is rendered in. */
+@media screen and (max-width: 1023.98px) {
+  .nav {
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    width: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background-color: #000;
+    padding-right: var(--scrollbar-comp, 0px);
+  }
+}
+
 .nav {
   opacity: 0;
   /* overflow: hidden; */
@@ -53,15 +70,37 @@
   transition: opacity 1000ms ease;
 }
 
-.menuButton {
-  display: block;
+/* Header actions (contacts, cart, burger): one flex row with equal gaps,
+   every target at least 44x44. Replaces three separately positioned,
+   vw-based absolute offsets that collided on tablets. */
+.actions {
   position: absolute;
-  right: 5vw;
-  top: 1.3rem;
+  top: 0;
+  right: max(0.5rem, 3vw);
   z-index: 20;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.menuButton,
+.basketBtn,
+.contacts {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
   background-color: transparent;
-  font-size: var(--font-size-4xl);
   border: none;
+  line-height: 1;
+  font-size: 1.75rem;
+  color: var(--foreground);
+}
+
+.menuButton {
+  font-size: 2rem;
   transition: transform 0.3s ease;
 }
 
@@ -69,15 +108,9 @@
   transform: rotate(90deg);
 }
 
-.basketBtn {
-  display: block;
-  position: absolute;
-  right: 22vw;
-  top: 1.1rem;
-  z-index: 20;
-  background-color: transparent;
-  font-size: var(--font-size-3xl);
-  line-height: 50px;
+.contacts svg,
+.basketBtn svg {
+  font-size: 1.75rem;
 }
 
 .basketBtnNav {
@@ -107,75 +140,48 @@
   font-size: var(--font-size-xl);
 }
 
-.contacts {
-  position: absolute;
-  right: 36vw;
-  top: 1.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 0.15rem 0.4rem;
-}
-
-.contacts svg {
-  font-size: var(--font-size-3xl);
-  margin: auto;
-}
-
-.menuContacts {
-  position: absolute;
-  bottom: 16vh;
-  left: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  width: 12rem;
-  transform: translateX(-50%);
-  text-transform: uppercase;
-  font-size: var(--font-size-xl);
-  font-weight: 600;
-  color: var(--foreground);
-  font-family: var(--font-family-secondary);
-  /* border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: var(--box-shadow); */
-  padding: 0.5rem;
-}
-
-.menuContacts svg {
-  font-size: var(--font-size-xl);
-}
-
-@media screen and (min-width: 768px) {
-  .menuButton {
-    display: none;
-  }
-
+/* Desktop header from 1024px. Below that the burger menu is used, so there is
+   no in-between state where the inline nav cannot fit on one line. */
+@media screen and (min-width: 1024px) {
   .headerWrapper {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
   }
 
+  /* Inline nav is always fully visible (the 1s fade is for the mobile menu). */
+  .nav,
+  .navOpen {
+    opacity: 1;
+    transition: none;
+  }
+
+  .menuButton {
+    display: none;
+  }
+
   .logo {
     position: static;
+    flex: none;
+    width: auto;
+    white-space: nowrap;
+    /* scale() does not take part in layout: grow from the left edge and
+       reserve the extra width as margin so the nav is not overlapped. */
+    transform-origin: left center;
+    margin-right: 1.5rem;
   }
 
   .logo_text .mafia {
     line-height: 1.2rem;
   }
+}
 
-  .menuButton {
-    display: block;
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    z-index: 20;
-    background-color: transparent;
-    font-size: var(--font-size-huge);
-    border: none;
+/* Original proportions once there is room for them. */
+@media screen and (min-width: 1257px) {
+  .logo {
+    width: 15%;
+    transform-origin: center;
+    margin-right: 0;
   }
 }

@@ -5,32 +5,51 @@ import css from "./Header.module.css";
 import Image from "next/image";
 import LangSwitcher from "../LangSwitcher/LangSwitcher";
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { LuShoppingCart } from "react-icons/lu";
 import { useTranslation } from "@/hooks/useTranslation";
 import { MdContactPhone } from "react-icons/md";
 
+// Header switches between the burger menu and the inline desktop nav here.
+// Keep in sync with the `min-width` media queries in Header / NavBar /
+// LangSwitcher CSS modules.
+const HEADER_DESKTOP_QUERY = "(min-width: 1024px)";
+
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  // Follows the viewport live (the old one-off window.innerWidth check left
+  // the header stuck in its initial state after a resize).
+  const isDesktop = useMediaQuery(HEADER_DESKTOP_QUERY);
   const { t } = useTranslation();
-  useEffect(() => {
-    setIsDesktop(window.innerWidth > 768);
 
+  // Crossing into the desktop layout always closes the mobile menu.
+  useEffect(() => {
+    if (isDesktop) setIsMenuOpen(false);
+  }, [isDesktop]);
+
+  useEffect(() => {
     if (isMenuOpen) {
       setIsVisible(true);
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      const timer = setTimeout(() => setIsVisible(false), 1000);
-      return () => clearTimeout(timer);
+      // Lock the page behind the drawer. Where the scrollbar takes space
+      // (desktop / tablet), reserve its width so the layout does not shift
+      // when it disappears (globals.css + header read --scrollbar-comp).
+      const root = document.documentElement;
+      const scrollbar = window.innerWidth - root.clientWidth;
+      root.style.setProperty("--scrollbar-comp", `${scrollbar}px`);
+      root.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      return () => {
+        root.style.removeProperty("--scrollbar-comp");
+        root.style.overflow = "";
+        document.body.style.overflow = "";
+      };
     }
-
-    return () => {
-      document.documentElement.style.overflow = "";
-    };
-  }, [isMenuOpen, isDesktop]);
+    const timer = setTimeout(() => setIsVisible(false), 1000);
+    return () => clearTimeout(timer);
+  }, [isMenuOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -62,11 +81,11 @@ const Header = () => {
           </Link>
 
           {!isDesktop && (
-            <>
+            <div className={css.actions}>
               {!isMenuOpen && (
                 <Link
                   href="#footer"
-                  className={isMenuOpen ? css.menuContacts : css.contacts}
+                  className={css.contacts}
                   onClick={closeMenu}
                   aria-label={t.a11y.contacts}
                 >
@@ -102,7 +121,7 @@ const Header = () => {
                   </span>
                 )}
               </button>
-            </>
+            </div>
           )}
           {(isVisible || isDesktop) && (
             <div

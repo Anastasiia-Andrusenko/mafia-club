@@ -45,7 +45,7 @@ const KidsPage: React.FC<KidsProps> = ({ imagePaths }) => {
         <Overlay />
         <Thread imagePaths={imagePaths} double />
         <section className={css.details}>
-          <h4 className={css.details_title}>{t.kidsP.details_title}</h4>
+          <h2 className={css.details_title}>{t.kidsP.details_title}</h2>
           <p className={css.text1}>1. {t.kidsP.text1}</p>
           <p className={css.text2}>2. {t.kidsP.text2}</p>
           <p className={css.text3}>3. {t.kidsP.text3}</p>

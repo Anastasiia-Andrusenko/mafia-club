@@ -1,8 +1,8 @@
 .nav {
   background-color: black;
   padding: 6vw 4vw;
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100%;
   max-height: fit-content;
   padding-top: 16vh;
   overflow-y: hidden;
@@ -50,7 +50,11 @@
 }
 
 /* ============================= Desktop  */
-@media screen and (min-width: 768px) {
+/* Fluid sizing between 1024px and 1256px: every value is
+   min(<original size>, max(<size at 1024px>, <linear interpolation>)), so it
+   scales down smoothly towards 1024px and is exactly the original from
+   ~1256px up. */
+@media screen and (min-width: 1024px) {
   .nav {
     background-color: transparent;
     padding: 0.7rem;
@@ -60,17 +64,21 @@
     margin: auto;
     display: flex;
     align-items: center;
-    gap: calc(100vw / 30);
+    gap: min(calc(100vw / 30), max(1rem, 11.16vw - 98.3px));
+    flex-wrap: nowrap;
+    white-space: nowrap;
   }
 
   .navList {
     flex-direction: row;
+    flex-wrap: nowrap;
     gap: 0.5rem;
   }
 
   .link {
     color: rgba(255, 255, 255, 0.65);
-    font-size: var(--font-size-md);
+    font-size: min(1rem, max(0.8125rem, 1.293vw - 0.015rem));
+    padding: 4px min(8px, max(4px, 1.724vw - 13.65px));
   }
 
   .link:hover {
@@ -85,16 +93,34 @@
   .navButtonsContainer {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: min(1rem, max(0.4rem, 4.14vw - 36px));
     transform: scale(0.9);
+    flex: none;
+  }
+
+  .buttonsIconsWrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  /* The lead button is the shared <Button>; size it from here. */
+  .mainFormBtn button {
+    width: min(160px, max(8.5rem, 18.1vw - 50px));
+    padding: 10px min(14px, max(8px, 2.6vw - 18.6px));
+    font-size: min(1rem, max(0.8125rem, 1.293vw - 0.015rem));
+    white-space: nowrap;
   }
 
   .basket,
   .contactHeader {
-    width: 3rem;
-    height: 3rem;
-    font-size: var(--font-size-xxl);
-    padding: 0.2rem 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(3rem, max(2.25rem, 5.17vw - 17px));
+    /* a little shorter than wide so the header stays 80px tall */
+    height: min(2.5rem, max(2.25rem, 1.724vw + 18.35px));
+    font-size: min(1.75rem, max(1.375rem, 2.586vw - 4.5px));
+    padding: 0.2rem;
   }
 
   .basket:hover,

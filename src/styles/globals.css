@@ -65,6 +65,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   max-width: 100%;
   overflow-x: hidden;
+  /* set while the nav drawer locks scrolling: keeps the layout from shifting
+     when the scrollbar disappears */
+  padding-right: var(--scrollbar-comp, 0px);
 }
 
 svg,

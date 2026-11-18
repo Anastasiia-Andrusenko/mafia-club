@@ -17,7 +17,8 @@
     "loading": "Завантаження…",
     "prevPhoto": "Попереднє фото",
     "nextPhoto": "Наступне фото",
-    "closePhoto": "Закрити"
+    "closePhoto": "Закрити",
+    "scrollTop": "Нагору"
   },
   "homeP": {
     "title": "Гра в Мафію",

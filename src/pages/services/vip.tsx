@@ -44,7 +44,7 @@ const VipPage: React.FC<VipProps> = ({ imagePaths }) => {
         <Overlay />
         <Thread imagePaths={imagePaths} double />
         <section className={css.details}>
-          <h4 className={css.details_title}>{t.vipP.details_title}</h4>
+          <h2 className={css.details_title}>{t.vipP.details_title}</h2>
           <p className={css.text1}>1. {t.vipP.text1}</p>
           <p className={css.text2}>2. {t.vipP.text2}</p>
           <p className={css.text3}>3. {t.vipP.text3}</p>

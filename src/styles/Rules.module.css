@@ -204,6 +204,7 @@
 
   .video {
     width: 840px;
+    max-width: 90vw;
     margin: auto;
     margin-top: 60px;
   }

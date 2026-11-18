@@ -17,7 +17,8 @@
     "loading": "Загрузка…",
     "prevPhoto": "Предыдущее фото",
     "nextPhoto": "Следующее фото",
-    "closePhoto": "Закрыть"
+    "closePhoto": "Закрыть",
+    "scrollTop": "Наверх"
   },
   "homeP": {
     "title": "Игра в мафию",

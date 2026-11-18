@@ -7,9 +7,18 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  /** Extra classes for the backdrop / the animated wrapper (e.g. the lead form). */
+  overlayClassName?: string;
+  wrapperClassName?: string;
 };
 
-const OverlayModal: React.FC<Props> = ({ isOpen, onClose, children }) => {
+const OverlayModal: React.FC<Props> = ({
+  isOpen,
+  onClose,
+  children,
+  overlayClassName,
+  wrapperClassName,
+}) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -29,26 +38,15 @@ const OverlayModal: React.FC<Props> = ({ isOpen, onClose, children }) => {
       }
     };
 
-    const disableScroll = () => {
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-    };
-
-    const enableScroll = () => {
+    // Only while open: a closed instance must not release a scroll lock held
+    // elsewhere (e.g. by the mobile menu).
+    if (!isOpen) return;
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleEscPress);
+    return () => {
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
-    };
-
-    if (isOpen) {
-      disableScroll();
-      document.addEventListener("keydown", handleEscPress);
-    } else {
-      enableScroll();
-      document.removeEventListener("keydown", handleEscPress);
-    }
-
-    return () => {
-      enableScroll();
       document.removeEventListener("keydown", handleEscPress);
     };
   }, [isOpen, onClose]);
@@ -59,7 +57,7 @@ const OverlayModal: React.FC<Props> = ({ isOpen, onClose, children }) => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className={css.overlay}
+          className={`${css.overlay} ${overlayClassName ?? ""}`}
           onClick={handleOverlayClick}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -67,7 +65,7 @@ const OverlayModal: React.FC<Props> = ({ isOpen, onClose, children }) => {
           transition={{ duration: 0.3 }}
         >
           <motion.div
-            className={css.formWrapper}
+            className={`${css.formWrapper} ${wrapperClassName ?? ""}`}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
