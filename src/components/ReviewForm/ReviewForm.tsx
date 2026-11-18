@@ -12,12 +12,15 @@ interface ReviewFormProps {
 const ReviewForm: React.FC<ReviewFormProps> = ({ onReviewAdded }) => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
+  // Honeypot: hidden from users, only bots fill it in. The API rejects non-empty values.
+  const [website, setWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setIsSubmitting(true);
     setError(null);
 
@@ -25,6 +28,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onReviewAdded }) => {
       name,
       comment,
       date: new Date().toISOString(),
+      website,
     };
 
     try {
@@ -72,6 +76,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onReviewAdded }) => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            maxLength={100}
             className={css.input}
           />
         </label>
@@ -82,9 +87,26 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onReviewAdded }) => {
             onChange={(e) => setComment(e.target.value)}
             onKeyDown={handleKeyDown} // Додаємо обробку клавіші Enter
             required
+            maxLength={2000}
             className={css.textArea}
           />
         </label>
+        <input
+          type="text"
+          name="website"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            width: "1px",
+            height: "1px",
+            opacity: 0,
+          }}
+        />
         <Button
           text={
             isSubmitting ? `${t.reviews.submitting}` : `${t.reviews.submit}`

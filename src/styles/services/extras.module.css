@@ -21,6 +21,12 @@
   text-shadow: 0px 0px 3rem rgba(0, 0, 0, 0.6);
 }
 
+/* Page <h1>: pinned to the former <h2> defaults so the typography is unchanged. */
+.pageHeading {
+  font-size: 1.5em;
+  margin-block: 0.83em;
+}
+
 .description {
   position: absolute;
   width: 90%;

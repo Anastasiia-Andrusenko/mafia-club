@@ -309,6 +309,7 @@ const Shop: React.FC = () => {
         }}
       />
       <Container>
+        <h1 className="srOnly">{t.nav.shop}</h1>
         <p className={css.description}>{t.shopP.welcoming}</p>
         <ul className={css.productList}>
           {products.map((product) => (

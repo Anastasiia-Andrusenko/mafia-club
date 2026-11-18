@@ -65,12 +65,12 @@ const Gallery: React.FC<GalleryProps> = ({ imagesFiles: files }) => {
 
   return (
     <>
-      <h2 className={css.title}>
+      <h1 className={css.title}>
         <span>{t.gallery.title1}</span>
         <span className={css.break}>{t.gallery.title2}</span>
         <br />
         <span className={css.club}> mafia dream club</span>
-      </h2>
+      </h1>
       <Container>
         <ImageGallery images={paginatedImages} allImages={imagesFiles} />
         <div className={css.pagination}>

@@ -11,12 +11,17 @@ interface ButtonProps {
   className?: any;
 }
 
-const Button: FC<ButtonProps> = ({ text, onClick, typeBtn }) => {
+const Button: FC<ButtonProps> = ({ text, onClick, typeBtn, disabled }) => {
   // const { t } = useTranslation();
 
   return (
     <div className={css.btnWrapper}>
-      <button type={typeBtn} className={css.btn} onClick={onClick} >
+      <button
+        type={typeBtn}
+        className={css.btn}
+        onClick={onClick}
+        disabled={disabled}
+      >
         {text}
       </button>
     </div>

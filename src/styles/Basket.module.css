@@ -4,6 +4,7 @@
 }
 
 .title {
+  font-size: 1.5em; /* unchanged from the former <h2> default */
   text-align: center;
   margin: 3rem;
   margin-top: 9rem;

@@ -33,7 +33,7 @@ const VipPage: React.FC<VipProps> = ({ imagePaths }) => {
     <>
       <div className={`${css.bgImg} ${css.vip}`}></div>
       <div className={css.pageTitle} style={{ opacity }}>
-        <h2 className={css.title1}>{t.vipP.title}</h2>
+        <h1 className={css.pageHeading}>{t.vipP.title}</h1>
       </div>
       <Container>
         <section className={css.main} style={{ opacity: opacity + 0.5 }}>

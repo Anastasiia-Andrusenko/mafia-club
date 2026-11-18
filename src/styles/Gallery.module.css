@@ -1,4 +1,5 @@
 .title {
+  font-size: 1.5em; /* unchanged from the former <h2> default */
   text-transform: uppercase;
   text-align: center;
   padding: 10px 20px;

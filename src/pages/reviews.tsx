@@ -44,7 +44,7 @@ const Reviews: React.FC = () => {
 
   return (
     <>
-      <h2 className={css.title}>{t.reviews.giveFeedBack}</h2>
+      <h1 className={css.title}>{t.reviews.giveFeedBack}</h1>
       <p className={css.description}>{t.reviews.description}</p>
       <ReviewForm onReviewAdded={handleReviewAdded} />
       {reviews.length > 0 ? (

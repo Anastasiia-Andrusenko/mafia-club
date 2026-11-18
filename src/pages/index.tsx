@@ -105,6 +105,8 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
             <motion.div className={css.video} {...scrollReveal}>
               <iframe
                 src="https://www.youtube.com/embed/tUHAoshTRQ0?si=zuLF6Ij4gPv7G3bo"
+                title={t.homeP.videoTitle1}
+                loading="lazy"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
@@ -112,6 +114,8 @@ const Home: React.FC<HomeProps> = ({ imagePaths }) => {
               ></iframe>
               <iframe
                 src="https://www.youtube.com/embed/CY4_zTEm_sk?si=aN5_bPGc3OMPlLku"
+                title={t.homeP.videoTitle2}
+                loading="lazy"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"

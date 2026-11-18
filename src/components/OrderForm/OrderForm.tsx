@@ -1,16 +1,18 @@
 // components/OrderForm.tsx
 import { useCart } from "@/context/CartContext";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Product } from "@/types/product";
 import css from "./OrderForm.module.css";
 import { useTranslation } from "@/hooks/useTranslation";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { LuShoppingCart } from "react-icons/lu";
-import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useScrollLock } from "@/hooks/useScrollLock";
-// import { sendTelegramMessage } from "../utils/telegram";
+import { deliverLead } from "@/lib/leadDelivery";
+import { formatUaPhone } from "@/lib/phone";
+import { escapeMarkdown, telLink } from "@/lib/telegram";
+import { validateName, validatePhone } from "../utils/validateOverlayForm";
 
 interface OrderFormProps {
   onBack: () => void;
@@ -19,6 +21,9 @@ interface OrderFormProps {
 const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  // Synchronous guard: state updates are async, so two quick submits could both pass.
+  const submittingRef = useRef(false);
   const { cart, clearCart } = useCart();
   const { t } = useTranslation();
   const total = cart.reduce(
@@ -28,97 +33,70 @@ const OrderForm: React.FC<OrderFormProps> = ({ onBack }) => {
 
   useScrollLock(true);
 
-  const escapeMarkdown = (text: string) =>
-    text.replace(/[_*[\]()~`>#+\-=|{}.!]/g, "\\$&");
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    notify(name);
-    if (!name.trim() || !phone.trim() || cart.length === 0) {
-      console.error("Помилка: Заповніть усі поля перед відправкою.");
+    if (submittingRef.current) return;
+
+    // Validate first - no success feedback until the input is known to be valid.
+    const errorKey =
+      validateName(name) ??
+      (cart.length === 0 ? "cartEmpty" : null) ??
+      validatePhone(phone);
+    if (errorKey) {
+      toast.error(t.validation[errorKey]);
       return;
     }
 
-    if (!/^\+380 \d{2} \d{2} \d{2} \d{3}$/.test(phone)) {
-      console.error("Помилка: Невірний формат номера телефону.");
-      return;
-    }
+    submittingRef.current = true;
+    setIsSubmitting(true);
 
-    const templateParams = {
-      name: name.trim(),
-      phone: phone.trim(),
-      message: cart.map((item) => `${item.quantity} × ${item.name}`).join("\n"),
-      total: total,
-    };
+    try {
+      const templateParams = {
+        name: name.trim(),
+        phone: phone.trim(),
+        message: cart
+          .map((item) => `${item.quantity} × ${item.name}`)
+          .join("\n"),
+        total: total,
+      };
 
-    const safeName = escapeMarkdown(templateParams.name);
-    const safePhone = escapeMarkdown(templateParams.phone);
-    const rawPhone = templateParams.phone.replace(/\s/g, "");
-    const safePhoneLink = `tel:${rawPhone.replace(/\+/g, "%2B")}`;
-    const safeMessage = escapeMarkdown(templateParams.message);
-
-    const messageForTelegram = `
+      const messageForTelegram = `
 🛒 *ХОЧУТЬ ПРИДБАТИ:*
-👤 *Імʼя:* ${safeName}
-📞 *Телефон:* [${safePhone}](${safePhoneLink})
+👤 *Імʼя:* ${escapeMarkdown(templateParams.name)}
+📞 *Телефон:* [${escapeMarkdown(templateParams.phone)}](${telLink(templateParams.phone)})
 🛍️ *Замовлення:*
-${safeMessage}
+${escapeMarkdown(templateParams.message)}
 💵 *Разом:* ${templateParams.total} грн
 `.trim();
 
-    emailjs
-      .send(
-        "service_awhca1b",
-        "template_0zj9rl8",
+      // EmailJS and Telegram are independent: one failing must not lose the order.
+      const result = await deliverLead({
+        templateId: "template_0zj9rl8",
         templateParams,
-        "nBlfFj-daI3JM87lR"
-      )
-      .then(
-        async (response) => {
-          console.log("SUCCESS!", response.status, response.text);
+        telegramMessage: messageForTelegram,
+      });
 
-          const telegramRes = await fetch("/api/sendToTelegram", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: messageForTelegram }),
-          });
+      if (!result.ok) {
+        toast.error(t.validation.sendFailed);
+        return;
+      }
 
-          const telegramData = await telegramRes.json();
-
-          if (!telegramRes.ok) {
-            console.error(
-              "❌ Telegram не надіслав повідомлення:",
-              telegramData
-            );
-            toast.error("Telegram не надіслав повідомлення 😔");
-          } else {
-            console.log("✅ Telegram повідомлення надіслано!", telegramData);
-            notify(templateParams.name);
-            setName("");
-            setPhone("");
-            clearCart();
-            onBack();
-          }
-        },
-        (err) => {
-          console.error("FAILED...", err);
-          toast.error("Сталася помилка при відправці. Спробуйте ще.");
-        }
-      );
+      notify(templateParams.name);
+      setName("");
+      setPhone("");
+      clearCart();
+      onBack();
+    } catch (err) {
+      console.error("Order submission failed unexpectedly:", err);
+      toast.error(t.validation.sendFailed);
+    } finally {
+      submittingRef.current = false;
+      setIsSubmitting(false);
+    }
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let input = e.target.value.replace(/\D/g, "");
-    if (input.length > 12) input = input.slice(0, 12);
-    if (input.startsWith("380")) {
-      input = `+380 ${input.slice(3, 5)} ${input.slice(5, 7)} ${input.slice(
-        7,
-        9
-      )} ${input.slice(9, 12)}`;
-    } else {
-      input = "+380";
-    }
-    setPhone(input.trim());
+    setPhone(formatUaPhone(e.target.value));
   };
 
   const notify = (name: string) =>
@@ -154,13 +132,17 @@ ${safeMessage}
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              maxLength={100}
+              autoComplete="name"
               className={css.input}
             />
           </label>
           <label className={css.label}>
             {t.basket.phone}:
             <input
-              type="text"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
               value={phone}
               onChange={handlePhoneChange}
               required
@@ -169,8 +151,9 @@ ${safeMessage}
               title="+380 XX XX XX XXX"
             />
           </label>
-          <button type="submit" className={css.submit}>
-            <MdOutlineDoneOutline /> {t.basket.submit}
+          <button type="submit" className={css.submit} disabled={isSubmitting}>
+            <MdOutlineDoneOutline />{" "}
+            {isSubmitting ? t.overlay.sending : t.basket.submit}
           </button>
           <button type="button" className={css.back} onClick={() => onBack()}>
             <LuShoppingCart /> {t.basket.back}

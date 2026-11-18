@@ -12,6 +12,7 @@ const PhoneInput: React.FC<Props> = ({ value, onChange, placeholder }) => (
     type="tel"
     inputMode="tel"
     required
+    autoComplete="tel"
     className={css.input}
     value={value}
     onChange={onChange}

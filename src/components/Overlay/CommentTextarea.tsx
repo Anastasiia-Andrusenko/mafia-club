@@ -11,6 +11,7 @@ const CommentTextarea: React.FC<Props> = ({ value, onChange, placeholder }) => (
   <textarea
     className={css.textarea}
     value={value}
+    maxLength={1000}
     onChange={onChange}
     placeholder={placeholder}
   />

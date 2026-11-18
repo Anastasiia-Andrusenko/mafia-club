@@ -34,7 +34,7 @@ const CorporatePage: React.FC<CorporateProps> = ({ imagePaths }) => {
     <>
       <div className={`${styles.bgImg}`}></div>
       <div className={css.pageTitle} style={{ opacity }}>
-        <h2 className={css.title}>{t.corporateP.title}</h2>
+        <h1 className={css.pageHeading}>{t.corporateP.title}</h1>
       </div>
       <Container>
         <section className={css.main} style={{ opacity: opacity + 0.5 }}>

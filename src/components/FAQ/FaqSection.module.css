@@ -55,6 +55,12 @@
   gap: 1.5rem;
 }
 
+.faqListCollapsed,
+.faqTextCollapsed {
+  /* Collapsed visually, but the text stays in the DOM / server-rendered HTML. */
+  display: none;
+}
+
 .faqItem {
   padding: 1rem;
   border-radius: var(--border-radius);

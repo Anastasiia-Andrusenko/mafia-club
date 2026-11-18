@@ -69,7 +69,7 @@ const Basket: React.FC<BasketProps> = () => {
 
   return (
     <div className={css.overlay}>
-      <h2 className={css.title}>{t.basket.title}</h2>
+      <h1 className={css.title}>{t.basket.title}</h1>
       {/* Show the "empty" message only after the stored cart has been loaded */}
       {isEmpty && isHydrated ? (
         <>
