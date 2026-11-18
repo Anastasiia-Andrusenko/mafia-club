@@ -41,7 +41,14 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onReviewAdded }) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to add review");
+        // Never pretend the review was saved; show a localized reason.
+        throw new Error(
+          response.status === 429
+            ? t.reviews.submitTooMany
+            : response.status === 400
+              ? t.reviews.submitInvalid
+              : t.reviews.submitError,
+        );
       }
 
       // Викликаємо onReviewAdded для оновлення списку відгуків
@@ -52,7 +59,12 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onReviewAdded }) => {
       setComment("");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      setError(error.message || "Error submitting review");
+      // Network failures surface as TypeError("Failed to fetch"): keep it localized.
+      setError(
+        error instanceof TypeError
+          ? t.reviews.submitError
+          : error.message || t.reviews.submitError,
+      );
     } finally {
       setIsSubmitting(false);
     }

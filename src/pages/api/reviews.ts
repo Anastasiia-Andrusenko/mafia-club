@@ -3,6 +3,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { db } from "@/lib/db";
 import type { RowDataPacket } from "mysql2";
+import { promises as fs } from "fs";
+import path from "path";
 import {
   getClientIp,
   getJsonObject,
@@ -30,6 +32,46 @@ export const config = {
 const CONTROL_CHARS = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g;
 const clean = (value: string) => value.replace(CONTROL_CHARS, "").trim();
 
+type FallbackReview = {
+  id: number | string;
+  name: string;
+  comment: string;
+  date: string;
+};
+
+const time = (d: string) => {
+  const n = new Date(d).getTime();
+  return Number.isNaN(n) ? -Infinity : n;
+};
+
+/**
+ * Read-only backup used when MySQL is unreachable. Never throws: a missing or
+ * corrupted file yields null so the caller can answer with a generic 500.
+ */
+async function readFallbackReviews(): Promise<FallbackReview[] | null> {
+  try {
+    const raw = await fs.readFile(
+      path.join(process.cwd(), "public", "reviews.json"),
+      "utf-8",
+    );
+    const data: unknown = JSON.parse(raw);
+    if (!Array.isArray(data)) return null;
+    return (data as Partial<FallbackReview>[])
+      .filter(
+        (r): r is FallbackReview =>
+          !!r &&
+          typeof r.name === "string" &&
+          typeof r.comment === "string" &&
+          typeof r.date === "string" &&
+          (typeof r.id === "number" || typeof r.id === "string"),
+      )
+      .sort((a, b) => time(b.date) - time(a.date))
+      .slice(0, MAX_REVIEWS);
+  } catch {
+    return null;
+  }
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -45,6 +87,7 @@ export default async function handler(
         "SELECT * FROM reviews ORDER BY date DESC LIMIT ?",
         [MAX_REVIEWS],
       );
+      res.setHeader("X-Reviews-Source", "db");
       return res.status(200).json(rows);
     } catch (err) {
       // Raw DB errors can expose schema/host details - log only, never return.
@@ -53,6 +96,12 @@ export default async function handler(
         (err as { code?: string })?.code ??
           (err instanceof Error ? err.message : "unknown"),
       );
+      // DB unreachable / query failed: serve the static backup instead.
+      const fallback = await readFallbackReviews();
+      if (fallback) {
+        res.setHeader("X-Reviews-Source", "fallback");
+        return res.status(200).json(fallback);
+      }
       return sendError(res, 500, "Failed to fetch reviews");
     }
   }

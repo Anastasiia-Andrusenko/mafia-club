@@ -15,6 +15,12 @@ const nextConfig = {
   poweredByHeader: false,
   // Canonical URLs, sitemap.xml and internal links all use a trailing slash.
   trailingSlash: true,
+  experimental: {
+    // Make sure the reviews backup is bundled with the serverless function.
+    outputFileTracingIncludes: {
+      "/api/reviews": ["./public/reviews.json"],
+    },
+  },
   images: {
     // Media pipeline is refactored separately; keep as-is for now.
     unoptimized: true,

@@ -12,6 +12,8 @@ export const db = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
+  // Fail fast when the host is unreachable/hanging instead of stalling pages.
+  connectTimeout: 3000,
   waitForConnections: true,
   connectionLimit,
   queueLimit: 0,
