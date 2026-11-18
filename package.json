@@ -7,14 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "import-reviews": "cross-env NODE_ENV=development node dist-scripts/src/components/utils/import-reviews.js"
+    "db:setup": "cross-env TS_NODE_PROJECT=tsconfig.scripts.json node --env-file=.env.local -r ts-node/register/transpile-only scripts/db-setup.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "dotenv": "^16.5.0",
+    "@neondatabase/serverless": "^1.2.1",
     "framer-motion": "^12.6.3",
     "modern-normalize": "^3.0.1",
-    "mysql2": "^3.14.1",
     "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18",

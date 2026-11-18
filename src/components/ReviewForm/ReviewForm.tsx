@@ -47,7 +47,9 @@ const ReviewForm: React.FC<ReviewFormProps> = ({ onReviewAdded }) => {
             ? t.reviews.submitTooMany
             : response.status === 400
               ? t.reviews.submitInvalid
-              : t.reviews.submitError,
+              : response.status === 409
+                ? t.reviews.submitDuplicate
+                : t.reviews.submitError,
         );
       }
 

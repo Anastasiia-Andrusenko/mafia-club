@@ -1,8 +1,7 @@
 // pages/api/reviews.ts
 
 import type { NextApiRequest, NextApiResponse } from "next";
-import { db } from "@/lib/db";
-import type { RowDataPacket } from "mysql2";
+import { addReview, listReviews } from "@/lib/reviewsStore";
 import { promises as fs } from "fs";
 import path from "path";
 import {
@@ -45,7 +44,7 @@ const time = (d: string) => {
 };
 
 /**
- * Read-only backup used when MySQL is unreachable. Never throws: a missing or
+ * Read-only backup used when the database is unreachable. Never throws: a missing or
  * corrupted file yields null so the caller can answer with a generic 500.
  */
 async function readFallbackReviews(): Promise<FallbackReview[] | null> {
@@ -82,11 +81,11 @@ export default async function handler(
       return sendError(res, 429, "Too many requests");
     }
 
+    // A freshly published review must show up on the very next request.
+    res.setHeader("Cache-Control", "no-store");
+
     try {
-      const [rows] = await db.query<RowDataPacket[]>(
-        "SELECT * FROM reviews ORDER BY date DESC LIMIT ?",
-        [MAX_REVIEWS],
-      );
+      const rows = await listReviews(MAX_REVIEWS);
       res.setHeader("X-Reviews-Source", "db");
       return res.status(200).json(rows);
     } catch (err) {
@@ -143,10 +142,12 @@ export default async function handler(
     }
 
     try {
-      await db.query("INSERT INTO reviews (name, comment) VALUES (?, ?)", [
-        name,
-        comment,
-      ]);
+      // Published immediately. An identical (normalised) review that already
+      // exists is rejected instead of being stored twice.
+      const result = await addReview(name, comment);
+      if (result === "duplicate") {
+        return sendError(res, 409, "Duplicate review");
+      }
       return res.status(200).json({ message: "Review added successfully!" });
     } catch (err) {
       console.error(
