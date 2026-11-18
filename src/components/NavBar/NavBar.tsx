@@ -150,13 +150,25 @@ const NavBar: React.FC<NavBarProps> = ({ closeMenu, isDesktop }) => {
       <div className={css.navButtonsContainer}>
         <div className={css.buttonsIconsWrapper}>
           {isDesktop && (
-            <Link href="#footer" className={css.contactHeader}>
-              <MdContactPhone />
+            <Link
+              href="#footer"
+              className={css.contactHeader}
+              aria-label={t.a11y.contacts}
+            >
+              <MdContactPhone aria-hidden="true" />
             </Link>
           )}
           {isDesktop && (
-            <Link href="/basket" className={css.basket}>
-              {cart.length > 0 ? <TfiShoppingCartFull /> : <LuShoppingCart />}
+            <Link
+              href="/basket"
+              className={css.basket}
+              aria-label={t.a11y.basket}
+            >
+              {cart.length > 0 ? (
+                <TfiShoppingCartFull aria-hidden="true" />
+              ) : (
+                <LuShoppingCart aria-hidden="true" />
+              )}
             </Link>
           )}
         </div>

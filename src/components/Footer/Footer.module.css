@@ -137,11 +137,18 @@
     justify-content: center;
   }
 
+  /* Wrap instead of overflowing the viewport on 768-1100px screens. */
   .wrapper {
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    gap: 3rem clamp(1.5rem, 5vw, 6rem);
   }
   .contacts {
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .contact_item {

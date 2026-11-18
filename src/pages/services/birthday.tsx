@@ -46,7 +46,7 @@ const BirthdayPage: React.FC<BirthdayProps> = ({ imagePaths }) => {
         <Overlay />
         <Thread imagePaths={imagePaths} double />
         <section className={css.details}>
-          <h4 className={css.details_title}>{t.birthdayP.details_title}</h4>
+          <h2 className={css.details_title}>{t.birthdayP.details_title}</h2>
           <p className={css.text1}>1. {t.birthdayP.text1}</p>
           <p className={css.text2}>2. {t.birthdayP.text2}</p>
           <p className={css.text3}>3. {t.birthdayP.text3}</p>

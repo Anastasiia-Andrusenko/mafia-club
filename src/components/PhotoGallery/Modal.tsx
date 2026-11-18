@@ -5,6 +5,7 @@ import css from "./Modal.module.css";
 import { TfiClose } from "react-icons/tfi";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
+import { useTranslation } from "@/hooks/useTranslation";
 
 interface ModalProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ const Modal: React.FC<ModalProps> = ({
   currentIndex,
   onChangeIndex,
 }) => {
+  const { t } = useTranslation();
   const handlePrev = useCallback(() => {
     if (currentIndex > 0) {
       onChangeIndex(currentIndex - 1);
@@ -67,11 +69,21 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <div className={css.overlay} onClick={onClose}>
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
-        <button className={css.closeButton} onClick={onClose}>
-          <TfiClose className={css.icon} />
+        <button
+          type="button"
+          className={css.closeButton}
+          onClick={onClose}
+          aria-label={t.a11y.closePhoto}
+        >
+          <TfiClose className={css.icon} aria-hidden="true" />
         </button>
-        <button className={css.prevButton} onClick={handlePrev}>
-          <GrPrevious className={css.icon} />
+        <button
+          type="button"
+          className={css.prevButton}
+          onClick={handlePrev}
+          aria-label={t.a11y.prevPhoto}
+        >
+          <GrPrevious className={css.icon} aria-hidden="true" />
         </button>
         <Image
           src={images[currentIndex].src}
@@ -80,8 +92,13 @@ const Modal: React.FC<ModalProps> = ({
           height={900}
           className={css.bigImg}
         />
-        <button className={css.nextButton} onClick={handleNext}>
-          <GrNext className={css.icon} />
+        <button
+          type="button"
+          className={css.nextButton}
+          onClick={handleNext}
+          aria-label={t.a11y.nextPhoto}
+        >
+          <GrNext className={css.icon} aria-hidden="true" />
         </button>
       </div>
     </div>

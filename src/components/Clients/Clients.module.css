@@ -96,7 +96,7 @@
 }
 .promin {
   background-color: rgb(247, 246, 233);
-  background-image: url("/img/clients/prominagro.png");
+  background-image: url("/img/clients/prominagro.webp");
   height: 50px;
   width: 90px;
   border-radius: 10px;
@@ -127,7 +127,7 @@
 .estafeta {
   background-color: white;
   padding: 10px;
-  background-image: url("/img/clients/estafeta.png");
+  background-image: url("/img/clients/estafeta.webp");
   height: 50px;
   border-radius: 10px;
   width: 120px;

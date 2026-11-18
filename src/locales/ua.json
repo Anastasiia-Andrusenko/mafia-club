@@ -8,6 +8,18 @@
     "reviews": "Відгуки",
     "contact": "Контакти"
   },
+  "a11y": {
+    "menuOpen": "Відкрити меню",
+    "menuClose": "Закрити меню",
+    "contacts": "Контакти",
+    "basket": "Кошик",
+    "playVideo": "Відтворити відео",
+    "loading": "Завантаження…",
+    "prevPhoto": "Попереднє фото",
+    "nextPhoto": "Наступне фото",
+    "closePhoto": "Закрити",
+    "scrollTop": "Нагору"
+  },
   "homeP": {
     "title": "Гра в Мафію",
 

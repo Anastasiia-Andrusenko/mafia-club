@@ -1,6 +1,6 @@
 :root {
-  --font-family-primary: "Oswald", sans-serif;
-  --font-family-secondary: "Spectral SC", serif;
+  /* --font-family-primary / --font-family-secondary are provided by
+     next/font in pages/_app.tsx (Oswald / Spectral SC, self-hosted). */
 
   /* Font sizes */
   --font-size-micro: 0.65rem;
@@ -23,6 +23,9 @@
   --background: #240000;
   --foreground: #e3e3e3;
   --red: #c61100;
+  /* Brand red lightened for TEXT on the dark backgrounds: #c61100 is only
+     ~3.2:1 on --background, this is >= 5:1 (WCAG AA needs 4.5:1). */
+  --red-text: #f23a2b;
   --bg-gradient: linear-gradient(to bottom, #000 0%, #750000 50%, #000 100%);
 
   --box-shadow:
@@ -62,6 +65,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   max-width: 100%;
   overflow-x: hidden;
+  /* set while the nav drawer locks scrolling: keeps the layout from shifting
+     when the scrollbar disappears */
+  padding-right: var(--scrollbar-comp, 0px);
 }
 
 svg,

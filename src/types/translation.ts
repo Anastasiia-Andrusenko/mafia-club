@@ -3,6 +3,9 @@ export interface Translation {
   nav: {
     [key: string]: string;
   };
+  a11y: {
+    [key: string]: string;
+  };
   homeP: {
     [key: string]: string;
   };

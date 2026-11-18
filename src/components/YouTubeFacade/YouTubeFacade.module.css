@@ -1,0 +1,74 @@
+.root {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+.poster,
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.poster {
+  object-fit: cover;
+}
+
+/* The whole poster is the hit area; the YouTube-style badge is its icon. */
+.play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0) 45%);
+  cursor: pointer;
+}
+
+.playIcon {
+  width: 4.25rem;
+  height: 3rem;
+  filter: drop-shadow(0 0.25rem 0.5rem rgba(0, 0, 0, 0.45));
+  transition: transform 200ms ease;
+}
+
+.playShape {
+  fill: #212121;
+  fill-opacity: 0.8;
+  transition:
+    fill 200ms ease,
+    fill-opacity 200ms ease;
+}
+
+.play:hover .playShape,
+.play:focus-visible .playShape {
+  fill: #f00;
+  fill-opacity: 1;
+}
+
+.play:hover .playIcon {
+  transform: scale(1.06);
+}
+
+.play:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .playIcon,
+  .playShape {
+    transition: none;
+  }
+  .play:hover .playIcon {
+    transform: none;
+  }
+}

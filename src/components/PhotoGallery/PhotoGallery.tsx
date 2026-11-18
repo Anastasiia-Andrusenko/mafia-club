@@ -3,6 +3,7 @@ import css from "./PhotoGallery.module.css";
 import Container from "../Container/Container";
 import Modal from "./Modal";
 import { useState } from "react";
+import { toThumb } from "@/lib/images";
 
 interface ImageData {
   id: string;
@@ -48,8 +49,10 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images, allImages }) => {
                 )
               }
             >
+              {/* Grid shows the 640px preview; the modal loads the full-size
+                  photo. width/height are the 3:2 slot the CSS crops into. */}
               <Image
-                src={img.src}
+                src={toThumb(img.src)}
                 alt={img.alt}
                 width={img.width}
                 height={img.height}

@@ -46,7 +46,7 @@ const OutdoorPage: React.FC<OutdoorProps> = ({ imagePaths }) => {
         <Overlay />
         <Thread imagePaths={imagePaths} double />
         <section className={css.details}>
-          <h4 className={css.details_title}>{t.outdoorP.details_title}</h4>
+          <h2 className={css.details_title}>{t.outdoorP.details_title}</h2>
           <p className={css.text1}>1. {t.outdoorP.text1}</p>
           <p className={css.text2}>2. {t.outdoorP.text2}</p>
           <p className={css.text3}>3. {t.outdoorP.text3}</p>

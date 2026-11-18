@@ -40,12 +40,6 @@
   margin-top: 7rem;
 }
 
-.frame {
-  width: 90vw;
-  height: 50vw;
-  margin: auto;
-}
-
 .video {
   width: 90vw;
   margin: auto;
@@ -208,14 +202,9 @@
     margin-bottom: 300px;
   }
 
-  .frame {
-    width: 840px;
-    height: 473px;
-    margin: auto;
-  }
-
   .video {
     width: 840px;
+    max-width: 90vw;
     margin: auto;
     margin-top: 60px;
   }

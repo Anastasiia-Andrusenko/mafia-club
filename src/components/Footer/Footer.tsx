@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
       <Container>
         <div className={css.wrapper}>
           <Link href="/" className={css.logo} aria-label={t.footer.homeLabel}>
-            <Image src={"/img/logo.png"} alt="" width={60} height={60} />
+            <Image src="/img/logo-sm.webp" alt="" width={49} height={60} />
           </Link>
           <Overlay />
           <ul className={css.contacts}>

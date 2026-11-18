@@ -6,11 +6,17 @@ import Overlay from "@/components/Overlay/Overlay";
 import ClientsList from "@/components/Clients/Clients";
 import path from "../components/PhotoGallery/imagesMainPage.json";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
-import { useEffect, useState } from "react";
+import Head from "next/head";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Thread from "@/components/Thread/Thread";
 import FaqSection from "@/components/FAQ/FaqSection";
 import AnimatedCounter from "@/components/common/AnimatedCounter";
+import YouTubeFacade from "@/components/YouTubeFacade/YouTubeFacade";
+// Static imports give the hashed URLs the CSS background resolves to, so the
+// preloads below are exactly the requests the hero will make.
+import heroDesktop from "../../public/img/hero.webp";
+import heroMobile from "../../public/img/hero-mobile.webp";
 
 interface HomeProps {
   imagePaths: string[];
@@ -23,112 +29,141 @@ const scrollReveal = {
   transition: { duration: 0.6, ease: "easeOut" as const },
 };
 
+const HOME_VIDEOS = [
+  { id: "tUHAoshTRQ0", titleKey: "videoTitle1" },
+  { id: "CY4_zTEm_sk", titleKey: "videoTitle2" },
+] as const;
+
 const Home: React.FC<HomeProps> = ({ imagePaths }) => {
   const { t } = useTranslation();
+  const heroContentRef = useRef<HTMLDivElement>(null);
 
-  const [opacity, setOpacity] = useState(1);
-
+  // The hero copy fades out over the first 200px of scroll. Browsers with
+  // scroll-driven animations do this in CSS (Home.module.css), with no JS at
+  // all. Everywhere else, fall back to a rAF-throttled direct style write:
+  // same formula as before, but no React state, so scrolling never re-renders
+  // the page.
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const newOpacity = Math.max(1 - scrollY / 200, 0);
-      setOpacity(newOpacity);
+    if (CSS.supports("animation-timeline: scroll()")) return;
+    const el = heroContentRef.current;
+    if (!el) return;
+
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      el.style.opacity = String(Math.max(1 - window.scrollY / 200, 0));
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
-    <>
-      <div>
-        <main>
-          <div className={css.hero}>
-            <Container>
-              <h1 className={css.title} style={{ opacity }}>
-                <span className={css.slogan}>{t.homeP.sloganMain}</span>
-                <span className={css.slogan}>{t.homeP.sloganSub}</span>
-              </h1>
-              <p className={css.heroDescription} style={{ opacity }}>
-                {t.homeP.heroDescription}
-              </p>
-            </Container>
+    <div>
+      <Head>
+        {/* The hero background is the LCP element, but it is a CSS image only
+            discovered after the stylesheet: preload it at high priority so it
+            is not stuck behind fonts / scripts / thumbnails. The media queries
+            mirror the breakpoint in Home.module.css so only one is fetched. */}
+        <link
+          rel="preload"
+          as="image"
+          href={heroMobile.src}
+          media="(max-width: 767.98px)"
+          {...{ fetchpriority: "high" }}
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={heroDesktop.src}
+          media="(min-width: 768px)"
+          {...{ fetchpriority: "high" }}
+        />
+      </Head>
+      <div className={css.hero}>
+        <Container>
+          <div ref={heroContentRef} className={css.heroContent}>
+            <h1 className={css.title}>
+              <span className={css.slogan}>{t.homeP.sloganMain}</span>
+              <span className={css.slogan}>{t.homeP.sloganSub}</span>
+            </h1>
+            <p className={css.heroDescription}>
+              {t.homeP.heroDescription}
+            </p>
           </div>
-          <Container>
-            <div className={css.about}>
-              <p className={css.funFact}> {t.homeP.funFact}</p>
-              <div className={css.about__counter}>
-                <ul className={css.about__counter_list}>
-                  <li className={css.item}>
-                    <p className={css.counter_text}>
-                      <AnimatedCounter value={16} className={css.sum} />
-                      {t.homeP.years}
-                    </p>
-                  </li>
-                  <li className={css.item}>
-                    <p className={css.counter_text}>
-                      <AnimatedCounter value={437} className={css.sum} />
-                      {t.homeP.kids}
-                    </p>
-                  </li>
-                  <li className={css.item}>
-                    <p className={css.counter_text}>
-                      <AnimatedCounter value={749} className={css.sum} />
-                      {t.homeP.adult}
-                    </p>
-                  </li>
-                  <li className={css.item}>
-                    <p className={css.counter_text}>
-                      <AnimatedCounter value={801} className={css.sum} />
-                      {t.homeP.corporate}
-                    </p>
-                  </li>
-                </ul>
-              </div>
-              <motion.div {...scrollReveal}>
-                <h2 className={css.about_title}>{t.homeP.aboutTitle}</h2>
-                <p className={css.about_text}>{t.homeP.aboutText}</p>
-              </motion.div>
-            </div>
-          </Container>
-          <Thread imagePaths={imagePaths} double />
-          <Container>
-            <motion.div {...scrollReveal}>
-              <Table />
-            </motion.div>
-          </Container>
-          <div className={css.mainPageBtn}>
-            <Overlay />
-          </div>
-
-          <Container>
-            <motion.div className={css.video} {...scrollReveal}>
-              <iframe
-                src="https://www.youtube.com/embed/tUHAoshTRQ0?si=zuLF6Ij4gPv7G3bo"
-                title={t.homeP.videoTitle1}
-                loading="lazy"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
-              <iframe
-                src="https://www.youtube.com/embed/CY4_zTEm_sk?si=aN5_bPGc3OMPlLku"
-                title={t.homeP.videoTitle2}
-                loading="lazy"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
-            </motion.div>
-          </Container>
-          <FaqSection />
-          <ClientsList />
-          <ScrollTopBtn />
-        </main>
+        </Container>
       </div>
-    </>
+      <Container>
+        <div className={css.about}>
+          <p className={css.funFact}> {t.homeP.funFact}</p>
+          <div className={css.about__counter}>
+            <ul className={css.about__counter_list}>
+              <li className={css.item}>
+                <p className={css.counter_text}>
+                  <AnimatedCounter value={16} className={css.sum} />
+                  {t.homeP.years}
+                </p>
+              </li>
+              <li className={css.item}>
+                <p className={css.counter_text}>
+                  <AnimatedCounter value={437} className={css.sum} />
+                  {t.homeP.kids}
+                </p>
+              </li>
+              <li className={css.item}>
+                <p className={css.counter_text}>
+                  <AnimatedCounter value={749} className={css.sum} />
+                  {t.homeP.adult}
+                </p>
+              </li>
+              <li className={css.item}>
+                <p className={css.counter_text}>
+                  <AnimatedCounter value={801} className={css.sum} />
+                  {t.homeP.corporate}
+                </p>
+              </li>
+            </ul>
+          </div>
+          <motion.div {...scrollReveal}>
+            <h2 className={css.about_title}>{t.homeP.aboutTitle}</h2>
+            <p className={css.about_text}>{t.homeP.aboutText}</p>
+          </motion.div>
+        </div>
+      </Container>
+      <Thread imagePaths={imagePaths} double />
+      <Container>
+        <motion.div {...scrollReveal}>
+          <Table />
+        </motion.div>
+      </Container>
+      <div className={css.mainPageBtn}>
+        <Overlay />
+      </div>
+
+      <Container>
+        <motion.div className={css.video} {...scrollReveal}>
+          {HOME_VIDEOS.map(({ id, titleKey }) => (
+            <YouTubeFacade
+              key={id}
+              className={css.videoItem}
+              videoId={id}
+              title={t.homeP[titleKey]}
+              poster={`/img/video/${id}.webp`}
+            />
+          ))}
+        </motion.div>
+      </Container>
+      <FaqSection />
+      <ClientsList />
+      <ScrollTopBtn />
+    </div>
   );
 };
 

@@ -2,10 +2,11 @@ import Container from "@/components/Container/Container";
 import css from "../styles/Rules.module.css";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useState } from "react";
+import Head from "next/head";
 import { FaHandPointDown } from "react-icons/fa";
 import Overlay from "@/components/Overlay/Overlay";
 import ScrollTopBtn from "@/components/ScrollTopBtn/ScrollTopBtn";
-// import Overlay from "@/components/Overlay/Overlay";
+import YouTubeFacade from "@/components/YouTubeFacade/YouTubeFacade";
 
 const Rules = () => {
   const { t } = useTranslation();
@@ -17,26 +18,29 @@ const Rules = () => {
 
   return (
     <>
+      <Head>
+        {/* LCP: the hero background is a CSS image (found late), so preload
+            it at high priority. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/img/anonymus.webp"
+          {...{ fetchpriority: "high" }}
+        />
+      </Head>
       <div className={css.img}></div>
       <Container>
         <h1 className="srOnly">{t.nav.rules}</h1>
         <p className={css.question}>{t.rules.qw}</p>
         <p className={css.rules_description}>{t.rules.text}</p>
         <>
-          <h3 className={css.rules_title}>{t.rules.classicTitle}</h3>
+          <h2 className={css.rules_title}>{t.rules.classicTitle}</h2>
           <div className={css.video}>
-            <iframe
-              className={css.frame}
-              // width="840"
-              // height="473"
-              src="https://www.youtube.com/embed/GqgDMsWyFHY?si=VnFkm1m6B6N24UTS"
+            <YouTubeFacade
+              videoId="GqgDMsWyFHY"
               title={`${t.rules.classicTitle} — YouTube`}
-              loading="lazy"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+              poster="/img/video/GqgDMsWyFHY.webp"
+            />
           </div>
           <div className={css.rules}>
             <p className={css.rulesShort}>{t.rules.rulesShort}</p>
@@ -97,20 +101,13 @@ const Rules = () => {
           )}
         </>
         <>
-          <h3 className={css.rules_title}>{t.rules.balaganTitle}</h3>
+          <h2 className={css.rules_title}>{t.rules.balaganTitle}</h2>
           <div className={css.video}>
-            <iframe
-              className={css.frame}
-              // width="840"
-              // height="473"
-              src="https://www.youtube.com/embed/DkMNdCm51wU?si=n4d6e0t7wAin09KG"
+            <YouTubeFacade
+              videoId="DkMNdCm51wU"
               title={`${t.rules.balaganTitle} — YouTube`}
-              loading="lazy"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+              poster="/img/video/DkMNdCm51wU.webp"
+            />
           </div>
         </>
         <div className={css.final}>

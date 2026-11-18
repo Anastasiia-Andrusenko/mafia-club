@@ -25,3 +25,8 @@
     margin-bottom: 2rem;
   }
 }
+
+/* Placeholder height for the client-fetched reviews list (prevents CLS). */
+.listSlot {
+  min-height: 70vh;
+}

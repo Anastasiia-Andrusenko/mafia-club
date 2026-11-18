@@ -61,7 +61,7 @@ const ProductCard: React.FC<Props> = ({ product, onOpenModal }) => {
 
   return (
     <li className={css.productItem} onClick={() => onOpenModal(product)}>
-      <h3 className={css.productName}>{product.name}</h3>
+      <h2 className={css.productName}>{product.name}</h2>
       <div className={css.imgBg} {...swipeHandlers}>
         <Image
           src={images[activeImageIndex]}
@@ -72,11 +72,21 @@ const ProductCard: React.FC<Props> = ({ product, onOpenModal }) => {
         />
         {images.length > 1 && (
           <div className={css.sliderControls}>
-            <button className={css.sliderBtn} onClick={handlePrev}>
-              <FaChevronLeft />
+            <button
+              type="button"
+              className={css.sliderBtn}
+              onClick={handlePrev}
+              aria-label={t.a11y.prevPhoto}
+            >
+              <FaChevronLeft aria-hidden="true" />
             </button>
-            <button className={css.sliderBtn} onClick={handleNext}>
-              <FaChevronRight />
+            <button
+              type="button"
+              className={css.sliderBtn}
+              onClick={handleNext}
+              aria-label={t.a11y.nextPhoto}
+            >
+              <FaChevronRight aria-hidden="true" />
             </button>
           </div>
         )}
